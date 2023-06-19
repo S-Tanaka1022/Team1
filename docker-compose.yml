@@ -52,6 +52,17 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    # PhpMyAdmin を追加
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links:
+            - mysql:mysql
+        ports:
+            - 8080:80
+        environment:
+            PMA_HOST: mysql
+        networks:
+            - sail
     redis:
         image: 'redis:alpine'
         ports:
