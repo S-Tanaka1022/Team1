@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get('/fukuyama', function() {
     print("fukuyama");
 });
+
+Route::get('/aaa', function () {
+    return view('aaa');
+});
