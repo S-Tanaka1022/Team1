@@ -66,4 +66,30 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 # Tuna-Gari-Night!ルール
-## コミットする際のルール
+## mainブランチ
+動作が完全にできる状態のブランチ
+### mainブランチにマージするタイミング
+  * 動作確認ができたタイミング
+
+## developブランチ
+編集・削除などを行うブランチ
+個人作業ブランチを作成しそこで作業を行う
+
+### 個人のブランチ
+個人で作業するブランチ
+developから派生してブランチを作成
+  * ファイル単位で作業を進める(1人1ファイルを編集)
+
+### コミットするタイミング
+  * こまめにコミットする
+  関数が一つできたタイミング、for文できたタイミングなど
+  * コメントは日本語で、branchは英語で
+
+### コメントする際のルール
+  * 例：  
+  ファイル追加：test.blade.phpを追加しました。  
+  関数追加：test.blade.phpに〇〇動作する関数を作成しました。  
+  など
+
+### マージするタイミング
+  * ファイルが完成したタイミングでマージ
