@@ -79,6 +79,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 個人で作業するブランチ
 developから派生してブランチを作成
   * ファイル単位で作業を進める(1人1ファイルを編集)
+他人の完結した作業やdevelopブランチの状況と個人ブランチを同期したい場合は、New pull requestでDevelop->個人ブランチ
 
 ### プルリクエストまでの流れ
   1. 個人のブランチにcheckoutする
