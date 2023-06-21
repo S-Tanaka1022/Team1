@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('region_names', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('region_code');
+            $table->unsignedBigInteger('region_code')->unique();
             $table->string('region_name');
             $table->timestamps();
         });
@@ -44,7 +44,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->onUpdate('CASCADE');
-            $table->bigInteger('region_code')->unsigned();
+            $table->unsignedBigInteger('region_code');
             $table->foreign('region_code')
                 ->references('region_code')
                 ->on('region_names');
@@ -64,10 +64,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('region_names');
-        Schema::dropIfExists('songs');
-        Schema::dropIfExists('playlists');
-        Schema::dropIfExists('regions');
         Schema::dropIfExists('playlist_song');
+        Schema::dropIfExists('regions');
+        Schema::dropIfExists('playlists');
+        Schema::dropIfExists('songs');
+        Schema::dropIfExists('region_names');
     }
 };
