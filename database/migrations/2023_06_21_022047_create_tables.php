@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('region_names', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('region_code')->unique();
+            $table->string('region_code')->unique();
             $table->string('region_name');
             $table->timestamps();
         });
@@ -44,7 +44,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->onUpdate('CASCADE');
-            $table->unsignedBigInteger('region_code');
+            $table->string('region_code');
             $table->foreign('region_code')
                 ->references('region_code')
                 ->on('region_names');
