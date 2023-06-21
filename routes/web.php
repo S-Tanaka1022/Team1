@@ -33,8 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-#ログイン画面
-Route::get('/login', [LoginController::class, 'login']);
+
 
 #ホーム画面
 Route::get('/index', [UserController::class, 'index']);
