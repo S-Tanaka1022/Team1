@@ -81,3 +81,6 @@ Route::get('/{id}', function ($id) {
 //     var_dump($weather);
 //     echo "</pre>";
 // });
+
+
+Route::get('login', [LoginController::class, 'login']);
