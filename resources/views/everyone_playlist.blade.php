@@ -1,4 +1,3 @@
-みんなのプレイリスト画面
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -20,21 +19,30 @@
         </form>
     </div>
 
+    <div>
+        <form action="" method="GET">
+            <button type="button" name="add_list" value="add_list">プレイリスト作成</button>
+        </form>
+    </div>
+
     <table border='1'>
         <tr>
-            <th>ファイル名</th>
-            <th>画像</th>
-            <th>URL</th>
-            <th>備考</th>
+            <th>user</th>
+            <th>playlist</th>
+            <th>詳細</th>
         </tr>
-        @foreach ($upload_images as $upload_image)
+        @foreach ($playlists as $playlist)
             <tr>
-                <td>{{$upload_image->filename}}</td>
-                <td><img src='{{$upload_image->filepath}}' width='200'></td>
-                <td>http://localhost/{{$upload_image->filepath}}</td>
-                <td>{{$upload_image->memo}}</td>
+                <td>{{$playlist->name}}</td>
+                <td>{{$playlist->playlist}}</td>
+                <td><a href="/other_playlist">詳細</a></td>
             </tr>
         @endforeach
     </table>
+
+    <form action="{{route('logout')}}" method="post">
+        <button type="submit">ログアウト</button>
+        @csrf
+    </form>
 </body>
 </html>
