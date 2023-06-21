@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Response;
-
-
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\RegionController;
+use App\Http\Controllers\RegionNameController;
+use App\Http\Controllers\SongController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,53 +34,30 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/{id}', function ($id) {
-    $url = "https://www.jma.go.jp/bosai/forecast/data/forecast/$id.json";
 
-    $json = file_get_contents($url);
-    $weatherdata = json_decode($json, true);
+#ホーム画面
+Route::get('/index', [UserController::class, 'index'])->middleware('auth');
 
-    $areasdata = ($weatherdata[0]["timeSeries"][0]["areas"]);
+#最初の現在地登録画面
+Route::get('/new_region', [RegionController::class, 'new']);
 
-    foreach ($areasdata as $key => $data) {
-        $area = $data["area"];
-        $weatherCodes = $data["weatherCodes"];
-        $weathers = $data["weathers"];
-        $winds = $data["winds"];
-        $waves = $data["waves"];
+#現在地追加画面
+Route::get('/add_region', [RegionController::class, 'add']);
 
-        echo $area["name"] . "の天気<hr>";
+#自分のプレイリスト一覧画面
+Route::get('/myplaylists', [PlaylistController::class, 'index']);
 
-        foreach ($weatherCodes as $key => $weatherCode) {
-            echo $key + 1 . "番目の天気コード：" . $weatherCode . "<br>";
-        }
-        echo "<hr>";
+#プレイリスト確認画面
+Route::get('/myplaylist', [PlaylistController::class, 'detail']);
 
-        foreach ($weathers as $key => $weather) {
-            echo $key + 1 . "番目の天気：" . $weather . "<br>";
-        }
-        echo "<hr>";
-
-        foreach ($winds as $key => $wind) {
-            echo $key + 1 . "番目の風向き：" . $wind . "<br>";
-        }
-        echo "<hr>";
-
-        foreach ($waves as $key => $wave) {
-            echo $key + 1 . "番目の風速：" . $wave . "<br>";
-        }
-        echo "<hr>";
-    }
-});
+#プレイリスト追加画面
+Route::get('/add_myplaylist', [PlaylistController::class, 'add']);
 
 
-// Route::get('/130000', function () {
-//     $url = "https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json";
+#全員のプレイリスト一覧画面と楽曲一覧画面
+Route::get('/everyone_playlist', [SongController::class, 'index']);
 
-//     $json = file_get_contents($url);
-//     $weather = json_decode($json);
+#それぞれのプレイリスト確認画面
+Route::get('/other_playlist', [SongController::class, 'detail']);
 
-//     echo "<pre>";
-//     var_dump($weather);
-//     echo "</pre>";
-// });
+require __DIR__ . '/auth.php';

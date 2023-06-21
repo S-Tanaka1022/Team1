@@ -66,6 +66,10 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 # Tuna-Gari-Night!ルール
+## ファイル名のルール
+  * 英語でわかりやすく
+  * "_"アンダーバーでつなげる(例：test_migration.php)
+
 ## mainブランチ
 動作が完全にできる状態のブランチ
 ### mainブランチにマージするタイミング
@@ -79,17 +83,26 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 個人で作業するブランチ
 developから派生してブランチを作成
   * ファイル単位で作業を進める(1人1ファイルを編集)
+他人の完結した作業やdevelopブランチの状況と個人ブランチを同期したい場合は、New pull requestでDevelop->個人ブランチ
 
-### コミットするタイミング
+### プルリクエストまでの流れ
+  1. 個人のブランチにcheckoutする
+  2. 作業をファイル単位で進める
+  3. 良きところでコミット
+  4. ファイルが完成(みんなに共有できるほどになったら)したら個人のブランチをプッシュ
+  5. GitHub上でプルリクエスト(New pull requestで個人ブランチ->Develop)  
+  その後代表者が承認して1.に戻る。
+
+#### コミットするタイミング
   * こまめにコミットする
   関数が一つできたタイミング、for文できたタイミングなど
   * コメントは日本語で、branchは英語で
 
-### コメントする際のルール
+#### コメントする際のルール
   * 例：  
   ファイル追加：test.blade.phpを追加しました。  
   関数追加：test.blade.phpに〇〇動作する関数を作成しました。  
   など
 
-### マージするタイミング
-  * ファイルが完成したタイミングでマージ
+#### マージするタイミング
+  * ファイルが完成したタイミングで代表者がプルリクエスト承認(マージ)
