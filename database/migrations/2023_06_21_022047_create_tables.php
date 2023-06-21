@@ -12,9 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('region_name', function (Blueprint $table) {
+        Schema::create('region_names', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('region_code')->primary();
+            $table->bigInteger('region_code');
             $table->string('region_name');
             $table->timestamps();
         });
@@ -32,8 +32,7 @@ return new class extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
-                ->onUpdate('CASCADE')
-                ->onDelete('DELETE');
+                ->onUpdate('CASCADE');
             $table->string('list_name');
             $table->timestamps();
         });
@@ -44,12 +43,11 @@ return new class extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
-                ->onUpdate('CASCADE')
-                ->onDelete('DELETE');
-            $table->bigInteger('region_code');
+                ->onUpdate('CASCADE');
+            $table->bigInteger('region_code')->unsigned();
             $table->foreign('region_code')
                 ->references('region_code')
-                ->on('region_name');
+                ->on('region_names');
             $table->timestamps();
         });
 
@@ -66,10 +64,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('regions');
-        Schema::dropIfExists('region_name');
-        Schema::dropIfExists('playlists');
-        Schema::dropIfExists('playlist_song');
+        Schema::dropIfExists('region_names');
         Schema::dropIfExists('songs');
+        Schema::dropIfExists('playlists');
+        Schema::dropIfExists('regions');
+        Schema::dropIfExists('playlist_song');
     }
 };
