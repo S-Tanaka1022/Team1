@@ -66,6 +66,10 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 # Tuna-Gari-Night!ルール
+## ファイル名のルール
+  * 英語でわかりやすく
+  * "_"アンダーバーでつなげる(例：test_migration.php)
+
 ## mainブランチ
 動作が完全にできる状態のブランチ
 ### mainブランチにマージするタイミング
@@ -79,6 +83,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 個人で作業するブランチ
 developから派生してブランチを作成
   * ファイル単位で作業を進める(1人1ファイルを編集)
+他人の完結した作業やdevelopブランチの状況と個人ブランチを同期したい場合は、New pull requestでDevelop->個人ブランチ
 
 ### プルリクエストまでの流れ
   1. 個人のブランチにcheckoutする
