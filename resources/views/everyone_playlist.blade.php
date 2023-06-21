@@ -10,11 +10,11 @@
 
 <body>
     <h1>みんなのプレイリスト</h1>
-    <form action="/index" method="GET">
-        <button type="button" name="weather" value="weather">天気情報</button>
+    <form action="" method="GET">
+        <button type="button" name="weather" value="weather" onclick="location.href='/index'">天気情報</button>
     </form>
-    <form action="/myplaylists" method="GET">
-        <button type="button" name="mylist" value="mylist">マイプレイリスト</button>
+    <form action="" method="GET">
+        <button type="button" name="mylist" value="mylist" onclick="location.href='/myplaylist'">マイプレイリスト</button>
     </form>
     <form action="{{route('logout')}}" method="post">
         <button type="submit">ログアウト</button>
