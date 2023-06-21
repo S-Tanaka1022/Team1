@@ -66,6 +66,10 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 # Tuna-Gari-Night!ルール
+## ファイル名のルール
+  * 英語でわかりやすく
+  * "_"アンダーバーでつなげる(例：test_migration.php)
+
 ## mainブランチ
 動作が完全にできる状態のブランチ
 ### mainブランチにマージするタイミング
