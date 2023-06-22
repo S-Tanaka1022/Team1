@@ -19,13 +19,20 @@ use App\Models\Region_name;
             {{ Auth::user() -> name }} さんログイン中
         </p>
         <nav style="background-color: #cdd9e4; padding: 10px;">
-            <form action="{{ route('logout') }}" method="post" style="display: inline-block; margin-right: 10px;">
-                @csrf
-                <button type="submit">ログアウト</button>
+            <form action="myplaylist" method="get" style="display: inline-block;">
+                <button type="submit">プレイリスト</button>
+            </form>
+            <form action="everyone_playlist" method="get" style="display: inline-block;">
+                <button type="submit">みんなのプレイリスト</button>
             </form>
             <form action="add_region" method="get" style="display: inline-block;">
                 <button type="submit">登録地追加</button>
             </form>
+            <form action="{{ route('logout') }}" method="post" style="display: inline-block; margin-right: 10px;">
+                @csrf
+                <button type="submit">ログアウト</button>
+            </form>
+
         </nav>
 
     </header>
