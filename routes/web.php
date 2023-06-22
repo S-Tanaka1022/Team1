@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
 
 
 #ホーム画面
-Route::get('/index', [UserController::class, 'index']);
+Route::get('/index', [UserController::class, 'index'])->middleware('auth');
 
 #最初の現在地登録画面
 Route::get('/new_region', [RegionController::class, 'new']);
