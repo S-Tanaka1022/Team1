@@ -1,13 +1,13 @@
 @php
 // 東京の現在の天気　overview
 // POSTで送られてきたエリアコードをurlに挿入
-$url1 = 'https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json';
+$url1 = 'https://www.jma.go.jp/bosai/forecast/data/overview_forecast/120000.json';
 $response1 = file_get_contents($url1);
 $data1 = json_decode($response1, true);
 
 // 東京の天気詳細
 // POSTで送られてきたエリアコードをurlに挿入
-$url2 = 'https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json';
+$url2 = 'https://www.jma.go.jp/bosai/forecast/data/forecast/120000.json';
 $response2 = file_get_contents($url2);
 $data2 = json_decode($response2, true);
 
