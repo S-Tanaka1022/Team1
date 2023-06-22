@@ -15,9 +15,11 @@
         <input type="text" name="playlist_name" placeholder="新規プレイリスト">
 
         プレイリスト選択▼
-        {{--
-        <select>
-            <option></option>
+        {{-- <select>
+            @foreach ($playlists as $playlist){
+                <option>{{$playlist->list_name}}</option>
+            }
+            @endforeach
             --}}
         <br>
 
