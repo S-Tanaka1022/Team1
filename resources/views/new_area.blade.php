@@ -1,3 +1,7 @@
+@php
+    $i=0;
+@endphp
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -13,10 +17,12 @@
 
     <main>
         エリア選択
-        <form action="" method="POST">
+        <form action="" method="GET">
             <select name="sel_area">
                 @foreach($areas_data as $areas)
-                    <option value="{{$areas['area']['code']}}">{{$areas['area']['name']}}</option>
+                    <option value="{{$i}}">{{$areas['area']['name']}}</option>
+                    {{-- エリアコードをエリアごとに変化させ、送信 --}}
+                    {{$i+=1}}
                 @endforeach
             </select>
         <input type="submit" value="選択">
