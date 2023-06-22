@@ -12,6 +12,7 @@ $response2 = file_get_contents($url2);
 $data2 = json_decode($response2, true);
 
 $areasdata = ($data2[0]["timeSeries"][0]["areas"]);
+// $data2[0:固定][timeSeries:固定][0]
 // @dump($areasdata["area"]);
 foreach ($areasdata as $key => $data) {
     $area = $data["area"];
