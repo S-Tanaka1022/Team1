@@ -50,21 +50,23 @@
                     <th>詳細を表示</th>
                 </tr>
                 @foreach ($results->tracks->items as $song)
-                <form action="add_myplaylist" method="GET" enctype="multipart/form-data">
+                <form action="add_myplaylist" method="get" enctype="multipart/form-data">
                     <tr>
                         <td><img src="{{$song->album->images[0]->url}}" width=80></td>
                         <td>{{$song->name}}</td>
                         <td>{{$song->artists[0]->name}}</td>
                         <td><button type="submit" name="add_mylist" value="add_mylist">リストへ追加</button></td>
-                        <input type="hidden" name="artist_name" value='{{$song->artists[0]->name}}''>
+                        <input type="hidden" name="artist_name" value='{{$song->artists[0]->name}}'>
                         <input type="hidden" name="song_name" value='{{$song->name}}'>
                         <td><button type="submit" name="add_mylist" value="add_mylist">リストへ追加</button></td>
                         <input type="hidden" name="artist_name" value='{{$song->artists[0]->name}}''>
                         <input type="hidden" name="song_name" value='{{$song->name}}'>
                     </tr>
+                    @csrf
                 </form>
                 @endforeach
             </table>
+
         </div>
 
 
