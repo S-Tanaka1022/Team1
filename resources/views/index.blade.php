@@ -144,6 +144,14 @@ $songs = $results->tracks->items;
                         <td><img src="{{ $albumImage }}" alt="Album Image"></td>
                         <td>{{ $trackName }}</td>
                         <td>{{ $artistName }}</td>
+                        <td>
+                        <form action="add_myplaylist" method="GET">
+                        @csrf
+                        <input type="hidden" name="artistName" value="{{ $artistName }}">
+                        <input type="hidden" name="trackName" value="{{ $trackName }}">
+                        <button type="submmit" name="add_mylist" value="add_mylist">リストへ追加</button>
+                        </form>
+                        </td>
                     </tr>
                     @endforeach
                 </table>

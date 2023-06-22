@@ -24,9 +24,9 @@
         <br>
 
         曲名
-        <input type="text" name="title" value="title"><br>
+        <input type="text" name="title" value="{{$title}}"><br>
         アーティスト
-        <input type="text" name="artist" value="artist"><br>
+        <input type="text" name="artist" value="{{$artist}}"><br>
         <input type="submit" value="追加">
         @csrf
     </form>
