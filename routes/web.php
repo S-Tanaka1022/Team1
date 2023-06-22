@@ -46,9 +46,12 @@ Route::get('/add_region', [RegionController::class, 'add']);
 
 #自分のプレイリスト一覧画面
 Route::get('/myplaylists', [PlaylistController::class, 'index']);
+Route::get('/myplaylist', function(){
+    return view('myplaylist');
+});
 
 #プレイリスト確認画面
-Route::get('/myplaylist', [PlaylistController::class, 'detail']);
+// Route::get('/myplaylist', [PlaylistController::class, 'detail']);
 
 #プレイリスト追加画面
 Route::get('/add_myplaylist', [PlaylistController::class, 'add']);
