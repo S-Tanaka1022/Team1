@@ -1,55 +1,7 @@
 @php
-// 東京の現在の天気　overview
-// POSTで送られてきたエリアコードをurlに挿入
-$url1 = 'https://www.jma.go.jp/bosai/forecast/data/overview_forecast/120000.json';
-$response1 = file_get_contents($url1);
-$data1 = json_decode($response1, true);
+use App\Models\Region_name;
 
-// 東京の天気詳細
-// POSTで送られてきたエリアコードをurlに挿入
-$url2 = 'https://www.jma.go.jp/bosai/forecast/data/forecast/120000.json';
-$response2 = file_get_contents($url2);
-$data2 = json_decode($response2, true);
-
-$areasdata = ($data2[0]["timeSeries"][0]["areas"]);
-// $data2[0:固定][timeSeries:固定][0:地域によって変化する]
-// @dump($areasdata["area"]);
-foreach ($areasdata as $key => $data) {
-    $area = $data["area"];
-    $weatherCodes = $data["weatherCodes"];
-    $weathers = $data["weathers"];
-    $winds = $data["winds"];
-    $waves = $data["waves"];
-}
-
-//     echo $area["name"] . "の天気<hr>";
-
-//     foreach ($weatherCodes as $key => $weatherCode) {
-//         echo $key + 1 . "番目の天気コード：" . $weatherCode . "<br>";
-//     }
-//     echo "<hr>";
-
-//     foreach ($weathers as $key => $weather) {
-//         echo $key + 1 . "番目の天気：" . $weather . "<br>";
-//     }
-//     echo "<hr>";
-
-//     foreach ($winds as $key => $wind) {
-//         echo $key + 1 . "番目の風向き：" . $wind . "<br>";
-//     }
-//     echo "<hr>";
-
-//     foreach ($waves as $key => $wave) {
-//         echo $key + 1 . "番目の風速：" . $wave . "<br>";
-//     }
-//     echo "<hr>";
-//     }
-
-// echo "天気予報over view";
-// @dump($data1);
-
-echo "天気予報詳細";
-@dump($data2);
+#表示するのは、都道府県名（DB）・地域名(API)・気象情報(API)
 
 @endphp
 
@@ -88,18 +40,39 @@ echo "天気予報詳細";
                         <th>今日の天気</th>
                         <th>明日の天気</th>
                         <th>明後日の天気</th>
+                        <th>削除</th>
                     </tr>
 
-                    <tr class="align-middle">
-                        {{-- 地方名 --}}
-                        <td class="align-middle"> {{$areasdata[0]["area"]["name"]}} </td>
+                    @php
+                            foreach ($fav_regions as $fav_region){
+                                $region_code = $fav_region["region_code"];
+                                $area_code = $fav_region["area_code"];
+                                $id = $fav_region["id"];
 
-                        {{-- 天気予報 --}}
-                        @foreach ($weathers as $key => $weather)
-                            <td>{{$weather}}</td>
-                        @endforeach
+                                $region = Region_name::where('region_code', "$region_code")->get();
+                                $region_data = json_decode($region, true);
+                                $prefecture = $region_data[0]["region_name"];
 
-                    </tr>
+                                $url = "https://www.jma.go.jp/bosai/forecast/data/forecast/{$region_code}.json";
+                                $response = file_get_contents($url);
+                                $data = json_decode($response, true);
+                                $areas_data = $data[0]["timeSeries"][0]["areas"];
+                                $area = $areas_data[$area_code]["area"]["name"];
+
+                                echo <<<_TABLE_
+                                <tr class="align-middle">
+                                    <td>{$prefecture}：{$area}</td>
+_TABLE_;
+
+                                $wethers = $areas_data[$area_code]["weathers"];
+                                foreach($wethers as $wether){
+                                    echo "<td>".$wether . "</td>";
+                                }
+
+                                echo "<td><a href='/delete/{$id}'>$id</td></tr>";
+                            }
+                    @endphp
+
                 </table>
             </p>
         </div>
