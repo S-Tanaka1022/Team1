@@ -120,8 +120,8 @@ _TABLE_;
                         <td>
                         <form action="add_myplaylist" method="GET">
                         @csrf
-                        <input type="hidden" name="artistName" value="{{ $artistName }}">
-                        <input type="hidden" name="trackName" value="{{ $trackName }}">
+                        <input type="hidden" name="artist_name" value="{{ $artistName }}">
+                        <input type="hidden" name="song_name" value="{{ $trackName }}">
                         <button type="submmit" name="add_mylist" value="add_mylist">リストへ追加</button>
                         </form>
                         </td>

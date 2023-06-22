@@ -65,7 +65,4 @@ class PlaylistController extends Controller
 
         print("<a href='everyone_playlist'>みんなプレイリストに戻る</a>");
     }
-    public function index(Request $request){
-        return view('add_myplaylist',['title' => $request->trackName , 'artist' => $request->artistName]);
-    }
 }
