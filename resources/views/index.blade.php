@@ -1,8 +1,5 @@
 @php
 use App\Models\Region_name;
-
-#表示するのは、都道府県名（DB）・地域名(API)・気象情報(API)
-
 @endphp
 
 
@@ -21,17 +18,19 @@ use App\Models\Region_name;
         <p>
             {{ Auth::user() -> name }} さんログイン中
         </p>
+        <nav style="background-color: #cdd9e4; padding: 10px;">
+            <form action="{{ route('logout') }}" method="post" style="display: inline-block; margin-right: 10px;">
+                @csrf
+                <button type="submit">ログアウト</button>
+            </form>
+            <form action="add_region" method="get" style="display: inline-block;">
+                <button type="submit">登録地追加</button>
+            </form>
+        </nav>
+
     </header>
 
     <main>
-        <div>
-
-        </div>
-        <form action="{{ route('logout') }}" method="post" class="max-w-md mx-auto px-4 py-6 bg-white rounded-md shadow-md">
-            <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 cursor-pointer">ログアウト</button>
-            @csrf
-        </form>
-
         <div>
             <p>
                 <table border="1">
@@ -44,6 +43,7 @@ use App\Models\Region_name;
                     </tr>
 
                     @php
+                    #表示するのは、都道府県名（DB）・地域名(API)・気象情報(API)
                             foreach ($fav_regions as $fav_region){
                                 $region_code = $fav_region["region_code"];
                                 $area_code = $fav_region["area_code"];
