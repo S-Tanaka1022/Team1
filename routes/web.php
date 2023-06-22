@@ -54,8 +54,12 @@ Route::get('/myplaylist', function(){
 // Route::get('/myplaylist', [PlaylistController::class, 'detail']);
 
 #プレイリスト追加画面
-Route::get('/add_myplaylist', [PlaylistController::class, 'add']);
+//Route::get('/add_myplaylist', [PlaylistController::class, 'add']);
+Route::get('/add_myplaylist', function(){
+    return view('add_myplaylist');
+});
 
+Route::post('/add_myplaylist', [PlaylistController::class, 'add'])->middleware('auth');
 
 #全員のプレイリスト一覧画面と楽曲一覧画面
 Route::get('/everyone_playlist', [SongController::class, 'index']);
