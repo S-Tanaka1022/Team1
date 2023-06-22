@@ -8,11 +8,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>エリア選択画面</title>
+    <title>エリア追加画面</title>
 </head>
 <body>
     <header>
-        <h1>エリア選択画面</h1>
+        <h1>エリア追加画面</h1>
     </header>
 
     <main>
@@ -26,7 +26,7 @@
                     {{$i+=1}}
                 @endforeach
             </select>
-        <input type="submit" value="選択">
+        <input type="submit" value="追加">
         @csrf
         </form>
     </main>
