@@ -45,10 +45,12 @@ Route::post('/code_save', [RegionController::class, 'update']);
 
 #現在地追加画面
 Route::get('/add_region', [RegionController::class, 'add']);
+Route::post('/add_area', [RegionController::class, 'add_area']);
+
 
 #自分のプレイリスト一覧画面
 //Route::get('/myplaylists', [PlaylistController::class, 'index']);
-Route::get('/myplaylist', function(){
+Route::get('/myplaylist', function () {
     return view('myplaylist');
 });
 
@@ -56,8 +58,12 @@ Route::get('/myplaylist', function(){
 // Route::get('/myplaylist', [PlaylistController::class, 'detail']);
 
 #プレイリスト追加画面
-Route::get('/add_myplaylist', [PlaylistController::class, 'add']);
+//Route::get('/add_myplaylist', [PlaylistController::class, 'add']);
+Route::get('/add_myplaylist', function () {
+    return view('add_myplaylist');
+});
 
+Route::post('/add_myplaylist', [PlaylistController::class, 'add'])->middleware('auth');
 
 #全員のプレイリスト一覧画面と楽曲一覧画面
 Route::get('/everyone_playlist', [SongController::class, 'index']);
