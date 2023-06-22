@@ -12,12 +12,16 @@
     </header>
 
     <main>
-        現在地選択
-        <select name="sel_region">
-            @foreach($regions as $region)
-                <option value="{{$region -> region_code}}">{{$region -> region_name}}</option>
-            @endforeach
-        </select>
+        都道府県選択
+        <form action="new_area" method="POST">
+            <select name="sel_region">
+                @foreach($regions as $region)
+                    <option value="{{$region -> region_code}}">{{$region -> region_name}}</option>
+                @endforeach
+            </select>
+            <input type="submit" value="選択">
+            @csrf
+        </form>
     </main>
 </body>
 </html>
