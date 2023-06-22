@@ -13,15 +13,14 @@
 
     <main>
         エリア選択
-        @dump($areas_data)
         <form action="" method="POST">
             <select name="sel_area">
                 @foreach($areas_data as $areas)
-                    <option value="{{$areas -> area -> code}}">{{$areas -> area -> name}}</option>
+                    <option value="{{$areas['area']['code']}}">{{$areas['area']['name']}}</option>
                 @endforeach
             </select>
-            <input type="submit" value="選択">
-            @csrf
+        <input type="submit" value="選択">
+        @csrf
         </form>
     </main>
 </body>
