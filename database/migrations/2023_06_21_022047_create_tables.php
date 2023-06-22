@@ -48,6 +48,7 @@ return new class extends Migration
             $table->foreign('region_code')
                 ->references('region_code')
                 ->on('region_names');
+            $table->integer('area_code');
             $table->timestamps();
         });
 
