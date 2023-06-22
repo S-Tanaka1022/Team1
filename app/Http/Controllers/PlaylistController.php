@@ -6,12 +6,17 @@ use App\Models\Playlist;
 use App\Models\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PlaylistController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        //var_dump($_GET);
+        //var_dump($request);
         $playlists = Playlist::all();
-        return view('add_myplaylist',compact('playlists'));
+        $title = $request->song_name;
+        $artist = $request->artist_name;
+        return view('add_myplaylist',compact('playlists','title','artist'));
     }
 
     public function add(Request $request)
@@ -36,8 +41,13 @@ class PlaylistController extends Controller
             /* データベースにレコードを追加する */
             $add_playlist->save();
         }else{//プレイリストを選択した場合
-            $add_playlist->id = Playlist::find($request->list_name);
-            dd($add_playlist);
+            print('test');
+            //dd($request->input());
+            //dd($request->list_id);
+            //$add_playlist = Playlist::where('list_name', $request->list_name)->get();
+
+            //var_dump($add_playlist);
+            $add_playlist = Playlist::find($request->list_id);
         }
 
         /* Song オブジェクトを生成 */
@@ -48,7 +58,9 @@ class PlaylistController extends Controller
 
         $add_song->save();
 
-        $add_playlist->songs()->attach($add_song->id);
+            $add_playlist->songs()->attach($add_song->id);
+
+
 
         print("<a href='everyone_playlist'>みんなプレイリストに戻る</a>");
     }

@@ -50,9 +50,10 @@ Route::post('/add_area', [RegionController::class, 'add_area']);
 
 #自分のプレイリスト一覧画面
 //Route::get('/myplaylists', [PlaylistController::class, 'index']);
-Route::get('/myplaylist', function () {
+/*Route::get('/myplaylist', function () {
     return view('myplaylist');
 });
+*/
 
 #プレイリスト確認画面
 // Route::get('/myplaylist', [PlaylistController::class, 'detail']);
