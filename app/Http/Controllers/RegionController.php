@@ -62,6 +62,13 @@ class RegionController extends Controller
         $regions = Region_name::all();
         $fav_regions = Region::where('user_id', "$user_id")->get();
 
-        return view("add_area", compact('areas_data', 'region_code','fav_regions'));
+        return view("add_area", compact('areas_data', 'region_code', 'fav_regions'));
+    }
+
+    public function delete($id)
+    {
+        $delete_region = Region::find($id);
+        $delete_region->delete();
+        return redirect('index');
     }
 }
