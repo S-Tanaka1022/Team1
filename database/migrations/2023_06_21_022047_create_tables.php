@@ -54,7 +54,7 @@ return new class extends Migration
 
         Schema::create('playlist_song', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('list_id');
+            $table->bigInteger('playlist_id');
             $table->bigInteger('song_id');
             $table->timestamps();
         });

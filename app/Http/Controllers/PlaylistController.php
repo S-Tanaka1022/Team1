@@ -41,7 +41,7 @@ class PlaylistController extends Controller
             /* データベースにレコードを追加する */
             $add_playlist->save();
         }else{//プレイリストを選択した場合
-            print('test');
+            //print('test');
             //dd($request->input());
             //dd($request->list_id);
             //$add_playlist = Playlist::where('list_name', $request->list_name)->get();
@@ -58,7 +58,8 @@ class PlaylistController extends Controller
 
         $add_song->save();
 
-            $add_playlist->songs()->attach($add_song->id);
+        $add_playlist->songs()->attach($add_song->id);
+
 
 
 
