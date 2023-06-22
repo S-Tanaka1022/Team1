@@ -52,18 +52,17 @@ Route::get('/delete/{id}', [RegionController::class, 'delete']);
 
 #自分のプレイリスト一覧画面
 //Route::get('/myplaylists', [PlaylistController::class, 'index']);
-Route::get('/myplaylist', function () {
+/*Route::get('/myplaylist', function () {
     return view('myplaylist');
 });
+*/
 
 #プレイリスト確認画面
 // Route::get('/myplaylist', [PlaylistController::class, 'detail']);
 
 #プレイリスト追加画面
 //Route::get('/add_myplaylist', [PlaylistController::class, 'add']);
-Route::get('/add_myplaylist', function () {
-    return view('add_myplaylist');
-});
+Route::get('/add_myplaylist', [PlaylistController::class, 'index'])->middleware('auth');
 
 Route::post('/add_myplaylist', [PlaylistController::class, 'add'])->middleware('auth');
 
