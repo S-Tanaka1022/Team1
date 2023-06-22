@@ -29,6 +29,28 @@
         <input type="submit" value="追加">
         @csrf
         </form>
+        <div>
+            <h1>現在の登録地</h1>
+            @php
+            use App\Models\Region_name;
+            foreach ($fav_regions as $fav_region){
+                $region_code = $fav_region["region_code"];
+                $area_code = $fav_region["area_code"];
+                $region = Region_name::where('region_code', "$region_code")->get();
+                $region_data = json_decode($region, true);
+
+                $url = "https://www.jma.go.jp/bosai/forecast/data/forecast/{$region_code}.json";
+                $response = file_get_contents($url);
+                $data = json_decode($response, true);
+                $areasdata = ($data[0]["timeSeries"][0]["areas"]);
+
+                foreach ($region_data as $data ){
+                    // echo $areasdata[0]["area"]["name"];
+                    echo "<p>".$data["region_name"]."：".$areasdata[$area_code]["area"]["name"]. "</p>";
+                }
+            }
+            @endphp
+        </div>
     </main>
 </body>
 </html>
