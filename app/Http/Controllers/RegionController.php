@@ -58,7 +58,17 @@ class RegionController extends Controller
         $response = file_get_contents($url);
         $data = json_decode($response, true);
         $areas_data = ($data[0]["timeSeries"][0]["areas"]);
+        $user_id = auth()->user()->id;
+        $regions = Region_name::all();
+        $fav_regions = Region::where('user_id', "$user_id")->get();
 
-        return view("add_area", compact('areas_data', 'region_code'));
+        return view("add_area", compact('areas_data', 'region_code', 'fav_regions'));
+    }
+
+    public function delete($id)
+    {
+        $delete_region = Region::find($id);
+        $delete_region->delete();
+        return redirect('index');
     }
 }
