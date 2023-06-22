@@ -45,10 +45,12 @@ Route::post('/code_save', [RegionController::class, 'update']);
 
 #現在地追加画面
 Route::get('/add_region', [RegionController::class, 'add']);
+Route::post('/add_area', [RegionController::class, 'add_area']);
+
 
 #自分のプレイリスト一覧画面
 //Route::get('/myplaylists', [PlaylistController::class, 'index']);
-Route::get('/myplaylist', function(){
+Route::get('/myplaylist', function () {
     return view('myplaylist');
 });
 
