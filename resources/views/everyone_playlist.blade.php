@@ -53,6 +53,8 @@
                         <td>{{$song->name}}</td>
                         <td>{{$song->artists[0]->name}}</td>
                         <td><button type="submit" name="add_mylist" value="add_mylist">リストへ追加</button></td>
+                        <input type="hidden" name="artist_name" value='{{$song->artists[0]->name}}''>
+                        <input type="hidden" name="song_name" value='{{$song->name}}'>
                         <td><a href="/other_playlist">詳細</a></td>
                     </tr>
                 </form>
