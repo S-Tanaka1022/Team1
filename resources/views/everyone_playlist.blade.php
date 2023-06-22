@@ -54,6 +54,14 @@
                 @endforeach
                 --}}
             </table>
+
+
+            {{--▼ プレイリスト追加へのページ遷移（仮） ▼--}}
+            <form action="" method="GET">
+                <button type="button" name="add_mylist" value="add_mylist" onclick="location.href='/add_myplaylist'">リストへ追加</button>
+            </form>
+            {{--▲ プレイリスト追加へのページ遷移（仮） ▲--}}
+
         </div>
 
 

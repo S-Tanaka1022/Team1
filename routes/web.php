@@ -57,9 +57,7 @@ Route::get('/myplaylist', function(){
 
 #プレイリスト追加画面
 //Route::get('/add_myplaylist', [PlaylistController::class, 'add']);
-Route::get('/add_myplaylist', function(){
-    return view('add_myplaylist');
-});
+Route::get('/add_myplaylist', [PlaylistController::class, 'index'])->middleware('auth');
 
 Route::post('/add_myplaylist', [PlaylistController::class, 'add'])->middleware('auth');
 

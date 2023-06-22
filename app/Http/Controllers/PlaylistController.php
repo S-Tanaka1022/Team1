@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PlaylistController extends Controller
 {
+    public function index(){
+        $playlists = Playlist::all();
+        return view('add_myplaylist',compact('playlists'));
+    }
+
     public function add(Request $request)
     {
         /* バリデーション
@@ -30,6 +35,9 @@ class PlaylistController extends Controller
 
             /* データベースにレコードを追加する */
             $add_playlist->save();
+        }else{//プレイリストを選択した場合
+            $add_playlist->id = Playlist::find($request->list_name);
+            dd($add_playlist);
         }
 
         /* Song オブジェクトを生成 */

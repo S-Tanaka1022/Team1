@@ -14,13 +14,13 @@
         プレイリスト名
         <input type="text" name="playlist_name" placeholder="新規プレイリスト">
 
-        プレイリスト選択▼
-        {{-- <select>
+        <select>
+            <option hidden>プレイリスト選択</option>
             @foreach ($playlists as $playlist){
-                <option>{{$playlist->list_name}}</option>
+                <option value="{{$playlist->list_name}}">{{$playlist->list_name}}</option>
             }
             @endforeach
-            --}}
+        </select>
         <br>
 
         曲名
