@@ -51,6 +51,27 @@ foreach ($areasdata as $key => $data) {
 echo "天気予報詳細";
 @dump($data2);
 
+use SpotifyWebAPI\SpotifyWebAPI;
+use SpotifyWebAPI\Session;
+
+// Spotify APIクライアントの初期化
+$session = new Session(
+    'f172da853aeb4266863fb2661addbb76',
+    'bcf72a943e1245828831cda721f77987'
+);
+$session->requestCredentialsToken();
+$accessToken = $session->getAccessToken();
+
+$api = new SpotifyWebAPI();
+$api->setAccessToken($accessToken);
+
+// 曲の検索
+$query = 'artist:"' . 'SUPER BEAVER' . '"';
+$results = $api->search($query, 'track');
+
+// 検索結果から曲の情報を取得
+$songs = $results->tracks->items;
+
 @endphp
 
 
@@ -80,8 +101,13 @@ echo "天気予報詳細";
             @csrf
         </form>
 
-        <div>
+        <div class="table">
             <p>
+
+                <table border="0">
+                <tr>
+
+                <td>
                 <table border="1">
                     <tr>
                         <th>地域名</th>
@@ -100,6 +126,30 @@ echo "天気予報詳細";
                         @endforeach
 
                     </tr>
+                </table>
+                </td>
+
+                <td>
+                <table border="1">
+                    @foreach ($songs as $counter => $song)
+                        <?php 
+                        if ($counter > 2) {
+                            break;
+                        }
+                        $trackName = $song->name;
+                        $artistName = $song->artists[0]->name;
+                        $albumImage = $song->album->images[0]->url;
+                        ?>
+                    <tr>
+                        <td><img src="{{ $albumImage }}" alt="Album Image"></td>
+                        <td>{{ $trackName }}</td>
+                        <td>{{ $artistName }}</td>
+                    </tr>
+                    @endforeach
+                </table>
+                </td>
+
+                </tr>
                 </table>
             </p>
         </div>
