@@ -16,6 +16,7 @@
     <form action="" method="GET">
         <button type="button" name="mylist" value="mylist" onclick="location.href='/myplaylist'">マイプレイリスト</button>
     </form>
+    <button type="button" name="reload" onclick="location.href='/everyone_playlist'">楽曲更新</button>
     <form action="{{route('logout')}}" method="post">
         <button type="submit">ログアウト</button>
         @csrf
@@ -37,6 +38,8 @@
                     <input type="submit" value="検索">
                 </form>
             </div>
+            <div>
+            </div>
 
             <table border='1'>
                 <tr>
@@ -55,7 +58,9 @@
                         <td><button type="submit" name="add_mylist" value="add_mylist">リストへ追加</button></td>
                         <input type="hidden" name="artist_name" value='{{$song->artists[0]->name}}''>
                         <input type="hidden" name="song_name" value='{{$song->name}}'>
-                        <td><a href="/other_playlist">詳細</a></td>
+                        <td><button type="submit" name="add_mylist" value="add_mylist">リストへ追加</button></td>
+                        <input type="hidden" name="artist_name" value='{{$song->artists[0]->name}}''>
+                        <input type="hidden" name="song_name" value='{{$song->name}}'>
                     </tr>
                 </form>
                 @endforeach
