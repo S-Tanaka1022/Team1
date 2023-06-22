@@ -16,7 +16,8 @@ $api = new SpotifyWebAPI();
 $api->setAccessToken($accessToken);
 
 // 曲の検索
-$results = $api->search('ex. ダーリン', 'track');
+$query = 'artist:"' . 'SUPER BEAVER' . '"';
+$results = $api->search($query, 'track');
 
 // 検索結果から曲の情報を取得
 $songs = $results->tracks->items;
