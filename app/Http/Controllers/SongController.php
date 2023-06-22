@@ -41,4 +41,8 @@ class SongController extends Controller
         $results = $api->search($query,'track',$options);
         return view('everyone_playlist', compact('results'));
     }
+
+    public function information(){
+        return view('/song_information');
+    }
 }
