@@ -1,6 +1,10 @@
-@php
+{{-- @php
+foreach ($regions as $key => $region) {
+    $region_code = $region["region_code"];
+    $region_name = $region["region_name"];
 
-@endphp
+}
+@endphp --}}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,10 +21,13 @@
 
     <main>
         現在地選択
+        @dump($regions)
         <select name="position">
-            @foreach ( as )
-                <option value=""></option>
-            @endforeach
+            {{-- @foreach ($regions as $key => $region)
+                {{$region_code}} = {{$region -> region_code}}
+                {{$region_name}} = {{$region -> region_name}}
+                <option value="{{ $region_code }}">{{ $region_name }}</option>
+            @endforeach --}}
         </select>
     </main>
 </body>

@@ -9,6 +9,7 @@ use App\Models\Region;
 class RegionController extends Controller
 {
     public function new(){
-
+        $regions = Region::all();
+        return view("new_region",compact('regions'));
     }
 }
