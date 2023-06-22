@@ -47,7 +47,7 @@ Route::post('/code_save', [RegionController::class, 'update']);
 Route::get('/add_region', [RegionController::class, 'add']);
 Route::post('/add_area', [RegionController::class, 'add_area']);
 
-#削除昨日
+#削除機能
 Route::get('/delete/{id}', [RegionController::class, 'delete']);
 
 #自分のプレイリスト一覧画面
