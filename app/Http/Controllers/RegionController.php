@@ -21,6 +21,6 @@ class RegionController extends Controller
         $data2 = json_decode($response2, true);
         $areas_data = ($data2[0]["timeSeries"][0]["areas"]);
 
-        return view("new_area", compact('areas_data'));
+        return view("new_area", compact('areas_data','seled_region_code'));
     }
 }
