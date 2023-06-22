@@ -40,6 +40,8 @@ Route::get('/index', [UserController::class, 'index'])->middleware('auth');
 
 #最初の現在地登録画面
 Route::get('/new_region', [RegionController::class, 'new']);
+Route::post('/new_area', [RegionController::class, 'new_area']);
+Route::post('/code_save', [RegionController::class, 'update']);
 
 #現在地追加画面
 Route::get('/add_region', [RegionController::class, 'add']);
