@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use SpotifyWebAPI\SpotifyWebAPI;
+use SpotifyWebAPI\Session;
 
 class SongController extends Controller
 {
@@ -19,6 +21,24 @@ class SongController extends Controller
         //    $upload_images = UploadImage::all();
         //}
 
-        return view('everyone_playlist');
+        $session = new Session(
+            'f172da853aeb4266863fb2661addbb76',
+            'bcf72a943e1245828831cda721f77987'
+        );
+        $session->requestCredentialsToken();
+        $accessToken = $session->getAccessToken();
+
+        $api = new SpotifyWebAPI();
+        $api->setAccessToken($accessToken);
+
+        $limit = 30;
+        $query = 'genre:"japanese"';
+        $options = [
+            'limit' => $limit,
+            'offset' => random_int(0,1000),
+        ];
+
+        $results = $api->search($query,'track',$options);
+        return view('everyone_playlist', compact('results'));
     }
 }

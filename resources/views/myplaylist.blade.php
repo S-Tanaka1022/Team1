@@ -21,8 +21,9 @@ $api = new SpotifyWebAPI();
 $api->setAccessToken($accessToken);
 
 // 曲の検索
-$query = 'artist:"' . 'SUPER BEAVER' . '"';
-$results = $api->search($query, 'track');
+// $data = '';
+$results = $api->search('雨', 'track');
+dump($results);
 
 // 検索結果から曲の情報を取得
 $songs = $results->tracks->items;

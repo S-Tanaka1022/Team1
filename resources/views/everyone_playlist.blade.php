@@ -40,19 +40,23 @@
 
             <table border='1'>
                 <tr>
-                    <th>No</th>
-                    <th>music</th>
-                    <th>artist</th>
+                    <th>ジャケット写真</th>
+                    <th>曲名</th>
+                    <th>アーティスト名</th>
+                    <th>プレリストに追加</th>
+                    <th>詳細を表示</th>
                 </tr>
-                {{--
-                @foreach ($playlists as $playlist)
+                @foreach ($results->tracks->items as $song)
+                <form action="add_myplaylist" method="GET" enctype="multipart/form-data">
                     <tr>
-                        <td>{{$playlist->name}}</td>
-                        <td>{{$playlist->playlist}}</td>
+                        <td><img src="{{$song->album->images[0]->url}}" width=80></td>
+                        <td>{{$song->name}}</td>
+                        <td>{{$song->artists[0]->name}}</td>
+                        <td><button type="submit" name="add_mylist" value="add_mylist">リストへ追加</button></td>
                         <td><a href="/other_playlist">詳細</a></td>
                     </tr>
+                </form>
                 @endforeach
-                --}}
             </table>
         </div>
 
