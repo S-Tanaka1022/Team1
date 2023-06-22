@@ -1,13 +1,5 @@
-{{-- @php
-foreach ($regions as $key => $region) {
-    $region_code = $region["region_code"];
-    $region_name = $region["region_name"];
-
-}
-@endphp --}}
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,13 +13,10 @@ foreach ($regions as $key => $region) {
 
     <main>
         現在地選択
-        @dump($regions)
-        <select name="position">
-            {{-- @foreach ($regions as $key => $region)
-                {{$region_code}} = {{$region -> region_code}}
-                {{$region_name}} = {{$region -> region_name}}
-                <option value="{{ $region_code }}">{{ $region_name }}</option>
-            @endforeach --}}
+        <select name="sel_region">
+            @foreach($regions as $region)
+                <option value="{{$region -> region_code}}">{{$region -> region_name}}</option>
+            @endforeach
         </select>
     </main>
 </body>
