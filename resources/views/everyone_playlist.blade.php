@@ -69,7 +69,11 @@
                 <form action="" method="GET">
                     <label>
                         検索キーワード
+<<<<<<< HEAD
                         <input type="text" name="keyword" value="検索">
+=======
+                        {{--<input type="text" name="keyword2" value="{{$keyword2}}">--}}
+>>>>>>> e183850740b30afbe1c927e9d144a701936e5d42
                     </label>
                     <input type="submit" value="検索">
                 </form>
@@ -80,15 +84,14 @@
                     <th>playlist</th>
                     <th>詳細</th>
                 </tr>
-                {{--
+
                 @foreach ($playlists as $playlist)
                     <tr>
-                        <td>{{$playlist->name}}</td>
-                        <td>{{$playlist->playlist}}</td>
+                        <td>{{$playlist->user_id}}</td>
+                        <td>{{$playlist->list_name}}</td>
                         <td><a href="/other_playlist">詳細</a></td>
                     </tr>
                 @endforeach
-                --}}
             </table>
         </div>
      </div>
