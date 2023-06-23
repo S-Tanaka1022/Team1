@@ -29,17 +29,13 @@
 
      <div id="tabbody">
         <div id="tabpage1">
-            <div>
                 <form action="" method="GET">
                     <label>
                         検索キーワード
-                        {{-- <input type="text" name="keyword" value="{{$keyword}}"> --}}
+                        <input type="text" name="keyword" placeholder="検索">
                     </label>
                     <input type="submit" value="検索">
                 </form>
-            </div>
-            <div>
-            </div>
 
             <table border='1'>
                 <tr>
@@ -73,7 +69,7 @@
                 <form action="" method="GET">
                     <label>
                         検索キーワード
-                        {{--<input type="text" name="keyword2" value="{{$keyword2}}">--}}
+                        <input type="text" name="keyword2" value="検索">
                     </label>
                     <input type="submit" value="検索">
                 </form>

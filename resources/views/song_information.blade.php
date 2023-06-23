@@ -1,6 +1,8 @@
 <?php
-dump($track);
 //曲の詳細情報
+$trackImage = $track->album->images[0]->url; //アルバム画像
+$releaseDate = $track->album->release_date; //リリース日
+    $dateFormat = date("Y年m月d日", strtotime($releaseDate));
 $trackName = $track->name; //曲名
 $artistName = $track->artists[0]->name; //アーティスト名
 $trackTime = $track->duration_ms; //曲の再生時間
@@ -12,18 +14,20 @@ $albumName = $track->album->name; //アルバム名
 $trackPreview = $track->preview_url; //プレビューのURL(日本の曲は対応してないことが多い)
 
 //アーティスト情報
-$artists = $track->artists;
-// $artistImage = $artists->images[0]->url;
-// $genres = [];
-// foreach($artists as $artist){
-//     $genres = array_merge($genres, $artist->genres);
-// }
-// $genres = array_unique($genres);
+$artistImage = $artist->images[0]->url; //アーティストの宣材写真
 
 echo "Song Detail<br>";
+echo "<img src='$trackImage' width=80><br>";
 echo "Track Name: $trackName<br>" . PHP_EOL;
 echo "Album Name: $albumName<br>" . PHP_EOL;
+echo "Release Date: $dateFormat<br>";
+echo "<img src='$artistImage' width=80><br>";
 echo "Artist Name: $artistName<br>" . PHP_EOL;
+echo "Genres: ";
+foreach($artist->genres as $genre){
+   print($genre . " ");
+}
+echo "<br>";
 echo "Duration Time: $minutes:$secondsFormat<br>" . PHP_EOL;
 if ($trackPreview) {
     echo '<audio controls>';
@@ -34,7 +38,9 @@ if ($trackPreview) {
 } else {
     echo 'Preview not available.<br>';
 }
-
-echo "Artist Information<br>";
-
 ?>
+
+<form action="add_myplaylist" method="get" enctype="multipart/form-data">
+    <button type="submit" name="add_mylist" value='{{$track->id}}'>リストへ追加</button>
+</form>
+<button name="back" onclick="location.href='/everyone_playlist'">楽曲一覧に戻る</button>
