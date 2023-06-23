@@ -15,12 +15,9 @@ $accessToken = $session->getAccessToken();
 $api = new SpotifyWebAPI();
 $api->setAccessToken($accessToken);
 
-// 曲の検索
-$query = 'artist:"' . 'SUPER BEAVER' . '"';
-$results = $api->search($query, 'track');
+$songs;
 
-// 検索結果から曲の情報を取得
-$songs = $results->tracks->items;
+
 
 @endphp
 
@@ -99,8 +96,18 @@ $songs = $results->tracks->items;
 _TABLE_;
 
                                 $wethers = $areas_data[$area_code]["weathers"];
+                                
                                 foreach($wethers as $wether){
                                     echo "<td>".$wether . "</td>";
+
+                                    // 曲の検索
+                                    $query = "track:$wether";
+                                    $results = $api->search($query, 'artist');
+
+                                    // 検索結果から曲の情報を取得
+                                    $songs = $results->artists->items;
+                                    var_dump($songs);
+                        
                                 }
 
                                 echo "<td><a href='/delete/{$id}'>$id</td></tr>";
