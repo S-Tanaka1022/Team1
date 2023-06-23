@@ -39,3 +39,8 @@ if ($trackPreview) {
     echo 'Preview not available.<br>';
 }
 ?>
+
+<form action="add_myplaylist" method="get" enctype="multipart/form-data">
+    <button type="submit" name="add_mylist" value='{{$track->id}}'>リストへ追加</button>
+</form>
+<button name="back" onclick="location.href='/everyone_playlist'">楽曲一覧に戻る</button>
