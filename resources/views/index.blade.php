@@ -58,10 +58,8 @@ $songs;
 
     <main>
         <div>
-            <p>
 
-                <table border="0">
-                <tr>
+
 
                 <td>
                 <table border="1">
@@ -89,6 +87,8 @@ $songs;
                                 $data = json_decode($response, true);
                                 $areas_data = $data[0]["timeSeries"][0]["areas"];
                                 $area = $areas_data[$area_code]["area"]["name"];
+                                $weathers = $areas_data[$area_code]["weathers"];
+
 
                                 echo <<<_TABLE_
                                 <tr class="align-middle">
@@ -112,26 +112,26 @@ _TABLE_;
 
 
 
-                                $weathers = $areas_data[$area_code]["weathers"];
+                                // $weathers = $areas_data[$area_code]["weathers"];
                                  // 曲の検索
-                                dump($weathers[0]);
-                                $search_word = preg_split('/\p{Zs}/u', $weathers[0], 2)[0];
-                                dump($search_word);
-                                $limit = 30;
-                                $options = [
-                                    'limit' => $limit,
-                                    'offset' => random_int(0,10),
-                                ];
-                                $results = $api->search($search_word, 'track',$options);
+                                // dump($weathers);
+                                // $search_word = preg_split('/\p{Zs}/u', $weathers[0], 2)[0];
+                                // dump($search_word);
+                                // $limit = 30;
+                                // $options = [
+                                //     'limit' => $limit,
+                                //     'offset' => random_int(0,10),
+                                // ];
+                                // $results = $api->search($search_word, 'track',$options);
 
                                 // 検索結果から曲の情報を取得
-                                $songs = $results->tracks->items;
-                                dump($songs);
-                                foreach($weathers as $weather){
-                                    echo "<td>".$weather . "</td>";
-                                }
+                                // $songs = $results->tracks->items;
+                                // dump($songs);
+                                // foreach($weathers as $weather){
+                                //     echo "<td>".$weather . "</td>";
+                                // }
 
-
+// @dump($weathers);
                                 for ($i=0; $i < 3; $i++) {
                                     if (isset($weathers[$i])) {
                                         $weather = $weathers[$i];
@@ -153,40 +153,68 @@ _TABLE_;
                     @endphp
 
                 </table>
-                </td>
-
-                <td>
                 <table border="1">
-                    @foreach ($songs as $counter => $song)
-                        <?php
-                        if ($counter > 2) {
-                            break;
-                        }
-                        $trackName = $song->name;
-                        $artistName = $song->artists[0]->name;
-                        $albumImage = $song->album->images[0]->url;
-                        ?>
-                    <tr>
-                        <td><img src="{{ $albumImage }}" alt="Album Image"></td>
-                        <td>{{ $trackName }}</td>
-                        <td>{{ $artistName }}</td>
-                        <td>
-                        <form action="add_myplaylist" method="GET">
-                        @csrf
-                        <input type="hidden" name="artist_name" value="{{ $artistName }}">
-                        <input type="hidden" name="song_name" value="{{ $trackName }}">
-                        <button type="submmit" name="add_mylist" value="add_mylist">リストへ追加</button>
-                        <!--<button type="submmit" name="add_mylist" value="{{$song->id}}">リストへ追加</button>-->
-                        </form>
-                        </td>
-                    </tr>
-                    @endforeach
+                    @php
+                    foreach ($fav_regions as $fav_region){
+                        $region_code = $fav_region["region_code"];
+                        $area_code = $fav_region["area_code"];
+                        $id = $fav_region["id"];
+
+                        $region = Region_name::where('region_code', "$region_code")->get();
+                        $region_data = json_decode($region, true);
+                        $prefecture = $region_data[0]["region_name"];
+
+                        $url = "https://www.jma.go.jp/bosai/forecast/data/forecast/{$region_code}.json";
+                        $response = file_get_contents($url);
+                        $data = json_decode($response, true);
+                        $areas_data = $data[0]["timeSeries"][0]["areas"];
+                        $weathers = $areas_data[$area_code]["weathers"];
+                            // 曲の検索
+                        // dump($weathers);
+                        $search_word = preg_split('/\p{Zs}/u', $weathers[0], 2)[0];
+                        // dump($search_word);
+                        $limit = 30;
+                        $options = [
+                            'limit' => $limit,
+                            'offset' => random_int(0,10),
+                        ];
+                        $results = $api->search($search_word, 'track',$options);
+
+                        // 検索結果から曲の情報を取得
+                        $songs = $results->tracks->items;
+
+
+                        foreach ($songs as $counter => $song){
+                            if ($counter > 2) {
+                                break;
+                            }
+                            $trackName = $song->name;
+                            $artistName = $song->artists[0]->name;
+                            $albumImage = $song->album->images[0]->url;
+
+                        echo <<<_TABLE_
+                        <tr>
+                            <td><img src="{ $albumImage }" alt="Album Image" width="100px"></td>
+                            <td>{ $trackName }</td>
+                            <td>{ $artistName }</td>
+                            <td>
+                                <form action="add_myplaylist" method="GET">
+                                    <input type="hidden" name="artist_name" value="{ $artistName }">
+                                    <input type="hidden" name="song_name" value="{ $trackName }">
+                                    <button type="submmit" name="add_mylist" value="add_mylist">リストへ追加</button>
+                                    <!--<button type="submmit" name="add_mylist" value="{$song->id}">リストへ追加</button>-->
+                                </form>
+                            </td>
+                        </tr>
+_TABLE_;
+                    }
+                    }
+            @endphp
+
                 </table>
                 </td>
 
-                </tr>
-                </table>
-            </p>
+
         </div>
     </main>
     <footer>
