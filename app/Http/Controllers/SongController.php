@@ -32,7 +32,6 @@ class SongController extends Controller
             ];
 
             $results = $api->search($keyword,'track',$options);
-            return view('everyone_playlist', compact('results'));
         } else {
            /* 検索キーワードが入力されていない場合は、全件取得する */
            $limit = 30;

@@ -69,6 +69,6 @@ class PlaylistController extends Controller
     }
 
     public function myplaylist () {
-        echo "MY PLAYLISTS";
+        return view('myplaylist');
     }
 }
