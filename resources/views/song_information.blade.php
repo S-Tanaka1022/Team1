@@ -1,3 +1,37 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">楽曲詳細</a>
+            <p class="navbar-text">
+                {{ Auth::user() -> name }} さん ログイン中
+            </p>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <form action="index" method="get">
+                    <button class="btn btn-primary" type="submit">ホーム</button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <form action="myplaylists" method="get">
+                    <button class="btn btn-primary" type="submit">マイプレイリスト</button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <form action="everyone_playlist" method="get">
+                    <button class="btn btn-primary" type="submit">みんなのプレイリスト</button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button class="btn btn-danger" type="submit">ログアウト</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+</header>
+
 <?php
 //曲の詳細情報
 $trackImage = $track->album->images[0]->url; //アルバム画像
