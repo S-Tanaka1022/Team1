@@ -117,8 +117,12 @@ _TABLE_;
                                 dump($weathers[0]);
                                 $search_word = preg_split('/\p{Zs}/u', $weathers[0], 2)[0];
                                 dump($search_word);
-                                $query = "track:$search_word";
-                                $results = $api->search($query, 'track');
+                                $limit = 30;
+                                $options = [
+                                    'limit' => $limit,
+                                    'offset' => random_int(0,10),
+                                ];
+                                $results = $api->search($search_word, 'track',$options);
 
                                 // 検索結果から曲の情報を取得
                                 $songs = $results->tracks->items;
