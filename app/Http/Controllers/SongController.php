@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Playlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use SpotifyWebAPI\SpotifyWebAPI;
 use SpotifyWebAPI\Session;
+use Illuminate\Support\Str;
 
 class SongController extends Controller
 {
@@ -39,7 +42,21 @@ class SongController extends Controller
         ];
 
         $results = $api->search($query,'track',$options);
-        return view('everyone_playlist', compact('results'));
+
+
+        //プレイリスト一覧表示のためのデータベース読み込み
+        $auth_info = Auth::user()->id;
+        $keyword2 = $request->input('keyword2');
+        if (Str::length($keyword2) > 0) { // キーワードが入っている場合
+            $playlists = Playlist::where('list_name', 'LIKE', "%$keyword2%") // プレイリスト名にkeyword2 を含むものを絞り込み
+                ->where('user_id','!=', $auth_info) //ログイン中のユーザー以外のプレイリスト
+                ->get();
+        } else {
+            /* 検索キーワードが入力されていない場合は、全件取得する */
+            $playlists = Playlist::where('user_id','!=', $auth_info)->get();//ログイン中のユーザー以外のプレイリストを表示
+        }
+
+        return view('everyone_playlist', compact('results','playlists'));
     }
 
     public function information(Request $request){

@@ -70,15 +70,13 @@
 
 
         <div id="tabpage2">
-            <div>
                 <form action="" method="GET">
                     <label>
                         検索キーワード
-                        {{-- <input type="text" name="keyword" value="{{$keyword}}"> --}}
+                        {{--<input type="text" name="keyword2" value="{{$keyword2}}">--}}
                     </label>
                     <input type="submit" value="検索">
                 </form>
-            </div>
 
             <table border='1'>
                 <tr>
@@ -86,15 +84,14 @@
                     <th>playlist</th>
                     <th>詳細</th>
                 </tr>
-                {{--
+
                 @foreach ($playlists as $playlist)
                     <tr>
-                        <td>{{$playlist->name}}</td>
-                        <td>{{$playlist->playlist}}</td>
+                        <td>{{$playlist->user_id}}</td>
+                        <td>{{$playlist->list_name}}</td>
                         <td><a href="/other_playlist">詳細</a></td>
                     </tr>
                 @endforeach
-                --}}
             </table>
         </div>
      </div>
