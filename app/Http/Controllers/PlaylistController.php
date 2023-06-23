@@ -68,4 +68,9 @@ class PlaylistController extends Controller
         print("<a href='everyone_playlist'>みんなプレイリストに戻る</a>");
     }
 
+    public function myplaylist () {
+        $auth_info = Auth::user()->id;
+        $playlists = Playlist::where('user_id', $auth_info)->get();
+        return view('/myplaylists', compact('playlists'));
+    }
 }
