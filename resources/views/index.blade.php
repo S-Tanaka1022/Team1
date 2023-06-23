@@ -77,6 +77,17 @@ _TABLE_;
                                     if (isset($weathers[$i])) {
                                         $weather = $weathers[$i];
                                         $replacements = array(
+                                            "雨" => "　雨　",
+                                            "晴れ" => "　晴れ　",
+                                            "雷" => "　雷　",
+                                            "雪" => "　雪　",
+                                            "くもり" => "　くもり　",
+                                            );
+                                        $result = str_replace(array_keys($replacements), array_values($replacements), $weather);
+
+                                        // 回数を数えて、2回出てきたら以降を削除
+
+                                        $replacements_img = array(
                                             "雨" => "<img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '100px'>",
                                             "晴れ" => "<img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '100px'>",
                                             "雷" => "<img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '100px'>",
