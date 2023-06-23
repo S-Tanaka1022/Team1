@@ -54,7 +54,9 @@ class SongController extends Controller
         $api->setAccessToken($accessToken);
         $trackId = $request->information;
         $track = $api->getTrack($trackId);
+        $artistId = $track->artists[0]->id;
+        $artist = $api->getArtist($artistId);
 
-        return view('/song_information', compact('track'));
+        return view('/song_information', compact('track','artist'));
     }
 }
