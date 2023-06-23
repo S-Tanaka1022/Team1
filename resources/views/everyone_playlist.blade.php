@@ -16,6 +16,7 @@
     <form action="" method="GET">
         <button type="button" name="mylist" value="mylist" onclick="location.href='/myplaylist'">マイプレイリスト</button>
     </form>
+    <button type="button" name="reload" onclick="location.href='/everyone_playlist'">楽曲更新</button>
     <form action="{{route('logout')}}" method="post">
         <button type="submit">ログアウト</button>
         @csrf
@@ -28,15 +29,13 @@
 
      <div id="tabbody">
         <div id="tabpage1">
-            <div>
                 <form action="" method="GET">
                     <label>
                         検索キーワード
-                        {{-- <input type="text" name="keyword" value="{{$keyword}}"> --}}
+                        <input type="text" name="keyword" placeholder="検索">
                     </label>
                     <input type="submit" value="検索">
                 </form>
-            </div>
 
             <table border='1'>
                 <tr>
@@ -47,18 +46,18 @@
                     <th>詳細を表示</th>
                 </tr>
                 @foreach ($results->tracks->items as $song)
-                <form action="add_myplaylist" method="get" enctype="multipart/form-data">
-                    <tr>
-                        <td><img src="{{$song->album->images[0]->url}}" width=80></td>
-                        <td>{{$song->name}}</td>
-                        <td>{{$song->artists[0]->name}}</td>
-                        <td><button type="submit" name="add_mylist" value="add_mylist">リストへ追加</button></td>
-                        <input type="hidden" name="artist_name" value='{{$song->artists[0]->name}}'>
-                        <input type="hidden" name="song_name" value='{{$song->name}}'>
-                        <td><a href="/other_playlist">詳細</a></td>
-                    </tr>
-                    @csrf
-                </form>
+                <tr>
+                    <td><img src="{{$song->album->images[0]->url}}" width=80></td>
+                    <td>{{$song->name}}</td>
+                    <td>{{$song->artists[0]->name}}</td>
+                    <form action="add_myplaylist" method="get" enctype="multipart/form-data">
+                        <td><button type="submit" name="add_mylist" value='{{$song->id}}'>リストへ追加</button></td>
+                    </form>
+                    <form action="information" method="get" enctype="multipart/form-data">
+                        <td><button type="submit" name="information" value='{{$song->id}}'>詳細情報</button></td>
+                     </form>
+                </tr>
+                @csrf
                 @endforeach
             </table>
 
@@ -67,15 +66,13 @@
 
 
         <div id="tabpage2">
-            <div>
                 <form action="" method="GET">
                     <label>
                         検索キーワード
-                        {{-- <input type="text" name="keyword" value="{{$keyword}}"> --}}
+                        <input type="text" name="keyword" value="検索">
                     </label>
                     <input type="submit" value="検索">
                 </form>
-            </div>
 
             <table border='1'>
                 <tr>

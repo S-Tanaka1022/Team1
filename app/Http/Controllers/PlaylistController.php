@@ -11,9 +11,11 @@ use Illuminate\Support\Facades\DB;
 class PlaylistController extends Controller
 {
     public function index(Request $request){
+        $auth_info = Auth::user()->id;
         //var_dump($_GET);
         //var_dump($request);
-        $playlists = Playlist::all();
+        $playlists = Playlist::where('user_id', $auth_info)->get();
+
         $title = $request->song_name;
         $artist = $request->artist_name;
         return view('add_myplaylist',compact('playlists','title','artist'));

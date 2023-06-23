@@ -51,7 +51,7 @@ $songs;
                 @csrf
                 <button type="submit">ログアウト</button>
             </form>
-
+            {{-- <img src="/images/normal/sunny.png" alt="晴れ画像"> --}}
         </nav>
 
     </header>
@@ -94,22 +94,54 @@ $songs;
                                 <tr class="align-middle">
                                     <td>{$prefecture}：{$area}</td>
 _TABLE_;
-
-                                $wethers = $areas_data[$area_code]["weathers"];
+                                /* 追加してほしいところ
+                                {{-- $weathers = $areas_data[$area_code]["weathers"]; --}}
+                                {{-- 曲の検索 --}}
+                                {{-- $query =  $weathers[0]; --}}
+                                {{-- dump($weathers[0]); --}}
+                                {{-- $options = ['limit'=>3]; --}}
+                                {{-- $results = $api->search($query, 'track', $options); --}}
+                                {{-- 検索結果から曲の情報を取得 --}}
+                                {{-- $songs = $results->tracks->items; --}}
+                                foreach($weathers as $weather){
+                                    echo "<td>".$weather . "</td>";
+                                }
+                                echo "<td><a href='/delete/{$id}'>$id</td></tr>";
+                                */
                                 
-                                foreach($wethers as $wether){
-                                    echo "<td>".$wether . "</td>";
+                                
+                        
+                                $weathers = $areas_data[$area_code]["weathers"];
+                                // @dump($weathers);
+                                foreach($weathers as $weather){
+                                    echo "<td>".$weather . "</td>";
 
                                     // 曲の検索
-                                    $query = "track:$wether";
+                                    $query = "track:$weather";
                                     $results = $api->search($query, 'artist');
 
                                     // 検索結果から曲の情報を取得
                                     $songs = $results->artists->items;
                                     var_dump($songs);
-                        
                                 }
 
+
+                                for ($i=0; $i < 3; $i++) {
+                                    if (isset($weathers[$i])) {
+                                        $weather = $weathers[$i];
+                                        $replacements = array(
+                                            "雨" => "<img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '100px'>",
+                                            "晴れ" => "<img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '100px'>",
+                                            "雷" => "<img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '100px'>",
+                                            "雪" => "<img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '100px'>",
+                                            "くもり" => "<img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '100px'>",
+                                        );
+                                        $result = str_replace(array_keys($replacements), array_values($replacements), $weather);
+                                        echo "<td align='center' valign='middle'>". $result. "</td>";
+                                    }else{
+                                        echo "<td align='center' valign='middle'>情報取得中</td>";
+                                    }
+                                }
                                 echo "<td><a href='/delete/{$id}'>$id</td></tr>";
                             }
                     @endphp

@@ -9,6 +9,7 @@ use App\Http\Controllers\RegionNameController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,6 +69,7 @@ Route::post('/add_myplaylist', [PlaylistController::class, 'add'])->middleware('
 
 #全員のプレイリスト一覧画面と楽曲一覧画面
 Route::get('/everyone_playlist', [SongController::class, 'index']);
+Route::get('/information', [SongController::class, 'information']);
 
 #それぞれのプレイリスト確認画面
 Route::get('/other_playlist', [SongController::class, 'detail']);
