@@ -23,9 +23,12 @@
         <br>
 
         曲名
-        <input type="text" name="title" value="{{$title}}"><br>
+        <input type="text" name="title" value="{{$track->name}}"><br>
         アーティスト
-        <input type="text" name="artist" value="{{$artist}}"><br>
+        <input type="text" name="artist" value="{{$track->artists[0]->name}}"><br>
+
+        {{-- trackIdの流用 --}}
+        <input type="hidden" name="trackId" value="{{$trackId}}">
         <input type="submit" value="追加">
         @csrf
     </form>
