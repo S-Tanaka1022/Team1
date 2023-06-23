@@ -14,7 +14,7 @@
         <button type="button" name="weather" value="weather" onclick="location.href='/index'">天気情報</button>
     </form>
     <form action="" method="GET">
-        <button type="button" name="mylist" value="mylist" onclick="location.href='/myplaylist'">マイプレイリスト</button>
+        <button type="button" name="mylist" value="mylist" onclick="location.href='/myplaylists'">マイプレイリスト</button>
     </form>
     <button type="button" name="reload" onclick="location.href='/everyone_playlist'">楽曲更新</button>
     <form action="{{route('logout')}}" method="post">
@@ -69,7 +69,7 @@
                 <form action="" method="GET">
                     <label>
                         検索キーワード
-                        <input type="text" name="keyword" value="検索">
+                        <input type="text" name="keyword2" value="検索">
                     </label>
                     <input type="submit" value="検索">
                 </form>
@@ -80,15 +80,14 @@
                     <th>playlist</th>
                     <th>詳細</th>
                 </tr>
-                {{--
+
                 @foreach ($playlists as $playlist)
                     <tr>
-                        <td>{{$playlist->name}}</td>
-                        <td>{{$playlist->playlist}}</td>
+                        <td>{{$playlist->user_id}}</td>
+                        <td>{{$playlist->list_name}}</td>
                         <td><a href="/other_playlist">詳細</a></td>
                     </tr>
                 @endforeach
-                --}}
             </table>
         </div>
      </div>
