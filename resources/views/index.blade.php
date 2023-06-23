@@ -72,23 +72,25 @@ use App\Models\Region_name;
 _TABLE_;
 
                                 $weathers = $areas_data[$area_code]["weathers"];
-                                foreach($weathers as $weather){
-                                    if(isset($weather)){
-                                    $replacements = array(
-                                        "雨" => "<img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '100px'>",
-                                        "晴れ" => "<img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '100px'>",
-                                        "雷" => "<img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '100px'>",
-                                        "雪" => "<img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '100px'>",
-                                        "くもり" => "<img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '100px'>",
-                                    );
-                                    $result = str_replace(array_keys($replacements), array_values($replacements), $weather);
-                                    echo "<td align='center' valign='middle'>". $result. "</td>";
-                                }else{
-                                    echo "<td align='center' valign='middle'>情報取得中</td>";
+                                // @dump($weathers);
+                                for ($i=0; $i < 3; $i++) {
+                                    if (isset($weathers[$i])) {
+                                        $weather = $weathers[$i];
+                                        $replacements = array(
+                                            "雨" => "<img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '100px'>",
+                                            "晴れ" => "<img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '100px'>",
+                                            "雷" => "<img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '100px'>",
+                                            "雪" => "<img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '100px'>",
+                                            "くもり" => "<img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '100px'>",
+                                        );
+                                        $result = str_replace(array_keys($replacements), array_values($replacements), $weather);
+                                        echo "<td align='center' valign='middle'>". $result. "</td>";
+                                    }else{
+                                        echo "<td align='center' valign='middle'>情報取得中</td>";
+                                    }
                                 }
-                            }
                                 echo "<td><a href='/delete/{$id}'>$id</td></tr>";
-                                }
+                            }
                     @endphp
 
                 </table>
