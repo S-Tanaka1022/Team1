@@ -1,8 +1,6 @@
 @php
 use App\Models\Region_name;
 
-#表示するのは、都道府県名（DB）・地域名(API)・気象情報(API)
-
 use SpotifyWebAPI\SpotifyWebAPI;
 use SpotifyWebAPI\Session;
 
@@ -133,6 +131,7 @@ _TABLE_;
                         <input type="hidden" name="artist_name" value="{{ $artistName }}">
                         <input type="hidden" name="song_name" value="{{ $trackName }}">
                         <button type="submmit" name="add_mylist" value="add_mylist">リストへ追加</button>
+                        <!--<button type="submmit" name="add_mylist" value="{{$song->id}}">リストへ追加</button>-->
                         </form>
                         </td>
                     </tr>
