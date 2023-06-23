@@ -114,19 +114,19 @@ _TABLE_;
 
                                 $weathers = $areas_data[$area_code]["weathers"];
                                  // 曲の検索
-                                dump($weathers[0]);
+                                // dump($weathers[0]);
                                 $search_word = preg_split('/\p{Zs}/u', $weathers[0], 2)[0];
-                                dump($search_word);
+                                // dump($search_word);
                                 $limit = 30;
                                 $options = [
                                     'limit' => $limit,
-                                    'offset' => random_int(0,10),
+                                    'offset' => random_int(0,100),
                                 ];
                                 $results = $api->search($search_word, 'track',$options);
 
                                 // 検索結果から曲の情報を取得
                                 $songs = $results->tracks->items;
-                                dump($songs);
+                                // dump($songs);
                                 foreach($weathers as $weather){
                                     echo "<td>".$weather . "</td>";
                                 }
@@ -167,7 +167,7 @@ _TABLE_;
                         $albumImage = $song->album->images[0]->url;
                         ?>
                     <tr>
-                        <td><img src="{{ $albumImage }}" alt="Album Image"></td>
+                        <td><img src="{{ $albumImage }}" alt="Album Image" width=50></td>
                         <td>{{ $trackName }}</td>
                         <td>{{ $artistName }}</td>
                         <td>
