@@ -94,6 +94,7 @@ $songs;
                                 <tr class="align-middle">
                                     <td>{$prefecture}：{$area}</td>
 _TABLE_;
+
                                 /* 追加してほしいところ
                                 {{-- $weathers = $areas_data[$area_code]["weathers"]; --}}
                                 {{-- 曲の検索 --}}
@@ -108,21 +109,22 @@ _TABLE_;
                                 }
                                 echo "<td><a href='/delete/{$id}'>$id</td></tr>";
                                 */
-                                
-                                
-                        
+
+
+
                                 $weathers = $areas_data[$area_code]["weathers"];
-                                // @dump($weathers);
+                                 // 曲の検索
+                                dump($weathers[0]);
+                                $search_word = preg_split('/\p{Zs}/u', $weathers[0], 2)[0];
+                                dump($search_word);
+                                $query = "track:$search_word";
+                                $results = $api->search($query, 'track');
+
+                                // 検索結果から曲の情報を取得
+                                $songs = $results->tracks->items;
+                                dump($songs);
                                 foreach($weathers as $weather){
                                     echo "<td>".$weather . "</td>";
-
-                                    // 曲の検索
-                                    $query = "track:$weather";
-                                    $results = $api->search($query, 'artist');
-
-                                    // 検索結果から曲の情報を取得
-                                    $songs = $results->artists->items;
-                                    var_dump($songs);
                                 }
 
 
@@ -152,7 +154,7 @@ _TABLE_;
                 <td>
                 <table border="1">
                     @foreach ($songs as $counter => $song)
-                        <?php 
+                        <?php
                         if ($counter > 2) {
                             break;
                         }

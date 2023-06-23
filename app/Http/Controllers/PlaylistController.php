@@ -69,6 +69,8 @@ class PlaylistController extends Controller
     }
 
     public function myplaylist () {
-        echo "MY PLAYLISTS";
+        $auth_info = Auth::user()->id;
+        $playlists = Playlist::where('user_id', $auth_info)->get();
+        return view('/myplaylists', compact('playlists'));
     }
 }
