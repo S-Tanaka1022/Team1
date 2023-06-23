@@ -43,7 +43,6 @@ class SongController extends Controller
            ];
 
            $results = $api->search($query,'track',$options);
-           return view('everyone_playlist', compact('results'));
         }
         // /* Requestに送信された検索キーワードを変数に保持 */
         // $keyword = $request->keyword;
