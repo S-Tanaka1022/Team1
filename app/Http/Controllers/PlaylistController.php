@@ -11,9 +11,11 @@ use Illuminate\Support\Facades\DB;
 class PlaylistController extends Controller
 {
     public function index(Request $request){
+        $auth_info = Auth::user()->id;
         //var_dump($_GET);
         //var_dump($request);
-        $playlists = Playlist::all();
+        $playlists = Playlist::where('user_id', $auth_info)->get();
+
         $title = $request->song_name;
         $artist = $request->artist_name;
         return view('add_myplaylist',compact('playlists','title','artist'));
@@ -41,7 +43,7 @@ class PlaylistController extends Controller
             /* データベースにレコードを追加する */
             $add_playlist->save();
         }else{//プレイリストを選択した場合
-            print('test');
+            //print('test');
             //dd($request->input());
             //dd($request->list_id);
             //$add_playlist = Playlist::where('list_name', $request->list_name)->get();
@@ -58,7 +60,8 @@ class PlaylistController extends Controller
 
         $add_song->save();
 
-            $add_playlist->songs()->attach($add_song->id);
+        $add_playlist->songs()->attach($add_song->id);
+
 
 
 
