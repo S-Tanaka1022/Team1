@@ -60,9 +60,8 @@
                             <input type="hidden" name="song_name" value='{{$song->name}}'>
                     </form>
                     <form action="information" method="get" enctype="multipart/form-data">
-                        <td><button type="submit" name="information" value="information">詳細情報</button></td>
-                        <input type="hidden" name="artist_name" value='{{$song->artists[0]->name}}'>
-                        <input type="hidden" name="song_name" value='{{$song->name}}'>                    </form>
+                        <td><button type="submit" name="information" value='{{$song->id}}'>詳細情報</button></td>
+                     </form>
                 </tr>
                 @csrf
                 @endforeach

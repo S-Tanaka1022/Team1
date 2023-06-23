@@ -42,7 +42,19 @@ class SongController extends Controller
         return view('everyone_playlist', compact('results'));
     }
 
-    public function information(){
-        return view('/song_information');
+    public function information(Request $request){
+        $session = new Session(
+            'f172da853aeb4266863fb2661addbb76',
+            'bcf72a943e1245828831cda721f77987'
+        );
+        $session->requestCredentialsToken();
+        $accessToken = $session->getAccessToken();
+
+        $api = new SpotifyWebAPI();
+        $api->setAccessToken($accessToken);
+        $trackId = $request->information;
+        $track = $api->getTrack($trackId);
+
+        return view('/song_information', compact('track'));
     }
 }
