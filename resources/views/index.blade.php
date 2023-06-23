@@ -46,7 +46,7 @@ use App\Models\Region_name;
                         <th>今日の天気</th>
                         <th>明日の天気</th>
                         <th>明後日の天気</th>
-                        <th>削除</th>
+                        <th>削除ボタン</th>
                     </tr>
 
                     @php
@@ -72,7 +72,6 @@ use App\Models\Region_name;
 _TABLE_;
 
                                 $weathers = $areas_data[$area_code]["weathers"];
-                                // @dump($weathers);
                                 for ($i=0; $i < 3; $i++) {
                                     if (isset($weathers[$i])) {
                                         $weather = $weathers[$i];
@@ -89,7 +88,13 @@ _TABLE_;
                                         echo "<td align='center' valign='middle'>情報取得中</td>";
                                     }
                                 }
-                                echo "<td><a href='/delete/{$id}'>$id</td></tr>";
+                                echo "
+                                    <td align='center'>
+                                    <form method='GET' action='/delete/{$id}'>
+                                        <button type='submit'>削除</button>
+                                    </form>
+                                    </td>
+                                    ";
                             }
                     @endphp
 
