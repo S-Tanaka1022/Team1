@@ -32,7 +32,7 @@ use App\Models\Region_name;
                 @csrf
                 <button type="submit">ログアウト</button>
             </form>
-
+            {{-- <img src="/images/normal/sunny.png" alt="晴れ画像"> --}}
         </nav>
 
     </header>
@@ -71,9 +71,17 @@ use App\Models\Region_name;
                                     <td>{$prefecture}：{$area}</td>
 _TABLE_;
 
-                                $wethers = $areas_data[$area_code]["weathers"];
-                                foreach($wethers as $wether){
-                                    echo "<td>".$wether . "</td>";
+                                $weathers = $areas_data[$area_code]["weathers"];
+                                foreach($weathers as $weather){
+                                    $replacements = array(
+                                        "雨" => "<img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト'>",
+                                        "晴れ" => "<img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト'>",
+                                        "雷" => "<img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト'>",
+                                        "雪" => "<img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト'>",
+                                        "くもり" => "<img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト'>",
+                                    );
+                                    $result = str_replace(array_keys($replacements), array_values($replacements), $weather);
+                                    echo "<td align='center'>". $result. "</td>";
                                 }
 
                                 echo "<td><a href='/delete/{$id}'>$id</td></tr>";
