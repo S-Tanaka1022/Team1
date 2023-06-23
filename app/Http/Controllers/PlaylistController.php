@@ -7,6 +7,8 @@ use App\Models\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use SpotifyWebAPI\SpotifyWebAPI;
+use SpotifyWebAPI\Session;
 
 class PlaylistController extends Controller
 {
@@ -19,6 +21,20 @@ class PlaylistController extends Controller
         $title = $request->song_name;
         $artist = $request->artist_name;
         return view('add_myplaylist',compact('playlists','title','artist'));
+
+        $session = new Session(
+            'f172da853aeb4266863fb2661addbb76',
+            'bcf72a943e1245828831cda721f77987'
+        );
+        $session->requestCredentialsToken();
+        $accessToken = $session->getAccessToken();
+
+        $api = new SpotifyWebAPI();
+        $api->setAccessToken($accessToken);
+        $trackId = $request->information;
+        $track = $api->getTrack($trackId);
+
+        return view('/song_information', compact('track'));
     }
 
     public function add(Request $request)
