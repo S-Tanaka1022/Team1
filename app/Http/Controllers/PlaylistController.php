@@ -67,4 +67,8 @@ class PlaylistController extends Controller
 
         print("<a href='everyone_playlist'>みんなプレイリストに戻る</a>");
     }
+
+    public function myplaylist () {
+        echo "MY PLAYLISTS";
+    }
 }
