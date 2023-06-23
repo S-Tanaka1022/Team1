@@ -69,11 +69,7 @@
                 <form action="" method="GET">
                     <label>
                         検索キーワード
-<<<<<<< HEAD
-                        <input type="text" name="keyword" value="検索">
-=======
-                        {{--<input type="text" name="keyword2" value="{{$keyword2}}">--}}
->>>>>>> e183850740b30afbe1c927e9d144a701936e5d42
+                        <input type="text" name="keyword2" value="検索">
                     </label>
                     <input type="submit" value="検索">
                 </form>
