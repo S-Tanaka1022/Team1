@@ -68,8 +68,7 @@
         <div id="tabpage2">
                 <form action="" method="GET">
                     <label>
-                        検索キーワード
-                        <input type="text" name="keyword" value="検索">
+                        <input type="text" name="keyword2" placeholder="検索"  onclick="showTab('tabpage2'); return false;">
                     </label>
                     <input type="submit" value="検索">
                 </form>
@@ -80,19 +79,23 @@
                     <th>playlist</th>
                     <th>詳細</th>
                 </tr>
-                {{--
+
                 @foreach ($playlists as $playlist)
                     <tr>
-                        <td>{{$playlist->name}}</td>
-                        <td>{{$playlist->playlist}}</td>
-                        <td><a href="/other_playlist">詳細</a></td>
+                        <td>{{$playlist->user->name}}</td>
+                        <td>{{$playlist->list_name}}</td>
+
+                        <form action="other_playlist" method="get" enctype="multipart/form-data">
+                            <td><button type="submit" name="playlist_id" value='{{$playlist->id}}'>詳細</button></td>
+                            @csrf
+                        </form>
                     </tr>
                 @endforeach
-                --}}
             </table>
         </div>
      </div>
 
-    <script src="{{ asset('/js/everyone_playlist.js') }}"></script>
+    {{-- <script src="{{ asset('/js/everyone_playlist.js') }}"></script> --}}
+    <script src="{{ asset('/js/test.js') }}"></script>
 </body>
 </html>

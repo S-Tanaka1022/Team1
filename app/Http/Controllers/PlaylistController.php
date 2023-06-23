@@ -7,18 +7,28 @@ use App\Models\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use SpotifyWebAPI\SpotifyWebAPI;
+use SpotifyWebAPI\Session;
 
 class PlaylistController extends Controller
 {
     public function index(Request $request){
         $auth_info = Auth::user()->id;
-        //var_dump($_GET);
-        //var_dump($request);
         $playlists = Playlist::where('user_id', $auth_info)->get();
 
-        $title = $request->song_name;
-        $artist = $request->artist_name;
-        return view('add_myplaylist',compact('playlists','title','artist'));
+        $session = new Session(
+            'f172da853aeb4266863fb2661addbb76',
+            'bcf72a943e1245828831cda721f77987'
+        );
+        $session->requestCredentialsToken();
+        $accessToken = $session->getAccessToken();
+
+        $api = new SpotifyWebAPI();
+        $api->setAccessToken($accessToken);
+        $trackId = $request->add_mylist;
+        $track = $api->getTrack($trackId);
+
+        return view('add_myplaylist', compact('playlists','track','trackId'));
     }
 
     public function add(Request $request)
@@ -43,28 +53,19 @@ class PlaylistController extends Controller
             /* データベースにレコードを追加する */
             $add_playlist->save();
         }else{//プレイリストを選択した場合
-            //print('test');
-            //dd($request->input());
-            //dd($request->list_id);
-            //$add_playlist = Playlist::where('list_name', $request->list_name)->get();
-
-            //var_dump($add_playlist);
             $add_playlist = Playlist::find($request->list_id);
         }
 
         /* Song オブジェクトを生成 */
         $add_song = new Song();
 
-        $add_song->title = $request->title;
-        $add_song->artist = $request->artist;
+        $add_song->song_detail_id = $request->trackId;
 
         $add_song->save();
 
-        $add_playlist->songs()->attach($add_song->id);
-
-
-
+        $add_playlist->songs()->attach($add_song->id);//中間テーブルにレコード追加
 
         print("<a href='everyone_playlist'>みんなプレイリストに戻る</a>");
     }
+
 }
