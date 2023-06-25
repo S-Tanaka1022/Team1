@@ -52,7 +52,7 @@ Route::post('/add_area', [RegionController::class, 'add_area']);
 Route::get('/delete/{id}', [RegionController::class, 'delete']);
 
 #自分のプレイリスト一覧画面
-Route::get('/myplaylists', [PlaylistController::class, 'myplaylist']);
+Route::get('/myplaylist', [PlaylistController::class, 'myplaylist']);
 /*Route::get('/myplaylist', function () {
     return view('myplaylist');
 });
