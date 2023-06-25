@@ -57,11 +57,8 @@ $songs;
     </header>
 
     <main>
-        <div>
-
-
-
-                <td>
+        <div style="display: flex; justify-content: space-between;">
+            <div style="flex: 1; margin-right: 10px;">
                 <table border="1">
                     <tr>
                         <th>地域名</th>
@@ -91,7 +88,7 @@ $songs;
 
 
                                 echo <<<_TABLE_
-                                <tr class="align-middle">
+                                <tr class="align-middle" height="60px">
                                     <td>{$prefecture}：{$area}</td>
 _TABLE_;
 
@@ -136,11 +133,12 @@ _TABLE_;
                                     if (isset($weathers[$i])) {
                                         $weather = $weathers[$i];
                                         $replacements = array(
-                                            "雨" => "<img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '100px'>",
-                                            "晴れ" => "<img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '100px'>",
-                                            "雷" => "<img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '100px'>",
-                                            "雪" => "<img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '100px'>",
-                                            "くもり" => "<img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '100px'>",
+                                            "雨" => "<img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '100px'><br>",
+                                            "晴れ" => "<img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '100px'><br>",
+                                            "雷" => "<img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '100px'><br>",
+                                            "雪" => "<img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '100px'><br>",
+                                            "くもり" => "<img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '100px'><br>",
+                                            "　" => "",
                                         );
                                         $result = str_replace(array_keys($replacements), array_values($replacements), $weather);
                                         echo "<td align='center' valign='middle'>". $result. "</td>";
@@ -153,7 +151,16 @@ _TABLE_;
                     @endphp
 
                 </table>
+            </div>
+            <div style="flex: 1; margin-left: 10px;">
                 <table border="1">
+                    <tr>
+                        <th>ジャケット</th>
+                        <th>曲名</th>
+                        <th>アーティスト</th>
+                        <th>マイプレイ</th>
+                    </tr>
+
                     @php
                     foreach ($fav_regions as $fav_region){
                         $region_code = $fav_region["region_code"];
@@ -192,27 +199,28 @@ _TABLE_;
                             $artistName = $song->artists[0]->name;
                             $albumImage = $song->album->images[0]->url;
 
+
                         echo <<<_TABLE_
-                        <tr>
-                            <td><img src="{ $albumImage }" alt="Album Image" width="100px"></td>
-                            <td>{ $trackName }</td>
-                            <td>{ $artistName }</td>
+                        <tr height="20px">
+                            <td><img src="$albumImage" alt="Album Image" width="100px"></td>
+                            <td>$trackName</td>
+                            <td>$artistName</td>
                             <td>
                                 <form action="add_myplaylist" method="GET">
-                                    <input type="hidden" name="artist_name" value="{ $artistName }">
-                                    <input type="hidden" name="song_name" value="{ $trackName }">
+                                    <input type="hidden" name="artist_name" value="$artistName">
+                                    <input type="hidden" name="song_name" value="$trackName">
                                     <button type="submmit" name="add_mylist" value="add_mylist">リストへ追加</button>
-                                    <!--<button type="submmit" name="add_mylist" value="{$song->id}">リストへ追加</button>-->
+                                    <!--<button type="submmit" name="add_mylist" value="$song->id">リストへ追加</button>-->
                                 </form>
                             </td>
                         </tr>
 _TABLE_;
                     }
-                    }
+                }
             @endphp
 
                 </table>
-                </td>
+            <div>
 
 
         </div>
