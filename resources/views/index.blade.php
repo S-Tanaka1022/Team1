@@ -21,7 +21,6 @@ $songs;
 
 @endphp
 
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -29,37 +28,54 @@ $songs;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>index</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- 自作CSSファイル -->
+    <link rel="stylesheet" href="path/to/your/custom.css">
 </head>
 
 <body>
     <header>
-        <h1>index.blade.php</h1>
-        <p>
-            {{ Auth::user() -> name }} さんログイン中
-        </p>
-        <nav style="background-color: #cdd9e4; padding: 10px;">
-            <form action="myplaylist" method="get" style="display: inline-block;">
-                <button type="submit">プレイリスト</button>
-            </form>
-            <form action="everyone_playlist" method="get" style="display: inline-block;">
-                <button type="submit">みんなのプレイリスト</button>
-            </form>
-            <form action="add_region" method="get" style="display: inline-block;">
-                <button type="submit">登録地追加</button>
-            </form>
-            <form action="{{ route('logout') }}" method="post" style="display: inline-block; margin-right: 10px;">
-                @csrf
-                <button type="submit">ログアウト</button>
-            </form>
-            {{-- <img src="/images/normal/sunny.png" alt="晴れ画像"> --}}
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">メインページ</a>
+                <p class="navbar-text">
+                    {{ Auth::user() -> name }} さん ログイン中
+                </p>
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <form action="myplaylists" method="get">
+                        <button class="btn btn-primary" type="submit">プレイリスト</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="everyone_playlist" method="get">
+                        <button class="btn btn-primary" type="submit">みんなのプレイリスト</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="add_region" method="get">
+                        <button class="btn btn-primary" type="submit">登録地追加</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button class="btn btn-danger" type="submit">ログアウト</button>
+                    </form>
+                </li>
+            </ul>
         </nav>
-
     </header>
 
     <main>
         <div style="display: flex; justify-content: space-between;">
             <div class="weather_table" style="margin-right: 10px;">
                 <table border="1">
+        <div class="container">
+            <table class="table">
+                <thead>
                     <tr>
                         <th><div class="column_headers">地域名</div></th>
                         <th><div class="column_headers">今日の天気</div></th>
@@ -67,17 +83,18 @@ $songs;
                         <th><div class="column_headers">明後日の天気</div></th>
                         <th><div class="column_headers">削除</div></th>
                     </tr>
-
+                </thead>
+                <tbody>
                     @php
-                    #表示するのは、都道府県名（DB）・地域名(API)・気象情報(API)
-                            foreach ($fav_regions as $fav_region){
-                                $region_code = $fav_region["region_code"];
-                                $area_code = $fav_region["area_code"];
-                                $id = $fav_region["id"];
+                #表示するのは、都道府県名（DB）・地域名(API)・気象情報(API)
+                foreach ($fav_regions as $fav_region){
+                    $region_code = $fav_region["region_code"];
+                    $area_code = $fav_region["area_code"];
+                    $id = $fav_region["id"];
 
-                                $region = Region_name::where('region_code', "$region_code")->get();
-                                $region_data = json_decode($region, true);
-                                $prefecture = $region_data[0]["region_name"];
+                    $region = Region_name::where('region_code', "$region_code")->get();
+                    $region_data = json_decode($region, true);
+                    $prefecture = $region_data[0]["region_name"];
 
                                 $url = "https://www.jma.go.jp/bosai/forecast/data/forecast/{$region_code}.json";
                                 $response = file_get_contents($url);
@@ -213,9 +230,8 @@ _TABLE_;
 
         </div>
     </main>
-    <footer>
-
-    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
 
