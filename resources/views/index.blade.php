@@ -115,11 +115,11 @@ _TABLE_;
                                     if (isset($weathers[$i])) {
                                         $weather = $weathers[$i];
                                         $replacements = array(
-                                            "雨" => "<img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '20px'><br>",
-                                            "晴れ" => "<img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '20px'><br>",
-                                            "雷" => "<img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '20px'><br>",
-                                            "雪" => "<img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '20px'><br>",
-                                            "くもり" => "<img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '20px'><br>",
+                                            "雨" => "<img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '75px'><br>",
+                                            "晴れ" => "<img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '75px'><br>",
+                                            "雷" => "<img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '75px'><br>",
+                                            "雪" => "<img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '75px'><br>",
+                                            "くもり" => "<img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '75px'><br>",
                                             "　" => "",
                                         );
                                         $result = str_replace(array_keys($replacements), array_values($replacements), $weather);
@@ -183,7 +183,7 @@ _TABLE_;
                         echo <<<_TABLE_
                         <tr>
                             <td>
-                                <div class="album_image"><img src="$albumImage" alt="Album Image" height="90px"></div>
+                                <div class="album_image"><img src="$albumImage" alt="Album Image" height="98px"></div>
                             </td>
                             <td>
                                 <div class="track_name">$trackName</div>
@@ -230,6 +230,7 @@ _TABLE_;
 .weather_forecasts,
 .delete{
     height: 300px;
+    font-size: 20px;
 }
 
 .column_headers{
@@ -238,10 +239,22 @@ _TABLE_;
 }
 
 .album_image,
-.track_name,
 .artist_name,
 .detail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 98px;
+    width: 98px;
+
+}
+
+.track_name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 98px;
+    width: 200px;
 }
 
 
