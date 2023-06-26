@@ -58,14 +58,14 @@ $songs;
 
     <main>
         <div style="display: flex; justify-content: space-between;">
-            <div style="flex: 1; margin-right: 10px;">
+            <div class="weather_table" style="margin-right: 10px;">
                 <table border="1">
                     <tr>
-                        <th>地域名</th>
-                        <th>今日の天気</th>
-                        <th>明日の天気</th>
-                        <th>明後日の天気</th>
-                        <th>削除</th>
+                        <th><div class="column_headers">地域名</div></th>
+                        <th><div class="column_headers">今日の天気</div></th>
+                        <th><div class="column_headers">明日の天気</div></th>
+                        <th><div class="column_headers">明後日の天気</div></th>
+                        <th><div class="column_headers">削除</div></th>
                     </tr>
 
                     @php
@@ -88,8 +88,10 @@ $songs;
 
 
                                 echo <<<_TABLE_
-                                <tr class="align-middle" height="60px">
-                                    <td>{$prefecture}：{$area}</td>
+                                <tr class="align-middle">
+                                    <td>
+                                        <div class="areas_name">{$prefecture}：{$area}</div>
+                                    </td>
 _TABLE_;
 
                                 /* 追加してほしいところ
@@ -109,44 +111,24 @@ _TABLE_;
 
 
 
-                                // $weathers = $areas_data[$area_code]["weathers"];
-                                 // 曲の検索
-                                // dump($weathers);
-                                // $search_word = preg_split('/\p{Zs}/u', $weathers[0], 2)[0];
-                                // dump($search_word);
-                                // $limit = 30;
-                                // $options = [
-                                //     'limit' => $limit,
-                                //     'offset' => random_int(0,10),
-                                // ];
-                                // $results = $api->search($search_word, 'track',$options);
-
-                                // 検索結果から曲の情報を取得
-                                // $songs = $results->tracks->items;
-                                // dump($songs);
-                                // foreach($weathers as $weather){
-                                //     echo "<td>".$weather . "</td>";
-                                // }
-
-// @dump($weathers);
                                 for ($i=0; $i < 3; $i++) {
                                     if (isset($weathers[$i])) {
                                         $weather = $weathers[$i];
                                         $replacements = array(
-                                            "雨" => "<img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '100px'><br>",
-                                            "晴れ" => "<img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '100px'><br>",
-                                            "雷" => "<img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '100px'><br>",
-                                            "雪" => "<img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '100px'><br>",
-                                            "くもり" => "<img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '100px'><br>",
+                                            "雨" => "<img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '20px'><br>",
+                                            "晴れ" => "<img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '20px'><br>",
+                                            "雷" => "<img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '20px'><br>",
+                                            "雪" => "<img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '20px'><br>",
+                                            "くもり" => "<img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '20px'><br>",
                                             "　" => "",
                                         );
                                         $result = str_replace(array_keys($replacements), array_values($replacements), $weather);
-                                        echo "<td align='center' valign='middle'>". $result. "</td>";
+                                        echo "<td align='center' valign='middle'><div class='weather_forecasts'>". $result. "</div></td>";
                                     }else{
-                                        echo "<td align='center' valign='middle'>情報取得中</td>";
+                                        echo "<td align='center' valign='middle'><div class='weather_forecasts'>情報取得中</div></td>";
                                     }
                                 }
-                                echo "<td><a href='/delete/{$id}'>$id</td></tr>";
+                                echo "<td><div class='delete'><a href='/delete/{$id}'>$id</div></td></tr>";
                             }
                     @endphp
 
@@ -155,10 +137,10 @@ _TABLE_;
             <div style="flex: 1; margin-left: 10px;">
                 <table border="1">
                     <tr>
-                        <th>ジャケット</th>
-                        <th>曲名</th>
-                        <th>アーティスト</th>
-                        <th>マイプレイ</th>
+                        <th><div class="column_headers">ジャケット</div></th>
+                        <th><div class="column_headers">曲名</div></th>
+                        <th><div class="column_headers">アーティスト</div></th>
+                        <th><div class="column_headers">マイプレイ</div></th>
                     </tr>
 
                     @php
@@ -177,9 +159,7 @@ _TABLE_;
                         $areas_data = $data[0]["timeSeries"][0]["areas"];
                         $weathers = $areas_data[$area_code]["weathers"];
                             // 曲の検索
-                        // dump($weathers);
                         $search_word = preg_split('/\p{Zs}/u', $weathers[0], 2)[0];
-                        // dump($search_word);
                         $limit = 30;
                         $options = [
                             'limit' => $limit,
@@ -201,17 +181,25 @@ _TABLE_;
 
 
                         echo <<<_TABLE_
-                        <tr height="20px">
-                            <td><img src="$albumImage" alt="Album Image" width="100px"></td>
-                            <td>$trackName</td>
-                            <td>$artistName</td>
+                        <tr>
                             <td>
-                                <form action="add_myplaylist" method="GET">
-                                    <input type="hidden" name="artist_name" value="$artistName">
-                                    <input type="hidden" name="song_name" value="$trackName">
-                                    <button type="submmit" name="add_mylist" value="add_mylist">リストへ追加</button>
-                                    <!--<button type="submmit" name="add_mylist" value="$song->id">リストへ追加</button>-->
-                                </form>
+                                <div class="album_image"><img src="$albumImage" alt="Album Image" height="90px"></div>
+                            </td>
+                            <td>
+                                <div class="track_name">$trackName</div>
+                            </td>
+                            <td>
+                                <div class="artist_name">$artistName</div>
+                            </td>
+                            <td>
+                                <div class="detail">
+                                    <form action="add_myplaylist" method="GET">
+                                        <input type="hidden" name="artist_name" value="$artistName">
+                                        <input type="hidden" name="song_name" value="$trackName">
+                                        <button type="submmit" name="add_mylist" value="add_mylist">リストへ追加</button>
+                                        <!--<button type="submmit" name="add_mylist" value="$song->id">リストへ追加</button>-->
+                                    </form>
+                                </div>
                             </td>
                         </tr>
 _TABLE_;
@@ -230,3 +218,33 @@ _TABLE_;
     </footer>
 </body>
 </html>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.areas_name,
+.weather_forecasts,
+.delete{
+    height: 300px;
+}
+
+.column_headers{
+    height: 25px;
+    overflow: auto;
+}
+
+.album_image,
+.track_name,
+.artist_name,
+.detail{
+    height: 98px;
+}
+
+
+</style>
+
+
