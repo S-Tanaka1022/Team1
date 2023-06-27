@@ -8,13 +8,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <title>エリア追加画面</title>
 </head>
 <body>
     <header>
-        <h1>エリア追加画面</h1>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">エリア選択画面</a>
+                <p class="navbar-text">
+                    {{ Auth::user() -> name }} さん ログイン中
+                </p>
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <form action="index" method="get">
+                        <button class="btn btn-primary" type="submit">ホーム</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="myplaylists" method="get">
+                        <button class="btn btn-primary" type="submit">マイプレイリスト</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="everyone_playlist" method="get">
+                        <button class="btn btn-primary" type="submit">みんなのプレイリスト</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button class="btn btn-danger" type="submit">ログアウト</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
     </header>
-
     <main>
         エリア選択
         <form action="code_save" method="POST">
