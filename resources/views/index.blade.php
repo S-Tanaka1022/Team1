@@ -217,8 +217,7 @@ _TABLE_;
                                     <form action="add_myplaylist" method="GET">
                                         <input type="hidden" name="artist_name" value="$artistName">
                                         <input type="hidden" name="song_name" value="$trackName">
-                                        <button type="submmit" name="add_mylist" value="add_mylist">リストへ追加</button>
-                                        <!--<button type="submmit" name="add_mylist" value="$song->id">リストへ追加</button>-->
+                                        <button type="submmit" name="add_mylist" value="$song->id">リストへ追加</button>
                                     </form>
                                 </div>
                             </td>
