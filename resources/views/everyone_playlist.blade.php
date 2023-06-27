@@ -99,25 +99,25 @@
         <div id="tabpage2">
                 <form action="" method="GET">
                     <label>
-                        <input type="text" name="keyword2" placeholder="検索"  onclick="showTab('tabpage2'); return false;">
+                        <input class="col-12" type="text" name="keyword2" placeholder="検索"  onclick="showTab('tabpage2'); return false;">
                     </label>
-                    <input type="submit" value="検索">
+                    <input type="submit" value="検索" class="btn btn-primary">
                 </form>
 
-            <table border='1'>
-                <tr>
-                    <th>user</th>
-                    <th>playlist</th>
+            <table class="table text-center align-middle">
+                <tr class="bg-dark text-white">
+                    <th>ユーザ名</th>
+                    <th>プレイリスト名</th>
                     <th>詳細</th>
                 </tr>
 
                 @foreach ($playlists as $playlist)
                     <tr>
-                        <td>{{$playlist->user->name}}</td>
-                        <td>{{$playlist->list_name}}</td>
+                        <td class="text-center align-middle"><b>{{$playlist->user->name}}</b></td>
+                        <td class="text-center align-middle"><b>{{$playlist->list_name}}</b></td>
 
                         <form action="other_playlist" method="get" enctype="multipart/form-data">
-                            <td><button type="submit" name="playlist_id" value='{{$playlist->id}}'>詳細</button></td>
+                            <td class="text-center align-middle"><button type="submit" name="playlist_id" value='{{$playlist->id}}' class="btn btn-info">詳細</button></td>
                             @csrf
                         </form>
                     </tr>
@@ -125,8 +125,6 @@
             </table>
         </div>
      </div>
-
-    {{-- <script src="{{ asset('/js/everyone_playlist.js') }}"></script> --}}
     <script src="{{ asset('/js/test.js') }}"></script>
 </body>
 </html>
