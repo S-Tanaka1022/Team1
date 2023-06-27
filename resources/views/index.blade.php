@@ -177,10 +177,14 @@ _TABLE_;
                         $weathers = $areas_data[$area_code]["weathers"];
                             // 曲の検索
                         $search_word = preg_split('/\p{Zs}/u', $weathers[0], 2)[0];
-                        $limit = 30;
+                        if($search_word=="くもり")
+                        {
+                            $search_word="曇";
+                        }
+                        $limit = 3;
                         $options = [
                             'limit' => $limit,
-                            'offset' => random_int(0,10),
+                            'offset' => random_int(0,100),
                         ];
                         $results = $api->search($search_word, 'track',$options);
 
