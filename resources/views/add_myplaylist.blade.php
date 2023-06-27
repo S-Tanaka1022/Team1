@@ -54,9 +54,9 @@
         <br>
 
         曲名
-        <input type="text" name="title" value="{{$track->name}}"><br>
+        <input type="text" name="title" value="{{$track->name}}" readonly><br>
         アーティスト
-        <input type="text" name="artist" value="{{$track->artists[0]->name}}"><br>
+        <input type="text" name="artist" value="{{$track->artists[0]->name}}" readonly><br>
 
         {{-- trackIdの流用 --}}
         <input type="hidden" name="trackId" value="{{$trackId}}">
