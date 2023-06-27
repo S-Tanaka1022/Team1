@@ -13,7 +13,7 @@
     <title>エリア追加画面</title>
 </head>
 <body>
-    <header>
+    <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
             <h1>エリア選択画面</h1>
                 <p class="navbar-text mt-3">
@@ -22,17 +22,17 @@
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <form action="index" method="get">
-                        <button class="btn btn-primary" type="submit">ホーム</button>
+                        <button class="btn btn-primary mr-3" type="submit">ホーム</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="myplaylists" method="get">
-                        <button class="btn btn-primary" type="submit">マイプレイリスト</button>
+                        <button class="btn btn-primary mr-3" type="submit">マイプレイリスト</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="everyone_playlist" method="get">
-                        <button class="btn btn-primary" type="submit">みんなのプレイリスト</button>
+                        <button class="btn btn-primary mr-3" type="submit">みんなのプレイリスト</button>
                     </form>
                 </li>
                 <li class="nav-item">
@@ -50,7 +50,7 @@
             エリア選択
             <form action="code_save" method="POST">
                 <input type="hidden" name="region_code" value="{{$region_code}}">
-                <select name="sel_area_code" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <select name="sel_area_code" class="form-select form-select-lg mb-3 text-center" aria-label=".form-select-lg example">
                     @foreach($areas_data as $areas)
                         <option value="{{$i}}">{{$areas['area']['name']}}</option>
                         {{-- エリアコードをエリアごとに変化させ、送信 --}}
@@ -64,7 +64,7 @@
         </div>
 
         <div class="now_areas">
-            <h2>現在の登録地</h2>
+            <h2 class="border-left-2 border-dark ps-4">現在の登録地</h2>
             @php
             use App\Models\Region_name;
             foreach ($fav_regions as $fav_region){
@@ -80,7 +80,7 @@
 
                 foreach ($region_data as $data ){
                     // echo $areasdata[0]["area"]["name"];
-                    echo "<div class='areas'>".$data["region_name"]."：".$areasdata[$area_code]["area"]["name"]. "</div>";
+                    echo "<div class='areas float-start me-2 mt-2 p-3 border border-dark rounded-pill'>".$data["region_name"]."：".$areasdata[$area_code]["area"]["name"]. "</div>";
                 }
             }
             @endphp

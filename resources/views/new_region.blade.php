@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
             <h1>初回現在地登録</h1>
                 <p class="navbar-text mt-3">

@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
             <h1>エリア選択画面</h1>
                 <p class="navbar-text mt-3">
