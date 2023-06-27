@@ -42,11 +42,13 @@
         </nav>
     </header>
 
-    <form action="" method="GET">
+    <form action="" method="get">
         <label>
             <input type="text" name="keyword3" placeholder="検索">
         </label>
+        <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
         <input type="submit" value="検索">
+        @csrf
     </form>
 
     <table border='1'>
