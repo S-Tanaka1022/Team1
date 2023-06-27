@@ -1,0 +1,39 @@
+header{
+    border-bottom: 2px solid gray;
+}
+
+select{
+    text-align: center;
+}
+
+.select_new,
+.select,
+.now_regions,
+.now_areas{
+    margin: 20px 20px 0px 20px;
+    font-size: 22px;
+}
+
+
+.now_regions{
+    padding-left: 322px;
+}
+
+.now_areas{
+    padding-left: 135px;
+}
+
+body h2{
+    border-left: 8px solid black;
+    padding-left: 20px;
+}
+
+.regions,
+.areas{
+    float: left;
+    margin-right: 15px;
+    margin-top: 10px;
+    padding: 14px;
+    border: 1px solid gray;
+    border-radius: 11px;
+}

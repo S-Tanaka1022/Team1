@@ -39,8 +39,13 @@ $songs;
 <body>
     <header>
         <nav class="navbar navbar-light bg-light">
+<<<<<<< HEAD
             <a class="navbar-brand" href="#">メインページ</a>
                 <p class="navbar-text pt-4">
+=======
+            <h1>Temporature</h1>
+                <p class="navbar-text mt-3">
+>>>>>>> origin/Develop
                     {{ Auth::user() -> name }} さん ログイン中
                 </p>
             <ul class="nav justify-content-end">
@@ -178,10 +183,14 @@ _TABLE_;
                         $weathers = $areas_data[$area_code]["weathers"];
                             // 曲の検索
                         $search_word = preg_split('/\p{Zs}/u', $weathers[0], 2)[0];
-                        $limit = 30;
+                        if($search_word=="くもり")
+                        {
+                            $search_word="曇";
+                        }
+                        $limit = 3;
                         $options = [
                             'limit' => $limit,
-                            'offset' => random_int(0,10),
+                            'offset' => random_int(0,100),
                         ];
                         $results = $api->search($search_word, 'track',$options);
 
