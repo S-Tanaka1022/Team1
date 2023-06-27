@@ -60,6 +60,8 @@ class PlaylistController extends Controller
         $add_song = new Song();
 
         $add_song->song_detail_id = $request->trackId;
+        $add_song->title = $request->title;
+        $add_song->artist = $request->artist;
 
         $add_song->save();
 
