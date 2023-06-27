@@ -33,7 +33,7 @@ $songs;
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <!-- 自作CSSファイル -->
-    <link rel="stylesheet" href="path/to/your/custom.css">
+    <link rel="stylesheet" href="resources\css\index_css.css">
 </head>
 
 <body>
@@ -73,9 +73,9 @@ $songs;
         <div style="display: flex; justify-content: space-between;">
             <div class="weather_table" style="margin-right: 10px;">
                 <table border="1">
-        <div class="container">
-            <table class="table">
-                <thead>
+                <div class="container">
+                    <table class="table table-bordered">
+                    <thead>
                     <tr>
                         <th><div class="column_headers">地域名</div></th>
                         <th><div class="column_headers">今日の天気</div></th>
@@ -152,7 +152,7 @@ _TABLE_;
                 </table>
             </div>
             <div style="flex: 1; margin-left: 10px;">
-                <table border="1">
+                <table border="1" class="table table-bordered">
                     <tr>
                         <th><div class="column_headers">ジャケット</div></th>
                         <th><div class="column_headers">曲名</div></th>
@@ -204,7 +204,7 @@ _TABLE_;
                         echo <<<_TABLE_
                         <tr>
                             <td>
-                                <div class="album_image"><img src="$albumImage" alt="Album Image" height="98px"></div>
+                                <div class="album_image"><img src="$albumImage" alt="Album Image" height="95px"></div>
                             </td>
                             <td>
                                 <div class="track_name">$trackName</div>
@@ -239,45 +239,5 @@ _TABLE_;
 </body>
 </html>
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.areas_name,
-.weather_forecasts,
-.delete{
-    height: 300px;
-    font-size: 20px;
-}
-
-.column_headers{
-    height: 25px;
-    overflow: auto;
-}
-
-.album_image,
-.artist_name,
-.detail{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 98px;
-    width: 98px;
-
-}
-
-.track_name{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 98px;
-    width: 200px;
-}
-
-
-</style>
 
 
