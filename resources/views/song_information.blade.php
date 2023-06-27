@@ -20,7 +20,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<header>
+<header class="border-bottom border-1 border-secondary">
     <nav class="navbar navbar-light bg-light">
         <h1>楽曲詳細</h1>
             <p class="navbar-text mt-3">
@@ -29,17 +29,17 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
         <ul class="nav justify-content-end">
             <li class="nav-item">
                 <form action="index" method="get">
-                    <button class="btn btn-primary" type="submit">ホーム</button>
+                    <button class="btn btn-primary mr-3" type="submit">ホーム</button>
                 </form>
             </li>
             <li class="nav-item">
                 <form action="myplaylists" method="get">
-                    <button class="btn btn-primary" type="submit">マイプレイリスト</button>
+                    <button class="btn btn-primary mr-3" type="submit">マイプレイリスト</button>
                 </form>
             </li>
             <li class="nav-item">
                 <form action="everyone_playlist" method="get">
-                    <button class="btn btn-primary" type="submit">みんなのプレイリスト</button>
+                    <button class="btn btn-primary mr-3" type="submit">みんなのプレイリスト</button>
                 </form>
             </li>
             <li class="nav-item">
@@ -65,7 +65,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                     </div>
                     <div class="fs-1 text-left align-middle">{{$artistName}}<br>
                         @foreach($artist->genres as $genre)
-                            {{$genre}}　
+                            {{$genre}}
                         @endforeach<br>
                         {{$dateFormat}}
                     </div>

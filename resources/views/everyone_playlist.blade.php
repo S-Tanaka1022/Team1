@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
             <h1>楽曲一覧&みんなのプレイリスト</h1>
                 <p class="navbar-text mt-3">
@@ -22,17 +22,17 @@
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <form action="index" method="get">
-                        <button class="btn btn-primary" type="submit">ホーム</button>
+                        <button class="btn btn-primary mr-3" type="submit">ホーム</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="myplaylists" method="get">
-                        <button class="btn btn-primary" type="submit">マイプレイリスト</button>
+                        <button class="btn btn-primary mr-3" type="submit">マイプレイリスト</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="add_region" method="get">
-                        <button class="btn btn-primary" type="submit">登録地追加</button>
+                        <button class="btn btn-primary mr-3" type="submit">登録地追加</button>
                     </form>
                 </li>
                 <li class="nav-item">
