@@ -72,6 +72,6 @@ Route::get('/everyone_playlist', [SongController::class, 'index'])->middleware('
 Route::get('/information', [SongController::class, 'information']);
 
 #それぞれのプレイリスト確認画面
-Route::get('/other_playlist', [SongController::class, 'detail']);
+Route::get('/other_playlist', [SongController::class, 'detail'])->middleware('auth');
 
 require __DIR__ . '/auth.php';
