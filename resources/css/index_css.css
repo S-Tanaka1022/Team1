@@ -1,0 +1,37 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.areas_name,
+.weather_forecasts,
+.delete{
+    height: 300px;
+    font-size: 20px;
+}
+
+.column_headers{
+    height: 25px;
+    overflow: auto;
+}
+
+.album_image,
+.artist_name,
+.detail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95px;
+    width: 95px;
+
+}
+
+.track_name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 98px;
+    width: 200px;
+}
