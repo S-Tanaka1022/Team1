@@ -12,8 +12,8 @@
     <h1>{{$playlist->user->name}}さんのプレイリスト</h1>
     <header>
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">{{$playlist->user->name}}さんのプレイリスト</a>
-                <p class="navbar-text">
+            <h1>{{$playlist->user->name}}さんのプレイリスト</h1>
+                <p class="navbar-text mt-3">
                     {{ Auth::user() -> name }} さん ログイン中
                 </p>
             <ul class="nav justify-content-end">

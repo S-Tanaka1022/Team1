@@ -1,5 +1,5 @@
 var tabs = document.querySelectorAll('#tabcontrol a');
-var pages = document.querySelectorAll('#tabbody div');
+var pages = document.querySelectorAll('#tabbody > div');
 var currentTab = 'tabpage1'; // 初期値として1つ目のタブを指定
 
 function showTab(targetid) {

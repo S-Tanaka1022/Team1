@@ -9,14 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    @vite(['resources/css/region_area.css'])
     <title>エリア追加画面</title>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">エリア選択画面</a>
-                <p class="navbar-text">
+            <h1>エリア選択画面</h1>
+                <p class="navbar-text mt-3">
                     {{ Auth::user() -> name }} さん ログイン中
                 </p>
             <ul class="nav justify-content-end">
@@ -44,22 +44,27 @@
             </ul>
         </nav>
     </header>
+
     <main>
-        エリア選択
-        <form action="code_save" method="POST">
-            <input type="hidden" name="region_code" value="{{$region_code}}">
-            <select name="sel_area_code">
-                @foreach($areas_data as $areas)
-                    <option value="{{$i}}">{{$areas['area']['name']}}</option>
-                    {{-- エリアコードをエリアごとに変化させ、送信 --}}
-                    {{$i+=1}}
-                @endforeach
-            </select>
-        <input type="submit" value="追加">
-        @csrf
-        </form>
-        <div>
-            <h1>現在の登録地</h1>
+        <div class="select">
+            エリア選択
+            <form action="code_save" method="POST">
+                <input type="hidden" name="region_code" value="{{$region_code}}">
+                <select name="sel_area_code" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    @foreach($areas_data as $areas)
+                        <option value="{{$i}}">{{$areas['area']['name']}}</option>
+                        {{-- エリアコードをエリアごとに変化させ、送信 --}}
+                        {{$i+=1}}
+                    @endforeach
+                </select>
+                <input class="btn btn-info mb-2" type="submit" value="追加">
+                <button type="button" onclick="history.back()" class="btn btn-secondary mb-2">戻る</button>
+            @csrf
+            </form>
+        </div>
+
+        <div class="now_areas">
+            <h2>現在の登録地</h2>
             @php
             use App\Models\Region_name;
             foreach ($fav_regions as $fav_region){
@@ -75,7 +80,7 @@
 
                 foreach ($region_data as $data ){
                     // echo $areasdata[0]["area"]["name"];
-                    echo "<p>".$data["region_name"]."：".$areasdata[$area_code]["area"]["name"]. "</p>";
+                    echo "<div class='areas'>".$data["region_name"]."：".$areasdata[$area_code]["area"]["name"]. "</div>";
                 }
             }
             @endphp
