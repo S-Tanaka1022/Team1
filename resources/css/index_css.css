@@ -5,33 +5,60 @@
     box-sizing: border-box;
 }
 
-.areas_name,
-.weather_forecasts,
-.delete{
-    height: 300px;
+
+.areas_name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 276px;
     font-size: 20px;
+    width: 150px;
+}
+.weather_forecasts{
+    height: 276px;
+    font-size: 20px;
+}
+.delete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 276px;
 }
 
 .column_headers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 25px;
+    /* width: auto; */
+}
+
+.album_image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+}
+.album_image:hover {
+ opacity: 0.8;
+}
+.aimage{
+width: 99.3px;
+}
+
+.aid,
+.artist_name{
+    height: 99.6px;
+    width:250px;
     overflow: auto;
-}
-
-.album_image,
-.artist_name,
-.detail{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 95px;
-    width: 95px;
 
 }
 
-.track_name{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 98px;
-    width: 200px;
+/* .aid{
+    width:250px;
+    overflow: auto;
+} */
+
+.content-container {
+    padding: 50px;
 }
