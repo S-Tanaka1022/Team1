@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    @vite(['resources/css/region_area.css'])
     <title>登録地追加（ログイン後）</title>
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">登録地追加</a>
-                <p class="navbar-text">
+            <h1>登録地追加</h1>
+                <p class="navbar-text pt-4">
                     {{ Auth::user() -> name }} さん ログイン中
                 </p>
             <ul class="nav justify-content-end">
@@ -42,18 +43,22 @@
     </header>
 
     <main>
-        都道府県選択
-        <form action="add_area" method="POST">
-            <select name="sel_region">
-                @foreach($regions as $region)
-                    <option value="{{$region -> region_code}}">{{$region -> region_name}}</option>
-                @endforeach
-            </select>
-            <input type="submit" value="選択">
-            @csrf
-        </form>
-        <div>
-            <h1>現在の登録地</h1>
+        <div class="select">
+            都道府県選択
+                <form action="add_area" method="POST">
+                    <select name="sel_region" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                        @foreach($regions as $region)
+                            <option value="{{$region -> region_code}}">{{$region -> region_name}}</option>
+                        @endforeach
+                    </select>
+                    <input class="btn btn-info mb-2" type="submit" value="選択">
+                    <button type="button" onclick="history.back()" class="btn btn-secondary mb-2">戻る</button>
+                    @csrf
+                </form>
+        </div>
+
+        <div class="now_regions">
+            <h2>現在の登録地</h2>
             @php
             use App\Models\Region_name;
             foreach ($fav_regions as $fav_region){
@@ -62,9 +67,8 @@
                 $region_data = json_decode($region, true);
 
                 foreach ($region_data as $data ){
-                    echo "<p>".$data["region_name"]. "</p>";
+                    echo "<div class='regions'>".$data["region_name"]. "</div>";
                 }
-
             }
             @endphp
         </div>
