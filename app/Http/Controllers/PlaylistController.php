@@ -65,7 +65,7 @@ class PlaylistController extends Controller
 
         $add_playlist->songs()->attach($add_song->id);//中間テーブルにレコード追加
 
-        print("<a href='everyone_playlist'>みんなプレイリストに戻る</a>");
+        return redirect("everyone_playlist");
     }
 
 }
