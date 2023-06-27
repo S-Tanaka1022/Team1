@@ -12,8 +12,8 @@
 <body>
     <header>
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">楽曲一覧&みんなのプレイリスト</a>
-                <p class="navbar-text">
+            <h1>楽曲一覧&みんなのプレイリスト</h1>
+                <p class="navbar-text mt-3">
                     {{ Auth::user() -> name }} さん ログイン中
                 </p>
             <ul class="nav justify-content-end">
