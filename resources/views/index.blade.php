@@ -33,14 +33,14 @@ $songs;
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <!-- 自作CSSファイル -->
-    <link rel="stylesheet" href="resources\css\index_css.css">
+    @vite(['resources/css/index_css.css'])
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="#">メインページ</a>
-                <p class="navbar-text">
+                <p class="navbar-text pt-4">
                     {{ Auth::user() -> name }} さん ログイン中
                 </p>
             <ul class="nav justify-content-end">
@@ -69,7 +69,7 @@ $songs;
         </nav>
     </header>
 
-    <main>
+    <main class="content-container">
         <div style="display: flex; justify-content: space-between;">
             <div class="weather_table" style="margin-right: 10px;">
                 <table border="1">
@@ -105,9 +105,9 @@ $songs;
 
 
                                 echo <<<_TABLE_
-                                <tr class="align-middle">
+                                <tr>
                                     <td>
-                                        <div class="areas_name">{$prefecture}：{$area}</div>
+                                        <div class="areas_name">{$prefecture}<br>{$area}</div>
                                     </td>
 _TABLE_;
 
@@ -132,20 +132,22 @@ _TABLE_;
                                     if (isset($weathers[$i])) {
                                         $weather = $weathers[$i];
                                         $replacements = array(
-                                            "雨" => "<img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '75px'><br>",
-                                            "晴れ" => "<img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '75px'><br>",
-                                            "雷" => "<img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '75px'><br>",
-                                            "雪" => "<img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '75px'><br>",
-                                            "くもり" => "<img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '75px'><br>",
+                                            "雨" => "<img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '50px'><br>",
+                                            "晴れ" => "<img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '50px'><br>",
+                                            "雷" => "<img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '50px'><br>",
+                                            "雪" => "<img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '50px'><br>",
+                                            "くもり" => "<img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '50px'><br>",
                                             "　" => "",
+                                            "所により" => "",
+                                            "では" => "では<br>",
                                         );
                                         $result = str_replace(array_keys($replacements), array_values($replacements), $weather);
-                                        echo "<td align='center' valign='middle'><div class='weather_forecasts'>". $result. "</div></td>";
+                                        echo "<td class='align-middle text-center weather_forecasts'>". $result. "</td>";
                                     }else{
-                                        echo "<td align='center' valign='middle'><div class='weather_forecasts'>情報取得中</div></td>";
+                                        echo "<td class='align-middle text-center weather_forecast'>情報取得中</td>";
                                     }
                                 }
-                                echo "<td><div class='delete'><a href='/delete/{$id}'>$id</div></td></tr>";
+                                echo "<td class='align-middle text-center delete><form action='/delete/{$id}'><input type='submit' value='削除'></form></td></tr>";
                             }
                     @endphp
 
@@ -157,7 +159,6 @@ _TABLE_;
                         <th><div class="column_headers">ジャケット</div></th>
                         <th><div class="column_headers">曲名</div></th>
                         <th><div class="column_headers">アーティスト</div></th>
-                        <th><div class="column_headers">マイプレイ</div></th>
                     </tr>
 
                     @php
@@ -195,30 +196,28 @@ _TABLE_;
                             $trackName = $song->name;
                             $artistName = $song->artists[0]->name;
                             $albumImage = $song->album->images[0]->url;
+                            $songId = $song->id;
+                            // @dump($song);
 
 
                         echo <<<_TABLE_
-                        <tr>
-                            <td>
-                                <div class="album_image"><img src="$albumImage" alt="Album Image" height="95px"></div>
-                            </td>
-                            <td>
-                                <div class="track_name">$trackName</div>
-                            </td>
-                            <td>
-                                <div class="artist_name">$artistName</div>
-                            </td>
-                            <td>
-                                <div class="detail">
-                                    <form action="add_myplaylist" method="GET">
-                                        <input type="hidden" name="artist_name" value="$artistName">
-                                        <input type="hidden" name="song_name" value="$trackName">
-                                        <button type="submmit" name="add_mylist" value="add_mylist">リストへ追加</button>
-                                        <!--<button type="submmit" name="add_mylist" value="$song->id">リストへ追加</button>-->
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="aimage">
+                                    <div class="album_image">
+                                        <a href="/information?information={$songId}">
+                                            <img src="$albumImage" alt="Album Image" height="75.6px">
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-center aid">
+                                        <a href="/information?information={$songId}">
+                                            $trackName
+                                        </a>
+                                </td>
+                                <td class='align-middle text-center artist_name'>
+                                    $artistName
+                                </td>
+                            </tr>
 _TABLE_;
                     }
                 }
