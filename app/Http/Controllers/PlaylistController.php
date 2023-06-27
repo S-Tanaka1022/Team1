@@ -68,4 +68,9 @@ class PlaylistController extends Controller
         return redirect("everyone_playlist");
     }
 
+    public function myplaylist () {
+        $auth_info = Auth::user()->id;
+        $playlists = Playlist::where('user_id', $auth_info)->get();
+        return view('/myplaylists', compact('playlists'));
+    }
 }
