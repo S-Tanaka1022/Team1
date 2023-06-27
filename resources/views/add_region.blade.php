@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar navbar-light bg-light">
             <h1>登録地追加</h1>
-                <p class="navbar-text pt-4">
+                <p class="navbar-text mt-3">
                     {{ Auth::user() -> name }} さん ログイン中
                 </p>
             <ul class="nav justify-content-end">

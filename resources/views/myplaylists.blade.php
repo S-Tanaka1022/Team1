@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <header>
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">マイプレイリスト</a>
-            <p class="navbar-text">
+        <h1>マイプレイリスト</h1>
+            <p class="navbar-text mt-3">
                 {{ Auth::user() -> name }} さん ログイン中
             </p>
         <ul class="nav justify-content-end">
