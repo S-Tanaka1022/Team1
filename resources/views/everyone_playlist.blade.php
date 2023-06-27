@@ -14,7 +14,7 @@
         <button type="button" name="weather" value="weather" onclick="location.href='/index'">天気情報</button>
     </form>
     <form action="" method="GET">
-        <button type="button" name="mylist" value="mylist" onclick="location.href='/myplaylists'">マイプレイリスト</button>
+        <button type="button" name="mylist" value="mylist" onclick="location.href='/myplaylist'">マイプレイリスト</button>
     </form>
     <button type="button" name="reload" onclick="location.href='/everyone_playlist'">楽曲更新</button>
     <form action="{{route('logout')}}" method="post">

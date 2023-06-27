@@ -74,4 +74,6 @@ Route::get('/information', [SongController::class, 'information']);
 #それぞれのプレイリスト確認画面
 Route::get('/other_playlist', [SongController::class, 'detail']);
 
+Route::get('/detail_myplaylist', [PlaylistController::class, 'detail']);
+
 require __DIR__ . '/auth.php';
