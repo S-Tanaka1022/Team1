@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>みんなのプレイリスト</title>
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
 
 <body>
@@ -37,7 +40,7 @@
                     <input type="submit" value="検索">
                 </form>
 
-            <table border='1'>
+            <table border='1' class='table table-bodered'>
                 <tr>
                     <th>ジャケット写真</th>
                     <th>曲名</th>
