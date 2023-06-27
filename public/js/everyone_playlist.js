@@ -1,5 +1,5 @@
 var tabs = document.querySelectorAll('#tabcontrol a');
-var pages = document.querySelectorAll('#tabbody div');
+var pages = document.querySelectorAll('#tabbody > div');
 console.dir(pages);
 
 
