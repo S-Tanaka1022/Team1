@@ -46,8 +46,8 @@
                 <td><button type="submit" name="playlist_id" value='{{$playlist->id}}'>詳細</button></td>
                  @csrf
             </form>
-            <form>
-            <td><button type="submit" name="" value="">削除</button></td>
+            <form action="delete_myplaylist" method="get">
+            <td><button type="submit" name="playlist_id" value="{{$playlist->id}}">削除</button></td>
             </form>
         </tr>
         @endforeach

@@ -74,6 +74,14 @@ Route::get('/information', [SongController::class, 'information']);
 #それぞれのプレイリスト確認画面
 Route::get('/other_playlist', [SongController::class, 'detail']);
 
-Route::get('/detail_myplaylist', [PlaylistController::class, 'detail']);
+#マイプレイリストの詳細画面
+Route::get('/detail_myplaylist', [PlaylistController::class, 'detail'])->name('back_detail_myplaylist');
+
+#マイプレイリストの削除
+Route::get('/delete_myplaylist', [PlaylistController::class, 'delete_myplaylist']);
+
+#マイプレイリスト内の曲の削除
+Route::get('/delete_myplaylist_song', [PlaylistController::class, 'delete_myplaylist_song']);
+
 
 require __DIR__ . '/auth.php';

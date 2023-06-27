@@ -121,6 +121,7 @@ class PlaylistController extends Controller
         $api = new SpotifyWebAPI();
         $api->setAccessToken($accessToken);
 
+        
         $playlistId = $request->playlist_id;
 
         $playlist = Playlist::findOrFail($playlistId);
@@ -132,8 +133,25 @@ class PlaylistController extends Controller
             $tracks[] = $api->getTrack($trackId);
         }
 
-        
-
         return view('detail_myplaylist',compact('playlist','tracks'));
+    }
+
+    public function delete_myplaylist(Request $request)
+    {
+        $playlistId = $request->playlist_id;
+        $delete_myplaylist = Playlist::find($playlistId);
+        $delete_myplaylist->songs()->sync([]);
+        $delete_myplaylist->delete();
+        return redirect('myplaylist');
+    }
+
+    public function delete_myplaylist_song(Request $request)
+    {
+        $playlistId = $request->playlist_id;
+        $songId = $request->song_detail_id;
+        $delete_myplaylist_song = Song::where('song_detail_id',$songId)->first();
+        $delete_myplaylist_song->playlist()->detach($playlistId);
+
+        return redirect()->route('back_detail_myplaylist')->with('playlist_id' , $playlistId);
     }
 }
