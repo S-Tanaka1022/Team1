@@ -81,7 +81,6 @@ class SongController extends Controller
 
     public function detail(Request $request)
     {
-
         $session = new Session(
             'f172da853aeb4266863fb2661addbb76',
             'bcf72a943e1245828831cda721f77987'
@@ -91,15 +90,17 @@ class SongController extends Controller
 
         $api = new SpotifyWebAPI();
         $api->setAccessToken($accessToken);
-
+        dump($request);
         $playlistId = $request->playlist_id;
-
+        dump($playlistId);
         $playlist = Playlist::findOrFail($playlistId);
+        dump("test3");
         $songs = $playlist->songs;
-
+        dump($songs);
         $tracks = [];
         $auth_info = Auth::user()->id;
-        $keyword3 = $request->input('keyword3');//キーワード
+        $keyword3 = $request->keyword3;//キーワード
+        dump("test");
         foreach ($songs as $song) {
             //$trackId = $song->song_detail_id;
             $title = $song->title;
