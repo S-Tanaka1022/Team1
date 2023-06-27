@@ -4,23 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <title>みんなのプレイリスト</title>
 </head>
 
 <body>
-    <h1>みんなのプレイリスト</h1>
-    <form action="" method="GET">
-        <button type="button" name="weather" value="weather" onclick="location.href='/index'">天気情報</button>
-    </form>
-    <form action="" method="GET">
-        <button type="button" name="mylist" value="mylist" onclick="location.href='/myplaylists'">マイプレイリスト</button>
-    </form>
-    <button type="button" name="reload" onclick="location.href='/everyone_playlist'">楽曲更新</button>
-    <form action="{{route('logout')}}" method="post">
-        <button type="submit">ログアウト</button>
-        @csrf
-    </form>
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">楽曲一覧&みんなのプレイリスト</a>
+                <p class="navbar-text">
+                    {{ Auth::user() -> name }} さん ログイン中
+                </p>
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <form action="index" method="get">
+                        <button class="btn btn-primary" type="submit">ホーム</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="myplaylists" method="get">
+                        <button class="btn btn-primary" type="submit">マイプレイリスト</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="add_region" method="get">
+                        <button class="btn btn-primary" type="submit">登録地追加</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button class="btn btn-danger" type="submit">ログアウト</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
     <p id="tabcontrol">
         <a href="#tabpage1">楽曲一覧</a>
