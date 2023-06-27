@@ -29,20 +29,20 @@ class SongController extends Controller
             $limit = 30;
             $options = [
                 'limit' => $limit,
-                'offset' => random_int(0,10),
+                'offset' => random_int(0, 10),
             ];
 
-            $results = $api->search($keyword,'track',$options);
+            $results = $api->search($keyword, 'track', $options);
         } else {
-           /* 検索キーワードが入力されていない場合は、全件取得する */
-           $limit = 30;
-           $query = 'genre:"japanese"';
-           $options = [
-               'limit' => $limit,
-               'offset' => random_int(0,1000),
-           ];
+            /* 検索キーワードが入力されていない場合は、全件取得する */
+            $limit = 30;
+            $query = 'genre:"japanese"';
+            $options = [
+                'limit' => $limit,
+                'offset' => random_int(0, 1000),
+            ];
 
-           $results = $api->search($query,'track',$options);
+            $results = $api->search($query, 'track', $options);
         }
 
         //プレイリスト一覧表示のためのデータベース読み込み
@@ -50,18 +50,18 @@ class SongController extends Controller
         $keyword2 = $request->input('keyword2');
         if (Str::length($keyword2) > 0) { // キーワードが入っている場合
             $playlists = Playlist::where('list_name', 'LIKE', "%$keyword2%") // プレイリスト名にkeyword2 を含むものを絞り込み
-                ->where('user_id','!=', $auth_info) //ログイン中のユーザー以外のプレイリスト
+                ->where('user_id', '!=', $auth_info) //ログイン中のユーザー以外のプレイリスト
                 ->get();
-
         } else {
             /* 検索キーワードが入力されていない場合は、全件取得する */
-            $playlists = Playlist::where('user_id','!=', $auth_info)->get();//ログイン中のユーザー以外のプレイリストを表示
+            $playlists = Playlist::where('user_id', '!=', $auth_info)->get(); //ログイン中のユーザー以外のプレイリストを表示
         }
 
-        return view('everyone_playlist', compact('results','playlists'));
+        return view('everyone_playlist', compact('results', 'playlists'));
     }
 
-    public function information(Request $request){
+    public function information(Request $request)
+    {
         $session = new Session(
             'f172da853aeb4266863fb2661addbb76',
             'bcf72a943e1245828831cda721f77987'
@@ -76,7 +76,7 @@ class SongController extends Controller
         $artistId = $track->artists[0]->id;
         $artist = $api->getArtist($artistId);
 
-        return view('/song_information', compact('track','artist'));
+        return view('/song_information', compact('track', 'artist'));
     }
 
     public function detail(Request $request)
@@ -130,7 +130,6 @@ class SongController extends Controller
         /*キーワード検索*/
         //$auth_info = Auth::user()->id;
 
-        return view('other_playlist',compact('playlist','tracks'));
+        return view('other_playlist', compact('playlist', 'tracks'));
     }
-
 }
