@@ -39,13 +39,8 @@ $songs;
 <body>
     <header>
         <nav class="navbar navbar-light bg-light">
-<<<<<<< HEAD
-            <a class="navbar-brand" href="#">メインページ</a>
-                <p class="navbar-text pt-4">
-=======
             <h1>Temporature</h1>
                 <p class="navbar-text mt-3">
->>>>>>> origin/Develop
                     {{ Auth::user() -> name }} さん ログイン中
                 </p>
             <ul class="nav justify-content-end">
