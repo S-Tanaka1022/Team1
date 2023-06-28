@@ -96,9 +96,16 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                 </div>
                 <div class="col">
                     <div class="d-flex justify-content-center align-items-center">
-                        <button class="btn btn-info btn-block btn-lg" name="back" onclick="location.href='/everyone_playlist'">
-                            <b>楽曲一覧に戻る</b>
+
+                        <button class="btn btn-info btn-block btn-lg" onclick="goBack()">
+                            <b>戻る</b>
                         </button>
+
+                        <script>
+                        function goBack() {
+                        window.history.back();
+                        }
+                        </script>
                     </div>
                 </div>
             </div>
