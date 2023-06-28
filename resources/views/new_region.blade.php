@@ -23,7 +23,7 @@
         <div class="select_new mt-3 mb-0 mx-3" style="font-size: 22px;">
             都道府県選択
             <form action="new_area" method="POST">
-                <select name="sel_region" class="form-select form-select-lg text-center mb-3">
+                <select name="sel_region" class="form-select form-select-lg text-center w-25">
                     @foreach($regions as $region)
                         <option value="{{$region -> region_code}}">{{$region -> region_name}}</option>
                     @endforeach
