@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    @vite(['resources/css/region_area.css'])
     <title>エリア追加画面</title>
 </head>
 <body>
@@ -46,7 +45,7 @@
     </header>
 
     <main>
-        <div class="select">
+        <div class="select mt-3 mb-0 mx-3" style="font-size: 22px;">
             エリア選択
             <form action="code_save" method="POST">
                 <input type="hidden" name="region_code" value="{{$region_code}}">
@@ -63,8 +62,8 @@
             </form>
         </div>
 
-        <div class="now_areas">
-            <h2 class="border-left-2 border-dark ps-4">現在の登録地</h2>
+        <div class="now_areas mt-3 mb-0 mx-3 pl-6" style="font-size: 22px; padding-left: 322px;">
+            <h2 class="pl-3" style="border-left: 8px solid black;">現在の登録地</h2>
             @php
             use App\Models\Region_name;
             foreach ($fav_regions as $fav_region){
@@ -80,7 +79,7 @@
 
                 foreach ($region_data as $data ){
                     // echo $areasdata[0]["area"]["name"];
-                    echo "<div class='areas float-start me-2 mt-2 p-3 border border-dark rounded-pill'>".$data["region_name"]."：".$areasdata[$area_code]["area"]["name"]. "</div>";
+                    echo "<div class='areas d-inline-block mr-3 mt-2 p-3 border border-secondary rounded-pill'>".$data["region_name"]."：".$areasdata[$area_code]["area"]["name"]. "</div>";
                 }
             }
             @endphp
