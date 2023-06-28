@@ -147,7 +147,7 @@ _TABLE_;
                                         echo "<td class='align-middle text-center weather_forecast'>情報取得中</td>";
                                     }
                                 }
-                                echo "<td class='align-middle text-center delete><form action='/delete/{$id}'><input type='submit' value='削除'></form></td></tr>";
+                                echo "<td class='align-middle text-center delete'><form action='/delete/{$id}'><button type='submit' class='btn btn-danger'>削除</botton></form></td></tr>";
                             }
                     @endphp
 

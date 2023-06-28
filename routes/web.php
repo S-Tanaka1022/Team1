@@ -72,7 +72,7 @@ Route::get('/everyone_playlist', [SongController::class, 'index'])->middleware('
 Route::get('/information', [SongController::class, 'information']);
 
 #それぞれのプレイリスト確認画面
-Route::get('/other_playlist', [SongController::class, 'detail']);
+Route::get('/other_playlist', [SongController::class, 'detail'])->middleware('auth');
 
 #マイプレイリストの詳細画面
 Route::get('/detail_myplaylist', [PlaylistController::class, 'detail']);

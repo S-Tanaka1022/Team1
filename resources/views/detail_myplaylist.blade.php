@@ -39,7 +39,7 @@
             </form>
             <form action="/delete_myplaylist_song" method="get">
             <input type="hidden" name="playlistId" value="{{$playlist->id}}">
-            <td><button type="submit" name="song_detail_id" value='{{$track->id}}'>削除</button></td>
+            <td><button type="submit" name="song_detail_id" value='{{$song_primary_key}}'>削除</button></td>
             </form>
         </tr>
         @csrf
