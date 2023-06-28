@@ -45,7 +45,7 @@
         <div class="select  mt-3 mb-0 mx-3" style="font-size: 22px;">
             都道府県選択
                 <form action="add_area" method="POST">
-                    <select name="sel_region" class="form-select form-select-lg text-center mb-3" aria-label=".form-select-lg example">
+                    <select name="sel_region" class="form-select form-select-lg text-center w-25" aria-label=".form-select-lg example">
                         @foreach($regions as $region)
                             <option value="{{$region -> region_code}}">{{$region -> region_name}}</option>
                         @endforeach
@@ -56,7 +56,7 @@
                 </form>
         </div>
 
-        <div class="now_regions  mt-3 mb-0 mx-3" style="font-size: 22px; padding-left: 322px;">
+        <div class="now_regions  mt-3 mb-0 mx-3" style="font-size: 22px; padding-left: 382px;">
             <h2 class="pl-3" style="border-left: 8px solid black;">現在の登録地</h2>
             @php
             use App\Models\Region_name;
