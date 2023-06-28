@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+    @vite(['resources/css/testcss.css'])
     <title>みんなのプレイリスト</title>
 </head>
 
@@ -46,13 +47,15 @@
         </nav>
     </header>
 
-    <p id="tabcontrol" class="ml-5">
-        <a href="#tabpage1">楽曲一覧</a>
-        <a href="#tabpage2">プレイリスト一覧</a>
-     </p>
+    <section class="someTabs" data-tabs="">
+        <nav class="tabs__nav">
+          <a href="#" class="tabs__item active" data-tab="">楽曲一覧</a>
+          <a href="#" class="tabs__item" data-tab="">プレイリスト一覧</a>
+          <a class="Tabs__presentation-slider" role="presentation"></a>
+        </nav>
 
-     <div id="tabbody"class="m-3">
-        <div id="tabpage1" class="m-4">
+        <div class="tabs__body">
+          <div class="tabs__content active" data-tab-content="">
             <div class="container align-middle text-center">
                 <div class="row align-items-center text-center">
                     <div class="col-2">
@@ -96,7 +99,7 @@
                 @endforeach
             </table>
         </div>
-        <div id="tabpage2">
+        <div class="tabs__content" data-tab-content="">
                 <form action="" method="GET">
                     <label>
                         <input class="col-12" type="text" name="keyword2" placeholder="検索"  onclick="showTab('tabpage2'); return false;">
@@ -122,6 +125,7 @@
             </table>
         </div>
      </div>
-    <script src="{{ asset('/js/test.js') }}"></script>
+    </section>
+    <script src="{{ asset('/js/testcss.js') }}"></script>
 </body>
 </html>

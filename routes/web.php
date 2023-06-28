@@ -84,5 +84,8 @@ Route::get('/delete_myplaylist', [PlaylistController::class, 'delete_myplaylist'
 #マイプレイリスト内の曲の削除
 Route::get('/delete_myplaylist_song', [PlaylistController::class, 'delete_myplaylist_song']);
 
+Route::get('/testcss', function () {
+    return view('testcss');
+});
 
 require __DIR__ . '/auth.php';
