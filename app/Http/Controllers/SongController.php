@@ -36,7 +36,8 @@ class SongController extends Controller
                 ->get();
         } else {
             /* 検索キーワードが入力されていない場合は、全件取得する */
-            $playlists = Playlist::getUserPlaylists($auth_info); //ログイン中のユーザー以外のプレイリストを表示
+            //$playlists = Playlist::getUserPlaylists($auth_info); //ログイン中のユーザー以外のプレイリストを表示
+            $playlists = Playlist::where('user_id', '!=', $auth_info)->get(); //ログイン中のユーザー以外のプレイリストを表示
         }
 
         return view('everyone_playlist', compact('results', 'playlists'));
