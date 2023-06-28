@@ -92,15 +92,16 @@ _TABLE_;
                                     $replacements = array(
                                         "雨" => "<br><img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '50px'><br>",
                                         "晴れ" => "<br><img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '50px'><br>",
-                                        "雷" => "<br><img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '50px'><br>",
+                                        "雷" => "<br><img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '50px'>",
                                         "雪" => "<br><img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '50px'><br>",
                                         "くもり" => "<br><img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '50px'><br>",
                                         "　" => "",
                                         "所により" => "",
                                         "<br><br>" => "<br>",
+                                        "<br>で<br>" => "",
                                         );
                                     $result = str_replace(array_keys($replacements), array_values($replacements), $weather);
-                                    echo "<td class='align-middle text-center weather_forecasts'>". $result. "</td>";
+                                    echo "<td class='align-middle text-center weather_forecasts'>". $result. "<br>　</td>";
                                 }else{
                                     echo "<td class='align-middle text-center weather_forecast'>情報取得中</td>";
                                 }
