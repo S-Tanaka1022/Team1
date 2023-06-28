@@ -52,15 +52,15 @@
             </tr>
             @foreach ($tracks as $track)
             <tr class="text-center align-middle">
-                <td class="text-center align-middle"><img src="{{$track->album->images[0]->url}}" width=80></td>
-                <td class="text-center align-middle"><b>{{$track->name}}</b></td>
-                <td class="text-center align-middle"><b>{{$track->artists[0]->name}}</b></td>
+                <td class="text-center align-middle"><img src="{{$track["detail"]->album->images[0]->url}}" width=80></td>
+                <td class="text-center align-middle"><b>{{$track["detail"]->name}}</b></td>
+                <td class="text-center align-middle"><b>{{$track["detail"]->artists[0]->name}}</b></td>
                 <form action="information" method="get" enctype="multipart/form-data">
-                    <td class="text-center align-middle"><button class="btn btn-info" type="submit" name="information" value='{{$track->id}}'>詳細情報</button></td>
+                    <td class="text-center align-middle"><button class="btn btn-info" type="submit" name="information" value='{{$track["detail"]->id}}'>詳細情報</button></td>
                 </form>
                 <form action="/delete_myplaylist_song" method="get">
                 <input type="hidden" name="playlistId" value="{{$playlist->id}}">
-                <td class="text-center align-middle"><button class="btn btn-danger" type="submit" name="song_detail_id" value='{{$song_primary_key}}'>削除</button></td>
+                <td class="text-center align-middle"><button class="btn btn-danger" type="submit" name="song_detail_id" value='{{$track["song_primary_key"]}}'>削除</button></td>
                 </form>
             </tr>
             @csrf
