@@ -14,36 +14,18 @@ class SongController extends Controller
 {
     public function index(Request $request)
     {
-        $session = new Session(
-            'f172da853aeb4266863fb2661addbb76',
-            'bcf72a943e1245828831cda721f77987'
-        );
-        $session->requestCredentialsToken();
-        $accessToken = $session->getAccessToken();
-
-        $api = new SpotifyWebAPI();
-        $api->setAccessToken($accessToken);
-        /* Requestに送信された検索キーワードを変数に保持 */
-        $keyword = $request->keyword;
+        $api = Controller::getAPI();
+        $keyword = $request->keyword; /* Requestに送信された検索キーワードを変数に保持 */
         if (Str::length($keyword) > 0) { // Str::length(<文字列>) で、文字列の長さを取得できる
-            $limit = 30;
-            $options = [
-                'limit' => $limit,
-                'offset' => random_int(0, 10),
-            ];
-
-            $results = $api->search($keyword, 'track', $options);
-        } else {
-            /* 検索キーワードが入力されていない場合は、全件取得する */
-            $limit = 30;
+            $query = $keyword;
+        } else { /* 検索キーワードが入力されていない場合は、全件取得する */
             $query = 'genre:"japanese"';
-            $options = [
-                'limit' => $limit,
-                'offset' => random_int(0, 1000),
-            ];
-
-            $results = $api->search($query, 'track', $options);
         }
+        $options = [
+            'limit' => 30,
+            'offset' => random_int(0, 1000),
+        ];
+        $results = $api->search($query, 'track', $options);
 
         //プレイリスト一覧表示のためのデータベース読み込み
         $auth_info = Auth::user()->id;
@@ -62,15 +44,7 @@ class SongController extends Controller
 
     public function information(Request $request)
     {
-        $session = new Session(
-            'f172da853aeb4266863fb2661addbb76',
-            'bcf72a943e1245828831cda721f77987'
-        );
-        $session->requestCredentialsToken();
-        $accessToken = $session->getAccessToken();
-
-        $api = new SpotifyWebAPI();
-        $api->setAccessToken($accessToken);
+        $api = Controller::getAPI();
         $trackId = $request->information;
         $track = $api->getTrack($trackId);
         $artistId = $track->artists[0]->id;

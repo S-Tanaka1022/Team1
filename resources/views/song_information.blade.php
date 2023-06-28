@@ -1,3 +1,6 @@
+{{-- 楽曲詳細画面 --}}
+{{-- リストへ追加ボタンと楽曲一覧に戻るボタンが設置されてる --}}
+
 <?php
 //曲の詳細情報
 $trackImage = $track->album->images[0]->url; //アルバム画像
@@ -85,16 +88,16 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                 <div class="col">
                     <form action="add_myplaylist" method="get" enctype="multipart/form-data">
                         <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn-light btn-block" type="submit" name="add_mylist" value="{{$track->id}}">
-                                リストへ追加
+                            <button class="btn btn-success btn-block btn-lg" type="submit" name="add_mylist" value="{{$track->id}}">
+                                <b>リストへ追加</b>
                             </button>
                         </div>
                     </form>
                 </div>
                 <div class="col">
                     <div class="d-flex justify-content-center align-items-center">
-                        <button class="btn btn-light btn-block" name="back" onclick="location.href='/everyone_playlist'">
-                            楽曲一覧に戻る
+                        <button class="btn btn-info btn-block btn-lg" name="back" onclick="location.href='/everyone_playlist'">
+                            <b>楽曲一覧に戻る</b>
                         </button>
                     </div>
                 </div>

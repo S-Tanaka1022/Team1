@@ -72,11 +72,11 @@ $songs;
     <main class="content-container">
         <div style="display: flex; justify-content: space-between;">
             <div class="weather_table" style="margin-right: 10px;">
-                <table border="1">
+                <table>
                 <div class="container">
                     <table class="table table-bordered">
                     <thead>
-                    <tr>
+                    <tr class="bg-dark text-white">
                         <th><div class="column_headers">地域名</div></th>
                         <th><div class="column_headers">今日の天気</div></th>
                         <th><div class="column_headers">明日の天気</div></th>
@@ -154,8 +154,8 @@ _TABLE_;
                 </table>
             </div>
             <div style="flex: 1; margin-left: 10px;">
-                <table border="1" class="table table-bordered">
-                    <tr>
+                <table class="table table-bordered">
+                    <tr class="bg-dark text-white">
                         <th><div class="column_headers">ジャケット</div></th>
                         <th><div class="column_headers">曲名</div></th>
                         <th><div class="column_headers">アーティスト</div></th>
@@ -214,13 +214,13 @@ _TABLE_;
                                     </div>
                                 </td>
                                 <td class="align-middle text-center aid">
-                                        <a href="/information?information={$songId}">
+                                        <b><a href="/information?information={$songId}">
                                             $trackName
-                                        </a>
+                                        </a></b>
                                 </td>
-                                <td class='align-middle text-center artist_name'>
+                                <td class='align-middle text-center artist_name'><b>
                                     $artistName
-                                </td>
+                                </b></td>
                             </tr>
 _TABLE_;
                     }
