@@ -114,22 +114,17 @@ class PlaylistController extends Controller
         $api = new SpotifyWebAPI();
         $api->setAccessToken($accessToken);
 
-        #必要性がわからない
         $playlistId = $request->playlist_id;
         $playlist = Playlist::findOrFail($playlistId);
-
-        #必要性はない
         $songs = $playlist->songs;
 
         $tracks = [];
         foreach ($songs as $song) {
             $trackId = $song->song_detail_id;
-            $tracks[] = $api->getTrack($trackId);
-            $song_primary_key = $song->id;
+            $tracks[] = ["detail" => $api->getTrack($trackId), "song_primary_key" => $song->id];
         }
-        var_dump($song_primary_key);
 
-        return view('detail_myplaylist', compact('playlist', 'tracks', 'song_primary_key'));
+        return view('detail_myplaylist', compact('playlist', 'tracks',));
     }
 
     public function delete_myplaylist(Request $request)
@@ -146,7 +141,8 @@ class PlaylistController extends Controller
 
         $playlistId = $request->playlistId;
         $songId = $request->song_detail_id;
-        $delete_myplaylist_song = Song::where('id', $songId)->first();
+        $delete_myplaylist_song = Song::findOrFail($songId);
+        $delete_myplaylist_song;
         $delete_myplaylist_song->delete();
         // $delete_myplaylist_song->playlist()->detach($playlistId);
         // return redirect()->route('back_detail_myplaylist')->with('playlist_id', $playlistId);

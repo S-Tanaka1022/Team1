@@ -31,15 +31,15 @@
         </tr>
         @foreach ($tracks as $track)
         <tr>
-            <td><img src="{{$track->album->images[0]->url}}" width=80></td>
-            <td>{{$track->name}}</td>
-            <td>{{$track->artists[0]->name}}</td>
+            <td><img src='{{$track["detail"]->album->images[0]->url}}' width=80></td>
+            <td>{{$track["detail"]->name}}</td>
+            <td>{{$track["detail"]->artists[0]->name}}</td>
             <form action="information" method="get" enctype="multipart/form-data">
-                <td><button type="submit" name="information" value='{{$track->id}}'>詳細情報</button></td>
+                <td><button type="submit" name="information" value='{{$track["detail"]->id}}'>詳細情報</button></td>
             </form>
             <form action="/delete_myplaylist_song" method="get">
             <input type="hidden" name="playlistId" value="{{$playlist->id}}">
-            <td><button type="submit" name="song_detail_id" value='{{$song_primary_key}}'>削除</button></td>
+            <td><button type="submit" name="song_detail_id" value='{{$track["song_primary_key"]}}'>削除</button></td>
             </form>
         </tr>
         @csrf
