@@ -1,3 +1,6 @@
+{{-- みんなのプレイリスト一覧画面から「詳細」ボタンを押したときに来る画面 --}}
+{{-- 楽曲一覧と構成は一緒でリストへ追加と楽曲詳細に遷移できる --}}
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -41,18 +44,12 @@
         </nav>
     </header>
 
-    <form action="" method="get">
+    <form action="" method="get" >
         <label>
+            <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
             <input type="text" name="keyword3" placeholder="検索">
         </label>
         <input type="submit" class="btn btn-primary" value="検索">
-    </form>
-
-    <table class="table text-center align-middle m-1">
-        <tr class="bg-dark text-white">
-        <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
-        <input type="submit" value="検索">
-        @csrf
     </form>
 
     @if(count($tracks) == 0)
