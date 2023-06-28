@@ -31,16 +31,18 @@
         </ul>
     </nav>
 </header>
-<table border='1'>
-    <tr>
-        <th>プレイリスト名</th>
-        <th>詳細</th>
-    </tr>
-
-    @foreach ($playlists as $playlist)
-        <tr>
-            <td>{{$playlist->list_name}}</td>
-            <td><a href="/my_playlist">詳細</a></td>
+<div class="container text-center">
+    <table class="table">
+        <tr class="text-center align-middle bg-dark text-white">
+            <th>プレイリスト名</th>
+            <th>詳細</th>
         </tr>
-    @endforeach
-</table>
+
+        @foreach ($playlists as $playlist)
+            <tr class="text-center align-middle">
+                <td><b>{{$playlist->list_name}}</b></td>
+                <td><a href="/my_playlist" class="btn btn-info">詳細</a></td>
+            </tr>
+        @endforeach
+    </table>
+</div>

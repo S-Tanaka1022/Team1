@@ -36,7 +36,7 @@ $songs;
     @vite(['resources/css/index_css.css'])
 </head>
 
-<body class="m-0 p-0 custom-box-sizing">
+<body>
     <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
             <h1>Temporature</h1>
@@ -147,7 +147,7 @@ _TABLE_;
                                         echo "<td class='align-middle text-center weather_forecast'>情報取得中</td>";
                                     }
                                 }
-                                echo "<td class='align-middle text-center delete><form action='/delete/{$id}'><input type='submit' value='削除'></form></td></tr>";
+                                echo "<td class='align-middle text-center delete'><form action='/delete/{$id}'><button type='submit' class='btn btn-danger'>削除</botton></form></td></tr>";
                             }
                     @endphp
 

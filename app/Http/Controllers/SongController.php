@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Playlist;
+use App\Models\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use SpotifyWebAPI\SpotifyWebAPI;
@@ -80,15 +81,6 @@ class SongController extends Controller
 
     public function detail(Request $request)
     {
-        /*
-        $playlist = new Playlist();
-        $playlist = Playlist::find($request->playlist_id);
-        //dd($playlist);
-
-        $list_id =$playlist->songs()->song_detail_id;
-        dd($list_id);
-        */
-
         $session = new Session(
             'f172da853aeb4266863fb2661addbb76',
             'bcf72a943e1245828831cda721f77987'
@@ -99,28 +91,55 @@ class SongController extends Controller
         $api = new SpotifyWebAPI();
         $api->setAccessToken($accessToken);
 
-        $playlistId = $request->playlist_id;
+        $auth_info = Auth::user()->id;
+        $keyword3 = $request->keyword3;//キーワード
 
-        $playlist = Playlist::findOrFail($playlistId);
-        $songs = $playlist->songs;
+        if (Str::length($keyword3) > 0){//検索している場合
+            $song_id = Song::where('title', 'LIKE', "%$keyword3%") // プレイリスト名にkeyword2 を含むものを絞り込み
+            ->orwhere('artist', 'LIKE', "%$keyword3%")
+            ->get();
 
-        $tracks = [];
-        foreach ($songs as $song) {
-            $trackId = $song->song_detail_id;
-            $tracks[] = $api->getTrack($trackId);
+
+            $select_id = [];//検索結果を配列に入れる
+            for($i=0;$i<count($song_id);$i++){
+                $select_id[] = $song_id[$i]->song_detail_id;
+            }
+
+            $playlistId = $request->playlist_id;
+
+            $playlist = Playlist::findOrFail($playlistId);
+            $songs = $playlist->songs;
+
+            $tracks = [];
+
+            foreach ($songs as $song) {
+                for($i=0;$i<count($select_id);$i++){
+                    if($select_id[$i] == $song->song_detail_id){//検索と一致
+                        $trackId = $song->song_detail_id;
+                        $tracks[] = $api->getTrack($trackId);
+                    }elseif(count($select_id) == 0){
+                        echo("検索結果が見つかりません");
+                    }
+            }
         }
 
+        }else{//検索していない
+            $playlistId = $request->playlist_id;
 
-        $session = new Session(
-            'f172da853aeb4266863fb2661addbb76',
-            'bcf72a943e1245828831cda721f77987'
-        );
-        $session->requestCredentialsToken();
-        $accessToken = $session->getAccessToken();
+            $playlist = Playlist::findOrFail($playlistId);
+            $songs = $playlist->songs;
 
-        $api = new SpotifyWebAPI();
-        $api->setAccessToken($accessToken);
+            $tracks = [];
 
-        return view('other_playlist', compact('playlist', 'tracks'));
+            foreach ($songs as $song) {
+                //$trackId = $song->song_detail_id;
+                $trackId = $song->song_detail_id;
+                //var_dump($trackId);
+                $tracks[] = $api->getTrack($trackId);
+            }
+        }
+
+        return view('other_playlist',compact('playlist','tracks','playlistId'));
+
     }
 }
