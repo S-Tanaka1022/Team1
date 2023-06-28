@@ -43,19 +43,35 @@
             </ul>
         </nav>
     </header>
-    <main class="m-3">
-        <form action="" method="get" >
-            <label>
-                <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
-                <input type="text" name="keyword3" placeholder="検索">
-            </label>
-            <input type="submit" class="btn btn-primary" value="検索">
-        </form>
+    <main class="m-1">
+        <div class="container m-2">
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-info btn" onclick="goBack()">
+                        <b>戻る</b>
+                    </button>
+                    <script>
+                        function goBack() {
+                            window.history.back();
+                        }
+                    </script>
+                </div>
+                <div class="col text-right">
+                    <form class="form-group text-right" action="" method="get">
+                      <label class="align-middle">
+                        <input type="hidden" name="playlist_id" value="{{$playlistId}}">
+                        <input class="form-control align-middle" type="text" name="keyword3" placeholder="検索">
+                      </label>
+                      <input type="submit" class="btn btn-primary align-top" value="検索">
+                    </form>
+                </div>
+            </div>
+        </div>
 
         @if(count($tracks) == 0)
         <p>検索結果は見つかりませんでした</p>
         @else
-        <table class="table text-center align-middle">
+        <table class="table table-striped text-center align-middle">
             <tbody class="m-3">
                 <tr class="bg-dark text-white m-3">
                     <th>ジャケット写真</th>

@@ -86,6 +86,20 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
         <div class="container m-10">
             <div class="row">
                 <div class="col">
+                    <div class="d-flex justify-content-center align-items-center">
+
+                        <button class="btn btn-info btn-block btn-lg" onclick="goBack()">
+                            <b>戻る</b>
+                        </button>
+
+                        <script>
+                        function goBack() {
+                        window.history.back();
+                        }
+                        </script>
+                    </div>
+                </div>
+                <div class="col">
                     <form action="add_myplaylist" method="get" enctype="multipart/form-data">
                         <div class="d-flex justify-content-center align-items-center">
                             <button class="btn btn-success btn-block btn-lg" type="submit" name="add_mylist" value="{{$track->id}}">
@@ -93,13 +107,6 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                             </button>
                         </div>
                     </form>
-                </div>
-                <div class="col">
-                    <div class="d-flex justify-content-center align-items-center">
-                        <button class="btn btn-info btn-block btn-lg" name="back" onclick="location.href='/everyone_playlist'">
-                            <b>楽曲一覧に戻る</b>
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
