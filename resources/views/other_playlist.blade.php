@@ -60,8 +60,8 @@
         @foreach ($tracks as $track)
         <tr class="text-center align-middle">
             <td class="text-center align-middle col-2"><img src="{{$track->album->images[0]->url}}" width=80></td>
-            <td class="text-center align-middle">{{$track->name}}</td>
-            <td class="text-center align-middle">{{$track->artists[0]->name}}</td>
+            <td class="text-center align-middle"><b>{{$track->name}}</b></td>
+            <td class="text-center align-middle"><b>{{$track->artists[0]->name}}</b></td>
             <form action="add_myplaylist" method="get" enctype="multipart/form-data">
                 <td class="text-center align-middle"><button class="btn text-center align-middle btn-secondary" type="submit" name="add_mylist" value='{{$track->id}}'>リストへ追加</button></td>
             </form>
