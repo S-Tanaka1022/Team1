@@ -132,11 +132,11 @@ _TABLE_;
                                     if (isset($weathers[$i])) {
                                         $weather = $weathers[$i];
                                         $replacements = array(
-                                            "雨" => "<img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '50px'><br>",
-                                            "晴れ" => "<img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '50px'><br>",
-                                            "雷" => "<img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '50px'><br>",
-                                            "雪" => "<img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '50px'><br>",
-                                            "くもり" => "<img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '50px'><br>",
+                                            "雨" => "<br><img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '50px'><br>",
+                                            "晴れ" => "<br><img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '50px'><br>",
+                                            "雷" => "<br><img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '50px'><br>",
+                                            "雪" => "<br><img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '50px'><br>",
+                                            "くもり" => "<br><img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '50px'><br>",
                                             "　" => "",
                                             "所により" => "",
                                             "では" => "では<br>",
