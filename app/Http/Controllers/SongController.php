@@ -111,7 +111,18 @@ class SongController extends Controller
             }
         }
 
-        return view('other_playlist',compact('playlist','tracks','playlistId'));
+        return view('other_playlist', compact('playlist', 'tracks', 'playlistId'));
 
+        $session = new Session(
+            'f172da853aeb4266863fb2661addbb76',
+            'bcf72a943e1245828831cda721f77987'
+        );
+        $session->requestCredentialsToken();
+        $accessToken = $session->getAccessToken();
+
+        $api = new SpotifyWebAPI();
+        $api->setAccessToken($accessToken);
+
+        return view('other_playlist', compact('playlist', 'tracks'));
     }
 }
