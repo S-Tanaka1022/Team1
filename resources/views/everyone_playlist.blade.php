@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            <table class="table text-center align-middle">
+            <table class="table text-center align-middle mt-4">
                 <tr class="bg-dark text-white">
                     <th>ジャケット写真</th>
                     <th>曲名</th>
