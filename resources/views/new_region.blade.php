@@ -6,13 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- 自作CSSファイル -->
-    @vite(['resources/css/region_area.css'])
     <title>初回現在地登録</title>
 </head>
 
 <body>
-    <header>
+    <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
             <h1>初回現在地登録</h1>
                 <p class="navbar-text mt-3">
@@ -22,10 +20,10 @@
     </header>
 
     <main>
-        <div class="select_new">
+        <div class="select_new mt-3 mb-0 mx-3" style="font-size: 22px;">
             都道府県選択
             <form action="new_area" method="POST">
-                <select name="sel_region">
+                <select name="sel_region" class="form-select form-select-lg text-center mb-3">
                     @foreach($regions as $region)
                         <option value="{{$region -> region_code}}">{{$region -> region_name}}</option>
                     @endforeach

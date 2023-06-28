@@ -1,3 +1,7 @@
+{{-- 楽曲一覧とみんなのプレイリストの一覧画面 --}}
+{{-- 楽曲を一覧として表示する画面がページ1（詳細画面、追加画面に遷移できる） --}}
+{{-- みんなのプレイリストの一覧を表示する画面がページ2 (詳細画面に遷移できる） --}}
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -7,13 +11,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <title>みんなのプレイリスト</title>
-        <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
 </head>
 
 <body>
-    <header>
+    <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
             <h1>楽曲一覧&みんなのプレイリスト</h1>
                 <p class="navbar-text mt-3">
@@ -22,17 +23,17 @@
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <form action="index" method="get">
-                        <button class="btn btn-primary" type="submit">ホーム</button>
+                        <button class="btn btn-primary mr-3" type="submit">ホーム</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="myplaylist" method="get">
-                        <button class="btn btn-primary" type="submit">マイプレイリスト</button>
+                        <button class="btn btn-primary mr-3" type="submit">マイプレイリスト</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="add_region" method="get">
-                        <button class="btn btn-primary" type="submit">登録地追加</button>
+                        <button class="btn btn-primary mr-3" type="submit">登録地追加</button>
                     </form>
                 </li>
                 <li class="nav-item">
@@ -71,7 +72,7 @@
                 </div>
             </div>
 
-            <table class="table text-center align-middle">
+            <table class="table text-center align-middle mt-4">
                 <tr class="bg-dark text-white">
                     <th>ジャケット写真</th>
                     <th>曲名</th>
@@ -94,11 +95,7 @@
                 @csrf
                 @endforeach
             </table>
-
         </div>
-
-
-
         <div id="tabpage2">
                 <form action="" method="GET">
                     <label>
@@ -106,19 +103,16 @@
                     </label>
                     <input type="submit" value="検索" class="btn btn-primary">
                 </form>
-
-            <table class="table text-center align-middle">
+            <table class="table text-center align-middle mt-4">
                 <tr class="bg-dark text-white">
                     <th>ユーザ名</th>
                     <th>プレイリスト名</th>
                     <th>詳細</th>
                 </tr>
-
                 @foreach ($playlists as $playlist)
                     <tr>
                         <td class="text-center align-middle"><b>{{$playlist->user->name}}</b></td>
                         <td class="text-center align-middle"><b>{{$playlist->list_name}}</b></td>
-
                         <form action="other_playlist" method="get" enctype="multipart/form-data">
                             <td class="text-center align-middle"><button type="submit" name="playlist_id" value='{{$playlist->id}}' class="btn btn-info">詳細</button></td>
                             @csrf
