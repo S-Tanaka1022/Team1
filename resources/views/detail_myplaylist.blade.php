@@ -40,23 +40,6 @@
             </ul>
         </nav>
     </header>
-    <main class="m-3">
-        <button class="btn btn-info btn-block btn-lg" onclick="goBack()">
-            <b>戻る</b>
-        </button>
-
-        <script>
-        function goBack() {
-        window.history.back();
-        }
-        </script>
-        <form action="" method="get" >
-            <label>
-                <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
-                <input type="text" name="keyword3" placeholder="検索キーワード">
-            </label>
-            <input type="submit" class="btn btn-primary" value="検索">
-        </form>
     <div class="container">
         <div class="row">
             <div class="col-2">
