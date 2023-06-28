@@ -96,7 +96,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                             <span class="m-2">プレイリスト名 </span>
                             <input type="text" name="playlist_name" placeholder="新規プレイリスト"><br><br>
                             <span class="m-2">既存プレイリスト </span>
-                            <select name="list_id">
+                            <select name="list_id" class="form-select form-select-lg">
                                 <option hidden>プレイリスト選択</option>
                                 @foreach ($playlists as $playlist)
                                     <option value="{{$playlist->id}}">{{$playlist->list_name}}</option>
@@ -111,12 +111,12 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
 
                             {{-- trackIdの流用 --}}
                             <input type="hidden" name="trackId" value="{{$trackId}}">
-                            <input type="submit" value="追加" class="btn btn-success btn-block"><br>
+                            <input type="submit" value="追加" class="btn btn-success btn-block btn-lg"><br>
                             @csrf
                         </form>
                     </div>
                     <div class="text-right"> <!-- 右寄せの要素 -->
-                        <button class="btn btn-info btn-block" name="back" onclick="location.href='/everyone_playlist'">
+                        <button class="btn btn-info btn-block btn-lg" name="back" onclick="location.href='/everyone_playlist'">
                             楽曲一覧に戻る
                         </button>
                     </div>
