@@ -1,3 +1,7 @@
+{{-- 楽曲一覧とみんなのプレイリストの一覧画面 --}}
+{{-- 楽曲を一覧として表示する画面がページ1（詳細画面、追加画面に遷移できる） --}}
+{{-- みんなのプレイリストの一覧を表示する画面がページ2 (詳細画面に遷移できる） --}}
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -7,9 +11,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <title>みんなのプレイリスト</title>
-        <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
 </head>
 
 <body>
@@ -70,7 +71,6 @@
                     </div>
                 </div>
             </div>
-
             <table class="table text-center align-middle">
                 <tr class="bg-dark text-white">
                     <th>ジャケット写真</th>
@@ -94,11 +94,7 @@
                 @csrf
                 @endforeach
             </table>
-
         </div>
-
-
-
         <div id="tabpage2">
                 <form action="" method="GET">
                     <label>
@@ -106,19 +102,16 @@
                     </label>
                     <input type="submit" value="検索" class="btn btn-primary">
                 </form>
-
             <table class="table text-center align-middle">
                 <tr class="bg-dark text-white">
                     <th>ユーザ名</th>
                     <th>プレイリスト名</th>
                     <th>詳細</th>
                 </tr>
-
                 @foreach ($playlists as $playlist)
                     <tr>
                         <td class="text-center align-middle"><b>{{$playlist->user->name}}</b></td>
                         <td class="text-center align-middle"><b>{{$playlist->list_name}}</b></td>
-
                         <form action="other_playlist" method="get" enctype="multipart/form-data">
                             <td class="text-center align-middle"><button type="submit" name="playlist_id" value='{{$playlist->id}}' class="btn btn-info">詳細</button></td>
                             @csrf

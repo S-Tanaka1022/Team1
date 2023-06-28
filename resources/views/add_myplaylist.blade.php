@@ -1,4 +1,7 @@
-@php
+{{-- ユーザが選択した楽曲をプレイリストに追加する際の最終画面 --}}
+{{-- 追加ボタン、楽曲へ戻るボタンが押されたら「みんなのプレイリスト画面」に遷移 --}}
+
+@php //前準備で変数を用意
 $trackImage = $track->album->images[0]->url; //アルバム画像
 $releaseDate = $track->album->release_date; //リリース日
     $dateFormat = date("Y年m月d日", strtotime($releaseDate));
@@ -59,6 +62,8 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
             </ul>
         </nav>
     </header>
+
+    {{-- ここから本文 --}}
     <div class="container m-10 p-10 rounded bg-dark text-white">
         <div class="container">
             <div class="row justify-content-center align-items-center">
@@ -90,8 +95,9 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                         @endif
                     </div><br>
                 </div>
+                {{-- ここまでが左側の要素 --}}
                 <div class="col-md-auto">
-                    <div class="text-right m-1"> <!-- 右寄せの要素 -->
+                    <div class="text-right m-1">
                         <form action="" method="POST">
                             <span class="m-2">プレイリスト名 </span>
                             <input type="text" name="playlist_name" placeholder="新規プレイリスト"><br><br>
@@ -101,21 +107,17 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                                 @foreach ($playlists as $playlist)
                                     <option value="{{$playlist->id}}">{{$playlist->list_name}}</option>
                                 @endforeach
-                            </select>
-                            <br><br>
-
-                            曲名
+                            </select><br><br>
+                            <span class="m-2">曲名 </span>
                             <input type="text" name="title" value="{{$track->name}}" readonly><br><br>
-                            アーティスト
+                            <span class="m-2">アーティスト </span>
                             <input type="text" name="artist" value="{{$track->artists[0]->name}}" readonly><br><br>
-
-                            {{-- trackIdの流用 --}}
                             <input type="hidden" name="trackId" value="{{$trackId}}">
                             <input type="submit" value="追加" class="btn btn-success btn-block btn-lg"><br>
                             @csrf
                         </form>
                     </div>
-                    <div class="text-right"> <!-- 右寄せの要素 -->
+                    <div class="text-right">
                         <button class="btn btn-info btn-block btn-lg" name="back" onclick="location.href='/everyone_playlist'">
                             楽曲一覧に戻る
                         </button>
