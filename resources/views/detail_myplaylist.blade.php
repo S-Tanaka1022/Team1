@@ -41,6 +41,15 @@
         </nav>
     </header>
     <main class="m-3">
+        <button class="btn btn-info btn-block btn-lg" onclick="goBack()">
+            <b>戻る</b>
+        </button>
+
+        <script>
+        function goBack() {
+        window.history.back();
+        }
+        </script>
         <form action="" method="get" >
             <label>
                 <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
