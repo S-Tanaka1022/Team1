@@ -37,7 +37,7 @@ $songs;
 </head>
 
 <body>
-    <header>
+    <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
             <h1>Temporature</h1>
                 <p class="navbar-text mt-3">
@@ -45,18 +45,18 @@ $songs;
                 </p>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <form action="myplaylist" method="get">
-                        <button class="btn btn-primary" type="submit">プレイリスト</button>
+                    <form action="myplaylists" method="get">
+                        <button class="btn btn-primary mr-3" type="submit">プレイリスト</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="everyone_playlist" method="get">
-                        <button class="btn btn-primary" type="submit">みんなのプレイリスト</button>
+                        <button class="btn btn-primary mr-3" type="submit">みんなのプレイリスト</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="add_region" method="get">
-                        <button class="btn btn-primary" type="submit">登録地追加</button>
+                        <button class="btn btn-primary mr-3" type="submit">登録地追加</button>
                     </form>
                 </li>
                 <li class="nav-item">
@@ -72,11 +72,11 @@ $songs;
     <main class="content-container">
         <div style="display: flex; justify-content: space-between;">
             <div class="weather_table" style="margin-right: 10px;">
-                <table border="1">
+                <table>
                 <div class="container">
                     <table class="table table-bordered">
                     <thead>
-                    <tr>
+                    <tr class="bg-dark text-white">
                         <th><div class="column_headers">地域名</div></th>
                         <th><div class="column_headers">今日の天気</div></th>
                         <th><div class="column_headers">明日の天気</div></th>
@@ -154,8 +154,8 @@ _TABLE_;
                 </table>
             </div>
             <div style="flex: 1; margin-left: 10px;">
-                <table border="1" class="table table-bordered">
-                    <tr>
+                <table class="table table-bordered">
+                    <tr class="bg-dark text-white">
                         <th><div class="column_headers">ジャケット</div></th>
                         <th><div class="column_headers">曲名</div></th>
                         <th><div class="column_headers">アーティスト</div></th>
@@ -214,13 +214,13 @@ _TABLE_;
                                     </div>
                                 </td>
                                 <td class="align-middle text-center aid">
-                                        <a href="/information?information={$songId}">
+                                        <b><a href="/information?information={$songId}">
                                             $trackName
-                                        </a>
+                                        </a></b>
                                 </td>
-                                <td class='align-middle text-center artist_name'>
+                                <td class='align-middle text-center artist_name'><b>
                                     $artistName
-                                </td>
+                                </b></td>
                             </tr>
 _TABLE_;
                     }

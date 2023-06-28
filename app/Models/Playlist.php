@@ -19,7 +19,11 @@ class Playlist extends Model
 
     public function user()
     {
-
         return $this->belongsTo(User::class);
+    }
+
+    public static function getUserPlaylists($userId)
+    {
+        return self::where('user_id', $userId)->get();
     }
 }

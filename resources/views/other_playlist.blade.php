@@ -1,3 +1,6 @@
+{{-- みんなのプレイリスト一覧画面から「詳細」ボタンを押したときに来る画面 --}}
+{{-- 楽曲一覧と構成は一緒でリストへ追加と楽曲詳細に遷移できる --}}
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,8 +12,7 @@
     <title>{{$playlist->user->name}}さんのプレイリスト</title>
 </head>
 <body>
-    <h1>{{$playlist->user->name}}さんのプレイリスト</h1>
-    <header>
+    <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
             <h1>{{$playlist->user->name}}さんのプレイリスト</h1>
                 <p class="navbar-text mt-3">
@@ -19,17 +21,17 @@
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <form action="index" method="get">
-                        <button class="btn btn-primary" type="submit">ホーム</button>
+                        <button class="btn btn-primary mr-3" type="submit">ホーム</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="everyone_playlist" method="get">
-                        <button class="btn btn-primary" type="submit">みんなのプレイリスト</button>
+                        <button class="btn btn-primary mr-3" type="submit">みんなのプレイリスト</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="add_region" method="get">
-                        <button class="btn btn-primary" type="submit">登録地追加</button>
+                        <button class="btn btn-primary mr-3" type="submit">登録地追加</button>
                     </form>
                 </li>
                 <li class="nav-item">
@@ -41,47 +43,46 @@
             </ul>
         </nav>
     </header>
+    <main class="m-3">
+        <form action="" method="get" >
+            <label>
+                <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
+                <input type="text" name="keyword3" placeholder="検索">
+            </label>
+            <input type="submit" class="btn btn-primary" value="検索">
+        </form>
 
-    <form action="" method="get">
-        <label>
-            <input type="text" name="keyword3" placeholder="検索">
-        </label>
-        <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
-        <input type="submit" value="検索">
-        @csrf
-    </form>
+        @if(count($tracks) == 0)
+        <p>検索結果は見つかりませんでした</p>
+        @else
+        <table class="table text-center align-middle">
+            <tbody class="m-3">
+                <tr class="bg-dark text-white m-3">
+                    <th>ジャケット写真</th>
+                    <th>曲名</th>
+                    <th>アーティスト名</th>
+                    <th>プレリストに追加</th>
+                    <th>詳細情報</th>
 
-    <table border='1'>
-        <tr>
-            <th>ジャケット写真</th>
-            <th>曲名</th>
-            <th>アーティスト名</th>
-            <th>プレリストに追加</th>
-            <th>詳細情報</th>
-
-        </tr>
-        @foreach ($tracks as $track)
-        <tr>
-            <td><img src="{{$track->album->images[0]->url}}" width=80></td>
-            <td>{{$track->name}}</td>
-            <td>{{$track->artists[0]->name}}</td>
-            <form action="add_myplaylist" method="get" enctype="multipart/form-data">
-                <td><button type="submit" name="add_mylist" value='{{$track->id}}'>リストへ追加</button></td>
-            </form>
-            <form action="information" method="get" enctype="multipart/form-data">
-                <td><button type="submit" name="information" value='{{$track->id}}'>詳細情報</button></td>
-            </form>
-        </tr>
-        @csrf
-        @endforeach
-    </table>
-
-
-    <form action="{{route('logout')}}" method="post">
-        <button type="submit">ログアウト</button>
-        @csrf
-    </form>
-
+                </tr>
+                @foreach ($tracks as $track)
+                <tr class="text-center align-middle">
+                    <td class="text-center align-middle col-2"><img src="{{$track->album->images[0]->url}}" width=80></td>
+                    <td class="text-center align-middle"><b>{{$track->name}}</b></td>
+                    <td class="text-center align-middle"><b>{{$track->artists[0]->name}}</b></td>
+                    <form action="add_myplaylist" method="get" enctype="multipart/form-data">
+                        <td class="text-center align-middle col-2"><button class="btn text-center align-middle btn-secondary" type="submit" name="add_mylist" value='{{$track->id}}'>リストへ追加</button></td>
+                    </form>
+                    <form action="information" method="get" enctype="multipart/form-data">
+                        <td class="text-center align-middle col-2"><button class="btn text-center align-middle btn-info" type="submit" name="information" value='{{$track->id}}'>詳細情報</button></td>
+                    </form>
+                </tr>
+                @csrf
+                @endforeach
+            </tr>
+        </table>
+        @endif
+    </main>
 </body>
 </html>
 

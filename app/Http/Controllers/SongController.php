@@ -14,36 +14,20 @@ class SongController extends Controller
 {
     public function index(Request $request)
     {
-        $session = new Session(
-            'f172da853aeb4266863fb2661addbb76',
-            'bcf72a943e1245828831cda721f77987'
-        );
-        $session->requestCredentialsToken();
-        $accessToken = $session->getAccessToken();
-
-        $api = new SpotifyWebAPI();
-        $api->setAccessToken($accessToken);
-        /* Requestに送信された検索キーワードを変数に保持 */
-        $keyword = $request->keyword;
+        $api = Controller::getAPI();
+        $keyword = $request->keyword; /* Requestに送信された検索キーワードを変数に保持 */
         if (Str::length($keyword) > 0) { // Str::length(<文字列>) で、文字列の長さを取得できる
-            $limit = 30;
-            $options = [
-                'limit' => $limit,
-                'offset' => random_int(0, 10),
-            ];
-
-            $results = $api->search($keyword, 'track', $options);
-        } else {
-            /* 検索キーワードが入力されていない場合は、全件取得する */
-            $limit = 30;
+            $query = $keyword;
+            $offset = 10;
+        } else { /* 検索キーワードが入力されていない場合は、全件取得する */
             $query = 'genre:"japanese"';
-            $options = [
-                'limit' => $limit,
-                'offset' => random_int(0, 1000),
-            ];
-
-            $results = $api->search($query, 'track', $options);
+            $offset = 1000;
         }
+        $options = [
+            'limit' => 30,
+            'offset' => random_int(0, $offset),
+        ];
+        $results = $api->search($query, 'track', $options);
 
         //プレイリスト一覧表示のためのデータベース読み込み
         $auth_info = Auth::user()->id;
@@ -54,6 +38,7 @@ class SongController extends Controller
                 ->get();
         } else {
             /* 検索キーワードが入力されていない場合は、全件取得する */
+            //$playlists = Playlist::getUserPlaylists($auth_info); //ログイン中のユーザー以外のプレイリストを表示
             $playlists = Playlist::where('user_id', '!=', $auth_info)->get(); //ログイン中のユーザー以外のプレイリストを表示
         }
 
@@ -62,15 +47,7 @@ class SongController extends Controller
 
     public function information(Request $request)
     {
-        $session = new Session(
-            'f172da853aeb4266863fb2661addbb76',
-            'bcf72a943e1245828831cda721f77987'
-        );
-        $session->requestCredentialsToken();
-        $accessToken = $session->getAccessToken();
-
-        $api = new SpotifyWebAPI();
-        $api->setAccessToken($accessToken);
+        $api = Controller::getAPI();
         $trackId = $request->information;
         $track = $api->getTrack($trackId);
         $artistId = $track->artists[0]->id;
@@ -81,64 +58,41 @@ class SongController extends Controller
 
     public function detail(Request $request)
     {
-
-        $session = new Session(
-            'f172da853aeb4266863fb2661addbb76',
-            'bcf72a943e1245828831cda721f77987'
-        );
-        $session->requestCredentialsToken();
-        $accessToken = $session->getAccessToken();
-
-        $api = new SpotifyWebAPI();
-        $api->setAccessToken($accessToken);
-
-        $playlistId = $request->playlist_id;
-
-        $playlist = Playlist::findOrFail($playlistId);
-        $songs = $playlist->songs;
-
-        $tracks = [];
+        $api = Controller::getAPI();
         $auth_info = Auth::user()->id;
-        $keyword3 = $request->keyword3; //キーワード
-        foreach ($songs as $song) {
-            //$trackId = $song->song_detail_id;
-            //$title = $song->title;
-            //$artist = $song->artist;
-
-            if (Str::length($keyword3) > 0) { //検索している場合
-                $song_id = Song::where('title', 'LIKE', "%$keyword3%") // プレイリスト名にkeyword2 を含むものを絞り込み
-                    ->orwhere('artist', 'LIKE', "%$keyword3%")
-                    ->get();
-                var_dump($song_id);
-                //$test = preg_match('/'.$keyword3.'/', $title);
-                ////dd($test);
-                //
-                //if(preg_match('/'.$keyword3.'/', $title) == 1||preg_match('/'.$keyword3.'/', $artist) == 1){//楽曲かアーティスト名で一致
-                //    $trackId = $song->song_detail_id;
-                //    //dd($trackId);
-                //}else{
-                //    echo ("一致する項目はありません");
-                //}
-                //break;
-            } else {
-                $trackId = $song->song_detail_id;
+        $keyword3 = $request->keyword3;//キーワード
+        if (Str::length($keyword3) > 0){//検索している場合
+            $song_id = Song::where('title', 'LIKE', "%$keyword3%") // プレイリスト名にkeyword2 を含むものを絞り込み
+            ->orwhere('artist', 'LIKE', "%$keyword3%")
+            ->get();
+            $select_id = [];//検索結果を配列に入れる
+            for($i=0;$i<count($song_id);$i++){
+                $select_id[] = $song_id[$i]->id;
             }
-            //var_dump($trackId);
-            $tracks[] = $api->getTrack($trackId);
+            $playlistId = $request->playlist_id;
+            $playlist = Playlist::findOrFail($playlistId);
+            $songs = $playlist->songs;
+            $tracks = [];
+            foreach ($songs as $song) {
+                for($i=0;$i<count($select_id);$i++){
+                    if($select_id[$i] == $song->id){//検索と一致
+                        $trackId = $song->song_detail_id;
+                        $tracks[] = $api->getTrack($trackId);
+                    }
+                }
+            }
+        }else{//検索していない
+            $playlistId = $request->playlist_id;
+
+            $playlist = Playlist::findOrFail($playlistId);
+            $songs = $playlist->songs;
+            $tracks = [];
+
+            foreach ($songs as $song) {
+                $trackId = $song->song_detail_id;
+                $tracks[] = $api->getTrack($trackId);
+            }
         }
-
-        return view('other_playlist', compact('playlist', 'tracks', 'playlistId'));
-
-        $session = new Session(
-            'f172da853aeb4266863fb2661addbb76',
-            'bcf72a943e1245828831cda721f77987'
-        );
-        $session->requestCredentialsToken();
-        $accessToken = $session->getAccessToken();
-
-        $api = new SpotifyWebAPI();
-        $api->setAccessToken($accessToken);
-
-        return view('other_playlist', compact('playlist', 'tracks'));
+        return view('other_playlist',compact('playlist','tracks','playlistId'));
     }
 }

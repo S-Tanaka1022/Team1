@@ -16,58 +16,36 @@ class PlaylistController extends Controller
     public function index(Request $request)
     {
         $auth_info = Auth::user()->id;
-        $playlists = Playlist::where('user_id', $auth_info)->get();
-
-        $session = new Session(
-            'f172da853aeb4266863fb2661addbb76',
-            'bcf72a943e1245828831cda721f77987'
-        );
-        $session->requestCredentialsToken();
-        $accessToken = $session->getAccessToken();
-
-        $api = new SpotifyWebAPI();
-        $api->setAccessToken($accessToken);
+        $playlists = Playlist::getUserPlaylists($auth_info);
+        $api = Controller::getAPI();
         $trackId = $request->add_mylist;
         $track = $api->getTrack($trackId);
+        $artistId = $track->artists[0]->id;
+        $artist = $api->getArtist($artistId);
 
-        return view('add_myplaylist', compact('playlists', 'track', 'trackId'));
+        return view('add_myplaylist', compact('playlists','track','trackId','artist'));
     }
 
     public function add(Request $request)
     {
-        /* バリデーション
-        $request->validate([
-            'image' => 'required|max:1024|mimes:jpg,jpeg,png,gif'
-        ]);
-        */
-
-        /* Playlist オブジェクトを生成 */
         $add_playlist = new Playlist();
-
         $playlist_name = $request->playlist_name;
         $auth_info = Auth::user()->id;
-        //dd($auth_info);
 
         if ($playlist_name != null) { //新規作成プレイリストの場合
             $add_playlist->user_id = $auth_info;
             $add_playlist->list_name = $playlist_name;
-
-            /* データベースにレコードを追加する */
-            $add_playlist->save();
-        } else { //プレイリストを選択した場合
+            $add_playlist->save(); /* データベースにレコードを追加する */
+        }else{//プレイリストを選択した場合
             $add_playlist = Playlist::find($request->list_id);
         }
-
         /* Song オブジェクトを生成 */
         $add_song = new Song();
-
         $add_song->song_detail_id = $request->trackId;
         $add_song->title = $request->title;
         $add_song->artist = $request->artist;
-
         $add_song->save();
-
-        $add_playlist->songs()->attach($add_song->id); //中間テーブルにレコード追加
+        $add_playlist->songs()->attach($add_song->id);//中間テーブルにレコード追加
 
         return redirect("everyone_playlist");
     }
@@ -114,22 +92,17 @@ class PlaylistController extends Controller
         $api = new SpotifyWebAPI();
         $api->setAccessToken($accessToken);
 
-        #必要性がわからない
         $playlistId = $request->playlist_id;
         $playlist = Playlist::findOrFail($playlistId);
-
-        #必要性はない
         $songs = $playlist->songs;
 
         $tracks = [];
         foreach ($songs as $song) {
             $trackId = $song->song_detail_id;
-            $tracks[] = $api->getTrack($trackId);
-            $song_primary_key = $song->id;
+            $tracks[] = ["detail" => $api->getTrack($trackId), "song_primary_key" => $song->id];
         }
-        var_dump($song_primary_key);
 
-        return view('detail_myplaylist', compact('playlist', 'tracks', 'song_primary_key'));
+        return view('detail_myplaylist', compact('playlist', 'tracks',));
     }
 
     public function delete_myplaylist(Request $request)
@@ -146,7 +119,8 @@ class PlaylistController extends Controller
 
         $playlistId = $request->playlistId;
         $songId = $request->song_detail_id;
-        $delete_myplaylist_song = Song::where('id', $songId)->first();
+        $delete_myplaylist_song = Song::findOrFail($songId);
+        $delete_myplaylist_song;
         $delete_myplaylist_song->delete();
         // $delete_myplaylist_song->playlist()->detach($playlistId);
         // return redirect()->route('back_detail_myplaylist')->with('playlist_id', $playlistId);
