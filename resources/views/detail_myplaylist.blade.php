@@ -70,7 +70,7 @@
         @if(count($tracks) == 0)
             <p>検索結果は見つかりませんでした</p>
         @else
-        <table class="table">
+        <table class="table table-striped">
             <tr class="bg-dark text-white text-center align-middle">
                 <th>ジャケット写真</th>
                 <th>曲名</th>

@@ -71,7 +71,7 @@
         @if(count($tracks) == 0)
         <p>検索結果は見つかりませんでした</p>
         @else
-        <table class="table text-center align-middle">
+        <table class="table table-striped text-center align-middle">
             <tbody class="m-3">
                 <tr class="bg-dark text-white m-3">
                     <th>ジャケット写真</th>
