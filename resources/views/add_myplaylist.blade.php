@@ -108,7 +108,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                             <input type="text" name="playlist_name" id="playlist_name" placeholder="新規プレイリスト"><br><br>
                             <span class="m-2">既存プレイリスト </span>
                             <select name="list_id" id="list_id" class="form-select form-select-lg">
-                                <option value="" hidden>プレイリスト選択</option>
+                                <option value="">-</option>
                                 @foreach ($playlists as $playlist)
                                     <option value="{{$playlist->id}}">{{$playlist->list_name}}</option>
                                 @endforeach
@@ -123,9 +123,15 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                         </form>
                     </div>
                     <div class="text-right">
-                        <button class="btn btn-info btn-block btn-lg" name="back" onclick="location.href='/everyone_playlist'">
-                            楽曲一覧に戻る
+                        <button class="btn btn-info btn-block btn-lg" onclick="goBack()">
+                            <b>戻る</b>
                         </button>
+
+                        <script>
+                        function goBack() {
+                        window.history.back();
+                        }
+                        </script>
                     </div>
                 </div>
 
@@ -139,13 +145,17 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                     listIdSelect.addEventListener('change', toggleAddButton);
 
                     function toggleAddButton() {
-                        if (playlistNameInput.value.trim() !== '' || listIdSelect.value !== '') {
+                        const playlistNameValue = playlistNameInput.value.trim();
+                        const listIdValue = listIdSelect.value;
+
+                        if ((playlistNameValue !== '' && listIdValue === '') || (playlistNameValue === '' && listIdValue !== '')) {
                             addButton.disabled = false;
                         } else {
                             addButton.disabled = true;
                         }
                     }
                 </script>
+
 
             </div>
         </div>

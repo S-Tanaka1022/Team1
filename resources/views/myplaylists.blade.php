@@ -34,7 +34,7 @@
     </nav>
 </header>
 
-<div class="container text-center">
+<div class="container text-center mt-5">
     <table class="table">
         <tr class="text-center align-middle bg-dark text-white">
             <th>プレイリスト名</th>
