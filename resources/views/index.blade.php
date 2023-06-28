@@ -46,7 +46,7 @@ $songs;
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <form action="myplaylist" method="get">
-                        <button class="btn btn-primary mr-3" type="submit">プレイリスト</button>
+                        <button class="btn btn-primary mr-3" type="submit">マイプレイリスト</button>
                     </form>
                 </li>
                 <li class="nav-item">
