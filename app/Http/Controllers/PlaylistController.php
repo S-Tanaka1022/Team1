@@ -101,7 +101,6 @@ class PlaylistController extends Controller
             $trackId = $song->song_detail_id;
             $tracks[] = ["detail" => $api->getTrack($trackId), "song_primary_key" => $song->id];
         }
-        //var_dump($song_primary_key);
 
         return view('detail_myplaylist', compact('playlist', 'tracks',));
     }
