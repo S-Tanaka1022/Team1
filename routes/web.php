@@ -52,7 +52,7 @@ Route::post('/add_area', [RegionController::class, 'add_area']);
 Route::get('/delete/{id}', [RegionController::class, 'delete']);
 
 #自分のプレイリスト一覧画面
-Route::get('/myplaylists', [PlaylistController::class, 'myplaylist']);
+Route::get('/myplaylist', [PlaylistController::class, 'myplaylist']);
 /*Route::get('/myplaylist', function () {
     return view('myplaylist');
 });
@@ -73,5 +73,16 @@ Route::get('/information', [SongController::class, 'information']);
 
 #それぞれのプレイリスト確認画面
 Route::get('/other_playlist', [SongController::class, 'detail'])->middleware('auth');
+
+#マイプレイリストの詳細画面
+Route::get('/detail_myplaylist', [PlaylistController::class, 'detail']);
+//->name('back_detail_myplaylist');
+
+#マイプレイリストの削除
+Route::get('/delete_myplaylist', [PlaylistController::class, 'delete_myplaylist']);
+
+#マイプレイリスト内の曲の削除
+Route::get('/delete_myplaylist_song', [PlaylistController::class, 'delete_myplaylist_song']);
+
 
 require __DIR__ . '/auth.php';
