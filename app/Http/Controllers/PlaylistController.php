@@ -14,17 +14,8 @@ class PlaylistController extends Controller
 {
     public function index(Request $request){
         $auth_info = Auth::user()->id;
-        $playlists = Playlist::where('user_id', $auth_info)->get();
-
-        $session = new Session(
-            'f172da853aeb4266863fb2661addbb76',
-            'bcf72a943e1245828831cda721f77987'
-        );
-        $session->requestCredentialsToken();
-        $accessToken = $session->getAccessToken();
-
-        $api = new SpotifyWebAPI();
-        $api->setAccessToken($accessToken);
+        $playlists = Playlist::getUserPlaylists($auth_info);
+        $api = Controller::getAPI();
         $trackId = $request->add_mylist;
         $track = $api->getTrack($trackId);
         $artistId = $track->artists[0]->id;
@@ -35,38 +26,23 @@ class PlaylistController extends Controller
 
     public function add(Request $request)
     {
-        /* バリデーション
-        $request->validate([
-            'image' => 'required|max:1024|mimes:jpg,jpeg,png,gif'
-        ]);
-        */
-
-        /* Playlist オブジェクトを生成 */
         $add_playlist = new Playlist();
-
         $playlist_name = $request->playlist_name;
         $auth_info = Auth::user()->id;
-        //dd($auth_info);
 
         if($playlist_name != null){//新規作成プレイリストの場合
             $add_playlist->user_id = $auth_info;
             $add_playlist->list_name = $playlist_name;
-
-            /* データベースにレコードを追加する */
-            $add_playlist->save();
+            $add_playlist->save(); /* データベースにレコードを追加する */
         }else{//プレイリストを選択した場合
             $add_playlist = Playlist::find($request->list_id);
         }
-
         /* Song オブジェクトを生成 */
         $add_song = new Song();
-
         $add_song->song_detail_id = $request->trackId;
         $add_song->title = $request->title;
         $add_song->artist = $request->artist;
-
         $add_song->save();
-
         $add_playlist->songs()->attach($add_song->id);//中間テーブルにレコード追加
 
         return redirect("everyone_playlist");
@@ -74,7 +50,7 @@ class PlaylistController extends Controller
 
     public function myplaylist () {
         $auth_info = Auth::user()->id;
-        $playlists = Playlist::where('user_id', $auth_info)->get();
+        $playlists = Playlist::getUserPlaylists($auth_info);
         return view('/myplaylists', compact('playlists'));
     }
 }

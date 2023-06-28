@@ -1,5 +1,7 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{{-- 自分の作成したプレイリストの一覧を見ることができる画面 --}}
+{{-- 詳細ボタンからそれぞれのプレイリストに入った曲を閲覧できる --}}
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <header class="border-bottom border-1 border-secondary">
     <nav class="navbar navbar-light bg-light">
         <h1>マイプレイリスト</h1>
@@ -31,6 +33,7 @@
         </ul>
     </nav>
 </header>
+
 <div class="container text-center">
     <table class="table">
         <tr class="text-center align-middle bg-dark text-white">
