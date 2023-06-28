@@ -147,11 +147,13 @@ class PlaylistController extends Controller
 
     public function delete_myplaylist_song(Request $request)
     {
-        $playlistId = $request->playlist_id;
+        
+        $playlistId = $request->playlistId;
         $songId = $request->song_detail_id;
         $delete_myplaylist_song = Song::where('song_detail_id',$songId)->first();
-        $delete_myplaylist_song->playlist()->detach($playlistId);
-
-        return redirect()->route('back_detail_myplaylist')->with('playlist_id' , $playlistId);
+        $delete_myplaylist_song->delete();
+        //$delete_myplaylist_song->playlist()->detach($playlistId);
+        //return redirect()->route('back_detail_myplaylist')->with('playlist_id' , $playlistId);
+        return redirect("detail_myplaylist?playlist_id=$playlistId");
     }
 }

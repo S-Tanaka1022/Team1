@@ -75,7 +75,8 @@ Route::get('/information', [SongController::class, 'information']);
 Route::get('/other_playlist', [SongController::class, 'detail']);
 
 #マイプレイリストの詳細画面
-Route::get('/detail_myplaylist', [PlaylistController::class, 'detail'])->name('back_detail_myplaylist');
+Route::get('/detail_myplaylist', [PlaylistController::class, 'detail']);
+//->name('back_detail_myplaylist');
 
 #マイプレイリストの削除
 Route::get('/delete_myplaylist', [PlaylistController::class, 'delete_myplaylist']);
