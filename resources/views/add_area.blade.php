@@ -9,30 +9,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
     <title>エリア追加画面</title>
 </head>
 <body>
-    <header>
+    <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">エリア選択画面</a>
-                <p class="navbar-text">
+            <h1>エリア選択画面</h1>
+                <p class="navbar-text mt-3">
                     {{ Auth::user() -> name }} さん ログイン中
                 </p>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <form action="index" method="get">
-                        <button class="btn btn-primary" type="submit">ホーム</button>
+                        <button class="btn btn-primary mr-3" type="submit">ホーム</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="myplaylists" method="get">
-                        <button class="btn btn-primary" type="submit">マイプレイリスト</button>
+                        <button class="btn btn-primary mr-3" type="submit">マイプレイリスト</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="everyone_playlist" method="get">
-                        <button class="btn btn-primary" type="submit">みんなのプレイリスト</button>
+                        <button class="btn btn-primary mr-3" type="submit">みんなのプレイリスト</button>
                     </form>
                 </li>
                 <li class="nav-item">
@@ -44,22 +43,27 @@
             </ul>
         </nav>
     </header>
+
     <main>
-        エリア選択
-        <form action="code_save" method="POST">
-            <input type="hidden" name="region_code" value="{{$region_code}}">
-            <select name="sel_area_code">
-                @foreach($areas_data as $areas)
-                    <option value="{{$i}}">{{$areas['area']['name']}}</option>
-                    {{-- エリアコードをエリアごとに変化させ、送信 --}}
-                    {{$i+=1}}
-                @endforeach
-            </select>
-        <input type="submit" value="追加">
-        @csrf
-        </form>
-        <div>
-            <h1>現在の登録地</h1>
+        <div class="select mt-3 mb-0 mx-3" style="font-size: 22px;">
+            エリア選択
+            <form action="code_save" method="POST">
+                <input type="hidden" name="region_code" value="{{$region_code}}">
+                <select name="sel_area_code" class="form-select form-select-lg mb-3 text-center" aria-label=".form-select-lg example">
+                    @foreach($areas_data as $areas)
+                        <option value="{{$i}}">{{$areas['area']['name']}}</option>
+                        {{-- エリアコードをエリアごとに変化させ、送信 --}}
+                        {{$i+=1}}
+                    @endforeach
+                </select>
+                <input class="btn btn-info mb-2" type="submit" value="追加">
+                <button type="button" onclick="history.back()" class="btn btn-secondary mb-2">戻る</button>
+            @csrf
+            </form>
+        </div>
+
+        <div class="now_areas mt-3 mb-0 mx-3 pl-6" style="font-size: 22px; padding-left: 322px;">
+            <h2 class="pl-3" style="border-left: 8px solid black;">現在の登録地</h2>
             @php
             use App\Models\Region_name;
             foreach ($fav_regions as $fav_region){
@@ -75,7 +79,7 @@
 
                 foreach ($region_data as $data ){
                     // echo $areasdata[0]["area"]["name"];
-                    echo "<p>".$data["region_name"]."：".$areasdata[$area_code]["area"]["name"]. "</p>";
+                    echo "<div class='areas d-inline-block mr-3 mt-2 p-3 border border-secondary rounded-pill'>".$data["region_name"]."：".$areasdata[$area_code]["area"]["name"]. "</div>";
                 }
             }
             @endphp

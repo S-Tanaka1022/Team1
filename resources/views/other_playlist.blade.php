@@ -9,27 +9,26 @@
     <title>{{$playlist->user->name}}さんのプレイリスト</title>
 </head>
 <body>
-    <h1>{{$playlist->user->name}}さんのプレイリスト</h1>
-    <header>
+    <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">{{$playlist->user->name}}さんのプレイリスト</a>
-                <p class="navbar-text">
+            <h1>{{$playlist->user->name}}さんのプレイリスト</h1>
+                <p class="navbar-text mt-3">
                     {{ Auth::user() -> name }} さん ログイン中
                 </p>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <form action="index" method="get">
-                        <button class="btn btn-primary" type="submit">ホーム</button>
+                        <button class="btn btn-primary mr-3" type="submit">ホーム</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="everyone_playlist" method="get">
-                        <button class="btn btn-primary" type="submit">みんなのプレイリスト</button>
+                        <button class="btn btn-primary mr-3" type="submit">みんなのプレイリスト</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="add_region" method="get">
-                        <button class="btn btn-primary" type="submit">登録地追加</button>
+                        <button class="btn btn-primary mr-3" type="submit">登録地追加</button>
                     </form>
                 </li>
                 <li class="nav-item">
@@ -46,6 +45,11 @@
         <label>
             <input type="text" name="keyword3" placeholder="検索">
         </label>
+        <input type="submit" class="btn btn-primary" value="検索">
+    </form>
+
+    <table class="table text-center align-middle m-1">
+        <tr class="bg-dark text-white">
         <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
         <input type="submit" value="検索">
         @csrf
@@ -64,15 +68,15 @@
 
         </tr>
         @foreach ($tracks as $track)
-        <tr>
-            <td><img src="{{$track->album->images[0]->url}}" width=80></td>
-            <td>{{$track->name}}</td>
-            <td>{{$track->artists[0]->name}}</td>
+        <tr class="text-center align-middle">
+            <td class="text-center align-middle col-2"><img src="{{$track->album->images[0]->url}}" width=80></td>
+            <td class="text-center align-middle"><b>{{$track->name}}</b></td>
+            <td class="text-center align-middle"><b>{{$track->artists[0]->name}}</b></td>
             <form action="add_myplaylist" method="get" enctype="multipart/form-data">
-                <td><button type="submit" name="add_mylist" value='{{$track->id}}'>リストへ追加</button></td>
+                <td class="text-center align-middle"><button class="btn text-center align-middle btn-secondary" type="submit" name="add_mylist" value='{{$track->id}}'>リストへ追加</button></td>
             </form>
             <form action="information" method="get" enctype="multipart/form-data">
-                <td><button type="submit" name="information" value='{{$track->id}}'>詳細情報</button></td>
+                <td class="text-center align-middle"><button class="btn text-center align-middle btn-info" type="submit" name="information" value='{{$track->id}}'>詳細情報</button></td>
             </form>
         </tr>
         @csrf
