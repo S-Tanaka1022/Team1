@@ -86,15 +86,6 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
         <div class="container m-10">
             <div class="row">
                 <div class="col">
-                    <form action="add_myplaylist" method="get" enctype="multipart/form-data">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn-success btn-block btn-lg" type="submit" name="add_mylist" value="{{$track->id}}">
-                                <b>リストへ追加</b>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div class="col">
                     <div class="d-flex justify-content-center align-items-center">
 
                         <button class="btn btn-info btn-block btn-lg" onclick="goBack()">
@@ -107,6 +98,15 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                         }
                         </script>
                     </div>
+                </div>
+                <div class="col">
+                    <form action="add_myplaylist" method="get" enctype="multipart/form-data">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <button class="btn btn-success btn-block btn-lg" type="submit" name="add_mylist" value="{{$track->id}}">
+                                <b>リストへ追加</b>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
