@@ -51,6 +51,9 @@
         @csrf
     </form>
 
+    @if(count($tracks) == 0)
+    <p>検索結果は見つかりませんでした</p>
+    @else
     <table border='1'>
         <tr>
             <th>ジャケット写真</th>
@@ -75,6 +78,7 @@
         @csrf
         @endforeach
     </table>
+    @endif
 
 
     <form action="{{route('logout')}}" method="post">
