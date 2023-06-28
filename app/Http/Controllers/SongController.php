@@ -64,7 +64,7 @@ class SongController extends Controller
             ->get();
             $select_id = [];//検索結果を配列に入れる
             for($i=0;$i<count($song_id);$i++){
-                $select_id[] = $song_id[$i]->song_detail_id;
+                $select_id[] = $song_id[$i]->id;
             }
             $playlistId = $request->playlist_id;
             $playlist = Playlist::findOrFail($playlistId);
@@ -72,11 +72,9 @@ class SongController extends Controller
             $tracks = [];
             foreach ($songs as $song) {
                 for($i=0;$i<count($select_id);$i++){
-                    if($select_id[$i] == $song->song_detail_id){//検索と一致
+                    if($select_id[$i] == $song->id){//検索と一致
                         $trackId = $song->song_detail_id;
                         $tracks[] = $api->getTrack($trackId);
-                    }elseif(count($select_id) == 0){
-                        echo("検索結果が見つかりません");
                     }
                 }
             }
