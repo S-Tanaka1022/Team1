@@ -41,7 +41,7 @@
         </nav>
     </header>
 
-    <form action="" method="GET">
+    <form action="" method="get">
         <label>
             <input type="text" name="keyword3" placeholder="検索">
         </label>
@@ -50,6 +50,16 @@
 
     <table class="table text-center align-middle m-1">
         <tr class="bg-dark text-white">
+        <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
+        <input type="submit" value="検索">
+        @csrf
+    </form>
+
+    @if(count($tracks) == 0)
+    <p>検索結果は見つかりませんでした</p>
+    @else
+    <table border='1'>
+        <tr>
             <th>ジャケット写真</th>
             <th>曲名</th>
             <th>アーティスト名</th>
@@ -72,6 +82,14 @@
         @csrf
         @endforeach
     </table>
+    @endif
+
+
+    <form action="{{route('logout')}}" method="post">
+        <button type="submit">ログアウト</button>
+        @csrf
+    </form>
+
 </body>
 </html>
 

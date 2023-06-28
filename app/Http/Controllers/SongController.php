@@ -90,46 +90,56 @@ class SongController extends Controller
 
         $api = new SpotifyWebAPI();
         $api->setAccessToken($accessToken);
-        dump($request);
-        $playlistId = $request->playlist_id;
-        dump($playlistId);
-        $playlist = Playlist::findOrFail($playlistId);
-        dump("test3");
-        $songs = $playlist->songs;
-        dump($songs);
-        $tracks = [];
+
         $auth_info = Auth::user()->id;
         $keyword3 = $request->keyword3;//キーワード
-        dump("test");
-        foreach ($songs as $song) {
-            //$trackId = $song->song_detail_id;
-            $title = $song->title;
-            $artist = $song->artist;
 
-            if (Str::length($keyword3) > 0){//検索している場合
+        if (Str::length($keyword3) > 0){//検索している場合
+            $song_id = Song::where('title', 'LIKE', "%$keyword3%") // プレイリスト名にkeyword2 を含むものを絞り込み
+            ->orwhere('artist', 'LIKE', "%$keyword3%")
+            ->get();
 
-                if(preg_match('/'.$keyword3.'/', $title) != null||preg_match('/'.$keyword3.'/', $artist) != null){//楽曲かアーティスト名で一致
-                    $trackId = $song->song_detail_id;
-                    //dd($trackId);
-                }else{
-                    echo ("一致する項目はありません");
-                }
 
-                //
-                //if(strpos($title, $keyword) === true || strpos($artist, $keyword) === true){
-                //    $trackId = $song->song_detail_id;
-                //}else{
-                //    echo ("一致する項目はありません");
-                //}
-            }else{
-                $trackId = $song->song_detail_id;
+            $select_id = [];//検索結果を配列に入れる
+            for($i=0;$i<count($song_id);$i++){
+                $select_id[] = $song_id[$i]->song_detail_id;
             }
-            //var_dump($trackId);
-            $tracks[] = $api->getTrack($trackId);
-        }
-        /*キーワード検索*/
-        //$auth_info = Auth::user()->id;
 
-        return view('other_playlist', compact('playlist', 'tracks'));
+            $playlistId = $request->playlist_id;
+
+            $playlist = Playlist::findOrFail($playlistId);
+            $songs = $playlist->songs;
+
+            $tracks = [];
+
+            foreach ($songs as $song) {
+                for($i=0;$i<count($select_id);$i++){
+                    if($select_id[$i] == $song->song_detail_id){//検索と一致
+                        $trackId = $song->song_detail_id;
+                        $tracks[] = $api->getTrack($trackId);
+                    }elseif(count($select_id) == 0){
+                        echo("検索結果が見つかりません");
+                    }
+            }
+        }
+
+        }else{//検索していない
+            $playlistId = $request->playlist_id;
+
+            $playlist = Playlist::findOrFail($playlistId);
+            $songs = $playlist->songs;
+
+            $tracks = [];
+
+            foreach ($songs as $song) {
+                //$trackId = $song->song_detail_id;
+                $trackId = $song->song_detail_id;
+                //var_dump($trackId);
+                $tracks[] = $api->getTrack($trackId);
+            }
+        }
+
+        return view('other_playlist',compact('playlist','tracks','playlistId'));
+
     }
 }
