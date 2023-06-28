@@ -23,11 +23,7 @@ class PlaylistController extends Controller
         $artistId = $track->artists[0]->id;
         $artist = $api->getArtist($artistId);
 
-<<<<<<< HEAD
         return view('add_myplaylist', compact('playlists','track','trackId','artist'));
-=======
-        return view('add_myplaylist', compact('playlists', 'track', 'trackId'));
->>>>>>> 1dd7640fa72cbc6360ee4d840f542bed6579640d
     }
 
     public function add(Request $request)
