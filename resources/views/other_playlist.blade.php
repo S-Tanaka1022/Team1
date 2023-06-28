@@ -44,18 +44,12 @@
         </nav>
     </header>
 
-    <form action="" method="get">
+    <form action="" method="get" >
         <label>
+            <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
             <input type="text" name="keyword3" placeholder="検索">
         </label>
         <input type="submit" class="btn btn-primary" value="検索">
-    </form>
-
-    <table class="table text-center align-middle m-1">
-        <tr class="bg-dark text-white">
-        <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
-        <input type="submit" value="検索">
-        @csrf
     </form>
 
     @if(count($tracks) == 0)
