@@ -45,8 +45,7 @@
         <div>
             <form action="" method="GET">
                 <label>
-                    検索キーワード
-                    <input type="text" name="keyword2">
+                    <input type="text" name="keyword2" placeholder="検索キーワード">
                 </label>
                 <input type="submit" value="検索" class="btn btn-primary">
             </form>

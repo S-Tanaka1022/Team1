@@ -63,8 +63,7 @@
                     <div class="col-8">
                         <form action="" method="GET">
                             <label>
-                                検索キーワード
-                                <input type="text" name="keyword" placeholder="検索">
+                                <input type="text" name="keyword" placeholder="検索キーワード">
                             </label>
                             <input type="submit" class="btn btn-primary" value="検索">
                         </form>
@@ -77,7 +76,7 @@
                     <th>ジャケット写真</th>
                     <th>曲名</th>
                     <th>アーティスト名</th>
-                    <th class="text-right">プレリストに追加</th>
+                    <th class="text-right">プレイリストに追加</th>
                     <th>詳細を表示</th>
                 </tr>
                 @foreach ($results->tracks->items as $song)
@@ -99,7 +98,7 @@
         <div id="tabpage2">
                 <form action="" method="GET">
                     <label>
-                        <input class="col-12" type="text" name="keyword2" placeholder="検索"  onclick="showTab('tabpage2'); return false;">
+                        <input class="col-12" type="text" name="keyword2" placeholder="検索キーワード"  onclick="showTab('tabpage2'); return false;">
                     </label>
                     <input type="submit" value="検索" class="btn btn-primary">
                 </form>

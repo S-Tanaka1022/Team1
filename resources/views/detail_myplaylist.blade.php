@@ -53,7 +53,7 @@
         <form action="" method="get" >
             <label>
                 <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
-                <input type="text" name="keyword3" placeholder="検索">
+                <input type="text" name="keyword3" placeholder="検索キーワード">
             </label>
             <input type="submit" class="btn btn-primary" value="検索">
         </form>
@@ -68,7 +68,7 @@
                 <th>曲名</th>
                 <th>アーティスト名</th>
                 <th>詳細情報</th>
-                <th>プレイリストを削除</th>
+                <th>曲を削除</th>
 
             </tr>
             @foreach ($tracks as $track)
