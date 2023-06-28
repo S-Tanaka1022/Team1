@@ -1,44 +1,58 @@
-<h1>myplaylist.blade.php</h1>
-<div>
-    <form action="" method="GET">
-        <button type="button" name="add_list" value="add_list">プレイリスト作成</button>
-    </form>
-</div>
-<?php
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-use SpotifyWebAPI\SpotifyWebAPI;
-use SpotifyWebAPI\Session;
+    <title>マイプレイリスト</title>
+</head>
 
-// Spotify APIクライアントの初期化
-$session = new Session(
-    'f172da853aeb4266863fb2661addbb76',
-    'bcf72a943e1245828831cda721f77987'
-);
-$session->requestCredentialsToken();
-$accessToken = $session->getAccessToken();
-
-$api = new SpotifyWebAPI();
-$api->setAccessToken($accessToken);
-
-// 曲の検索
-// $data = '';
-$results = $api->search('雨', 'track');
-dump($results);
-
-// 検索結果から曲の情報を取得
-$songs = $results->tracks->items;
-?>
-
-@foreach ($songs as $song)
-    <?php
-        $trackName = $song->name;
-        $artistName = $song->artists[0]->name;
-        $albumImage = $song->album->images[0]->url;
-    ?>
-
+<body>
+    <h1>マイプレイリスト</h1>
+    
     <div>
-        <p>{{ $trackName }}</p>
-        <p>{{ $artistName }}</p>
-        <img src="{{ $albumImage }}" alt="Album Image">
+        <form action="" method="GET">
+            <label>
+                検索キーワード
+                <input type="text" name="keyword2">
+            </label>
+            <input type="submit" value="検索">
+        </form>
     </div>
-@endforeach
+
+
+    <form action="" method="GET">
+        <button type="button" name="weather" value="weather" onclick="location.href='/index'">天気情報</button>
+    </form>
+    <form action="" method="GET">
+        <button type="button" name="mylist" value="mylist" onclick="location.href='/everyone_playlist'">みんなのプレイリスト</button>
+    </form>
+    <form action="{{route('logout')}}" method="post">
+        <button type="submit">ログアウト</button>
+        @csrf
+    </form>
+
+    <table border='1'>
+        <tr>
+            <th>プレイリスト名</th>
+            <th>詳細を表示</th>
+            <th>プレイリストを削除</th>
+        </tr>
+        @foreach ($playlists as $playlist)
+        <tr>
+            <td>{{$playlist->list_name}}</td>
+            <form action="detail_myplaylist" method="get" enctype="multipart/form-data">
+                <td><button type="submit" name="playlist_id" value='{{$playlist->id}}'>詳細</button></td>
+                 @csrf
+            </form>
+            <form action="delete_myplaylist" method="get">
+            <td><button type="submit" name="playlist_id" value="{{$playlist->id}}">削除</button></td>
+            </form>
+        </tr>
+        @endforeach
+    </table>
+
+</body>
+
+</html>
