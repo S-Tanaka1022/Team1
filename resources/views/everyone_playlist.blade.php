@@ -49,9 +49,9 @@
     <p id="tabcontrol" class="ml-5">
         <a href="#tabpage1">楽曲一覧</a>
         <a href="#tabpage2">プレイリスト一覧</a>
-     </p>
+    </p>
 
-     <div id="tabbody"class="m-3">
+    <div id="tabbody"class="m-3">
         <div id="tabpage1" class="m-4">
             <div class="container align-middle text-center">
                 <div class="row align-items-center text-center">
@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            <table class="table text-center align-middle mt-4">
+            <table class="table table-striped text-center align-middle mt-4">
                 <tr class="bg-dark text-white">
                     <th>ジャケット写真</th>
                     <th>曲名</th>
@@ -90,7 +90,7 @@
                     </form>
                     <form action="information" method="get" enctype="multipart/form-data">
                         <td class="text-center align-middle col-2"><button class="btn text-center align-middle btn-info" type="submit" name="information" value='{{$song->id}}'>詳細情報</button></td>
-                     </form>
+                    </form>
                 </tr>
                 @csrf
                 @endforeach
@@ -103,7 +103,7 @@
                     </label>
                     <input type="submit" value="検索" class="btn btn-primary">
                 </form>
-            <table class="table text-center align-middle mt-4">
+            <table class="table table-striped text-center align-middle mt-4">
                 <tr class="bg-dark text-white">
                     <th>ユーザ名</th>
                     <th>プレイリスト名</th>
@@ -121,7 +121,7 @@
                 @endforeach
             </table>
         </div>
-     </div>
+    </div>
     <script src="{{ asset('/js/test.js') }}"></script>
 </body>
 </html>
