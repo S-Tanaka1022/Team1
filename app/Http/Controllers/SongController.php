@@ -18,12 +18,14 @@ class SongController extends Controller
         $keyword = $request->keyword; /* Requestに送信された検索キーワードを変数に保持 */
         if (Str::length($keyword) > 0) { // Str::length(<文字列>) で、文字列の長さを取得できる
             $query = $keyword;
+            $offset = 10;
         } else { /* 検索キーワードが入力されていない場合は、全件取得する */
             $query = 'genre:"japanese"';
+            $offset = 1000;
         }
         $options = [
             'limit' => 30,
-            'offset' => random_int(0, 1000),
+            'offset' => random_int(0, $offset),
         ];
         $results = $api->search($query, 'track', $options);
 
