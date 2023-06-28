@@ -36,7 +36,7 @@ $songs;
     @vite(['resources/css/index_css.css'])
 </head>
 
-<body>
+<body class="m-0 p-0 custom-box-sizing">
     <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
             <h1>Temporature</h1>
