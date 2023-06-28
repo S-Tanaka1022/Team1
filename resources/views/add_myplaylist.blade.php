@@ -99,11 +99,16 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                 <div class="col-md-auto">
                     <div class="text-right m-1">
                         <form action="" method="POST">
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                             <span class="m-2">プレイリスト名 </span>
-                            <input type="text" name="playlist_name" placeholder="新規プレイリスト"><br><br>
+                            <input type="text" name="playlist_name" id="playlist_name" placeholder="新規プレイリスト"><br><br>
                             <span class="m-2">既存プレイリスト </span>
-                            <select name="list_id" class="form-select form-select-lg">
-                                <option hidden>プレイリスト選択</option>
+                            <select name="list_id" id="list_id" class="form-select form-select-lg">
+                                <option value="" hidden>プレイリスト選択</option>
                                 @foreach ($playlists as $playlist)
                                     <option value="{{$playlist->id}}">{{$playlist->list_name}}</option>
                                 @endforeach
@@ -113,7 +118,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                             <span class="m-2">アーティスト </span>
                             <input type="text" name="artist" value="{{$track->artists[0]->name}}" readonly><br><br>
                             <input type="hidden" name="trackId" value="{{$trackId}}">
-                            <input type="submit" value="追加" class="btn btn-success btn-block btn-lg"><br>
+                            <input type="submit" value="追加" class="btn btn-success btn-block btn-lg" id="add_button" disabled><br>
                             @csrf
                         </form>
                     </div>
@@ -123,6 +128,25 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                         </button>
                     </div>
                 </div>
+
+                <script>
+                    // 入力状態を監視し、どちらか一方が入力されている場合に追加ボタンを有効化する
+                    const playlistNameInput = document.getElementById('playlist_name');
+                    const listIdSelect = document.getElementById('list_id');
+                    const addButton = document.getElementById('add_button');
+
+                    playlistNameInput.addEventListener('input', toggleAddButton);
+                    listIdSelect.addEventListener('change', toggleAddButton);
+
+                    function toggleAddButton() {
+                        if (playlistNameInput.value.trim() !== '' || listIdSelect.value !== '') {
+                            addButton.disabled = false;
+                        } else {
+                            addButton.disabled = true;
+                        }
+                    }
+                </script>
+
             </div>
         </div>
     </div>
