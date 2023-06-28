@@ -28,7 +28,7 @@
         エリア選択
             <form action="code_save" method="POST">
                 <input type="hidden" name="region_code" value="{{$region_code}}">
-                <select name="sel_area_code" class="form-select form-select-lg text-center mb-3">
+                <select name="sel_area_code" class="form-select form-select-lg text-center w-25">
                     @foreach($areas_data as $areas)
                         <option value="{{$i}}">{{$areas['area']['name']}}</option>
                         {{-- エリアコードをエリアごとに変化させ、送信 --}}
