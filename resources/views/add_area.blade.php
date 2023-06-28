@@ -49,20 +49,21 @@
             エリア選択
             <form action="code_save" method="POST">
                 <input type="hidden" name="region_code" value="{{$region_code}}">
-                <select name="sel_area_code" class="form-select form-select-lg mb-3 text-center" aria-label=".form-select-lg example">
-                    @foreach($areas_data as $areas)
-                        <option value="{{$i}}">{{$areas['area']['name']}}</option>
-                        {{-- エリアコードをエリアごとに変化させ、送信 --}}
-                        {{$i+=1}}
-                    @endforeach
-                </select>
+                    <select name="sel_area_code" class="form-select form-select-lg text-center w-25" aria-label=".form-select-lg example">
+                    {{-- <select name="sel_region" class="form-select form-select-lg text-center w-50" aria-label=".form-select-lg example"> --}}
+                        @foreach($areas_data as $areas)
+                            <option value="{{$i}}">{{$areas['area']['name']}}</option>
+                            {{-- エリアコードをエリアごとに変化させ、送信 --}}
+                            {{$i+=1}}
+                        @endforeach
+                    </select>
                 <input class="btn btn-info mb-2" type="submit" value="追加">
                 <button type="button" onclick="history.back()" class="btn btn-secondary mb-2">戻る</button>
             @csrf
             </form>
         </div>
 
-        <div class="now_areas mt-3 mb-0 mx-3 pl-6" style="font-size: 22px; padding-left: 322px;">
+        <div class="now_areas mt-3 mb-0 mx-3 pl-6" style="font-size: 22px; padding-left: 382px;">
             <h2 class="pl-3" style="border-left: 8px solid black;">現在の登録地</h2>
             @php
             use App\Models\Region_name;
