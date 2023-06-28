@@ -36,7 +36,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                 </form>
             </li>
             <li class="nav-item">
-                <form action="myplaylists" method="get">
+                <form action="myplaylist" method="get">
                     <button class="btn btn-primary mr-3" type="submit">マイプレイリスト</button>
                 </form>
             </li>
