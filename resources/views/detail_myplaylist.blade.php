@@ -8,18 +8,19 @@
 </head>
 <body>
     <h1>プレイリスト：{{$playlist->list_name}}</h1>
-    {{--
-    <div>
-        <form action="" method="GET">
-            <label>
-                検索キーワード
-                <input type="text" name="keyword">
-            </label>
-            <input type="submit" value="検索">
-        </form>
-    </div>
-    --}}
 
+    <form action="" method="get" >
+        <label>
+            <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
+            <input type="text" name="keyword3" placeholder="検索">
+        </label>
+        <input type="submit" class="btn btn-primary" value="検索">
+    </form>
+
+
+    @if(count($tracks) == 0)
+        <p>検索結果は見つかりませんでした</p>
+    @else
     <table border='1'>
         <tr>
             <th>ジャケット写真</th>
@@ -30,21 +31,22 @@
 
         </tr>
         @foreach ($tracks as $track)
-        <tr>
-            <td><img src="{{$track->album->images[0]->url}}" width=80></td>
-            <td>{{$track->name}}</td>
-            <td>{{$track->artists[0]->name}}</td>
+        <tr class="text-center align-middle">
+            <td class="text-center align-middle"><img src="{{$track["detail"]->album->images[0]->url}}" width=80></td>
+            <td class="text-center align-middle"><b>{{$track["detail"]->name}}</b></td>
+            <td class="text-center align-middle"><b>{{$track["detail"]->artists[0]->name}}</b></td>
             <form action="information" method="get" enctype="multipart/form-data">
-                <td><button type="submit" name="information" value='{{$track->id}}'>詳細情報</button></td>
+                <td class="text-center align-middle"><button class="btn btn-info" type="submit" name="information" value='{{$track["detail"]->id}}'>詳細情報</button></td>
             </form>
             <form action="/delete_myplaylist_song" method="get">
             <input type="hidden" name="playlistId" value="{{$playlist->id}}">
-            <td><button type="submit" name="song_detail_id" value='{{$song_primary_key}}'>削除</button></td>
+            <td class="text-center align-middle"><button class="btn btn-danger" type="submit" name="song_detail_id" value='{{$track["song_primary_key"]}}'>削除</button></td>
             </form>
         </tr>
         @csrf
         @endforeach
     </table>
+    @endif
 
 
     <form action="{{route('logout')}}" method="post">

@@ -10,7 +10,7 @@
 
 <body>
     <h1>マイプレイリスト</h1>
-    
+
     <div>
         <form action="" method="GET">
             <label>

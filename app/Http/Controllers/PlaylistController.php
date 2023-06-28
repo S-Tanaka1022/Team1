@@ -82,32 +82,45 @@ class PlaylistController extends Controller
 
     public function detail(Request $request)
     {
-        $session = new Session(
-            'f172da853aeb4266863fb2661addbb76',
-            'bcf72a943e1245828831cda721f77987'
-        );
-        $session->requestCredentialsToken();
-        $accessToken = $session->getAccessToken();
+        $api = Controller::getAPI();
+        $auth_info = Auth::user()->id;
+        $keyword3 = $request->keyword3;//キーワード
+        if (Str::length($keyword3) > 0){//検索している場合
+            $song_id = Song::where('title', 'LIKE', "%$keyword3%") // プレイリスト名にkeyword2 を含むものを絞り込み
+            ->orwhere('artist', 'LIKE', "%$keyword3%")
+            ->get();
+            $select_id = [];//検索結果を配列に入れる
+            for($i=0;$i<count($song_id);$i++){
+                $select_id[] = $song_id[$i]->id;
+            }
+            $playlistId = $request->playlist_id;
+            $playlist = Playlist::findOrFail($playlistId);
+            $songs = $playlist->songs;
+            $tracks = [];
+            foreach ($songs as $song) {
+                for($i=0;$i<count($select_id);$i++){
+                    if($select_id[$i] == $song->id){//検索と一致
+                        $trackId = $song->song_detail_id;
+                        //$tracks[] = $api->getTrack($trackId);
+                        $tracks[] = ["detail" => $api->getTrack($trackId), "song_primary_key" => $song->id];
+                    }
+                }
+                $song_primary_key = $song->id;
+            }
+        }else{//検索していない
+            $playlistId = $request->playlist_id;
 
-        $api = new SpotifyWebAPI();
-        $api->setAccessToken($accessToken);
+            $playlist = Playlist::findOrFail($playlistId);
+            $songs = $playlist->songs;
+            $tracks = [];
 
-        #必要性がわからない
-        $playlistId = $request->playlist_id;
-        $playlist = Playlist::findOrFail($playlistId);
-
-        #必要性はない
-        $songs = $playlist->songs;
-
-        $tracks = [];
-        foreach ($songs as $song) {
-            $trackId = $song->song_detail_id;
-            $tracks[] = $api->getTrack($trackId);
-            $song_primary_key = $song->id;
+            foreach ($songs as $song) {
+                $trackId = $song->song_detail_id;
+                $tracks[] = ["detail" => $api->getTrack($trackId), "song_primary_key" => $song->id];
+            }
         }
-        var_dump($song_primary_key);
 
-        return view('detail_myplaylist', compact('playlist', 'tracks', 'song_primary_key'));
+        return view('detail_myplaylist', compact('playlist', 'tracks','playlistId'));
     }
 
     public function delete_myplaylist(Request $request)
