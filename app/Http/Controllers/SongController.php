@@ -91,8 +91,6 @@ class SongController extends Controller
                     if($select_id[$i] == $song->song_detail_id){//検索と一致
                         $trackId = $song->song_detail_id;
                         $tracks[] = $api->getTrack($trackId);
-                    }elseif(count($select_id) == 0){
-                        echo("検索結果が見つかりません");
                     }
             }
         }
