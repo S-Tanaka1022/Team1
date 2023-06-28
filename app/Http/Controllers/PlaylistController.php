@@ -27,8 +27,10 @@ class PlaylistController extends Controller
         $api->setAccessToken($accessToken);
         $trackId = $request->add_mylist;
         $track = $api->getTrack($trackId);
+        $artistId = $track->artists[0]->id;
+        $artist = $api->getArtist($artistId);
 
-        return view('add_myplaylist', compact('playlists','track','trackId'));
+        return view('add_myplaylist', compact('playlists','track','trackId','artist'));
     }
 
     public function add(Request $request)
@@ -60,6 +62,8 @@ class PlaylistController extends Controller
         $add_song = new Song();
 
         $add_song->song_detail_id = $request->trackId;
+        $add_song->title = $request->title;
+        $add_song->artist = $request->artist;
 
         $add_song->save();
 

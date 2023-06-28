@@ -41,17 +41,13 @@
             </ul>
         </nav>
     </header>
-    {{--
-    <div>
-        <form action="" method="GET">
-            <label>
-                検索キーワード
-                <input type="text" name="keyword" value="{{ $keyword }}">
-            </label>
-            <input type="submit" value="検索">
-        </form>
-    </div>
-    --}}
+
+    <form action="" method="GET">
+        <label>
+            <input type="text" name="keyword3" placeholder="検索">
+        </label>
+        <input type="submit" value="検索">
+    </form>
 
     <table border='1'>
         <tr>
@@ -83,6 +79,7 @@
         <button type="submit">ログアウト</button>
         @csrf
     </form>
+
 </body>
 </html>
 
