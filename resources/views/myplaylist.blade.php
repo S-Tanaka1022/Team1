@@ -50,7 +50,7 @@
                 <input type="submit" value="検索" class="btn btn-primary">
             </form>
         </div>
-        <table class="table">
+        <table class="table table-striped">
             <tr class="bg-dark text-white text-center align-center">
                 <th>プレイリスト名</th>
                 <th>詳細を表示</th>
