@@ -77,7 +77,7 @@
                     <th>ジャケット写真</th>
                     <th>曲名</th>
                     <th>アーティスト名</th>
-                    <th>プレリストに追加</th>
+                    <th>マイプレイリストへ</th>
                     <th>詳細情報</th>
 
                 </tr>
@@ -87,7 +87,7 @@
                     <td class="text-center align-middle"><b>{{$track->name}}</b></td>
                     <td class="text-center align-middle"><b>{{$track->artists[0]->name}}</b></td>
                     <form action="add_myplaylist" method="get" enctype="multipart/form-data">
-                        <td class="text-center align-middle col-2"><button class="btn text-center align-middle btn-secondary" type="submit" name="add_mylist" value='{{$track->id}}'>リストへ追加</button></td>
+                        <td class="text-center align-middle col-2"><button class="btn text-center align-middle btn-secondary" type="submit" name="add_mylist" value='{{$track->id}}'>追加する</button></td>
                     </form>
                     <form action="information" method="get" enctype="multipart/form-data">
                         <td class="text-center align-middle col-2"><button class="btn text-center align-middle btn-info" type="submit" name="information" value='{{$track->id}}'>詳細情報</button></td>
