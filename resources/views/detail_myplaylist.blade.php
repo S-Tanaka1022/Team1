@@ -23,7 +23,7 @@
                 </li>
                 <li class="nav-item">
                     <form action="everyone_playlist" method="get">
-                        <button class="btn btn-primary mr-3" type="submit">楽曲一覧</button>
+                        <button class="btn btn-primary mr-3" type="submit">みんなのプレイリスト</button>
                     </form>
                 </li>
                 <li class="nav-item">
@@ -40,37 +40,29 @@
             </ul>
         </nav>
     </header>
-    <div class="container">
-        <div class="row">
-            <div class="col-2">
-                <main class="m-2 text-left">
-                    <button class="btn btn-info" onclick="goBack()">
-                        <b>戻る</b>
-                    </button>
+    <main class="m-3">
+        <button class="btn btn-info btn-block btn-lg" onclick="goBack()">
+            <b>戻る</b>
+        </button>
 
-                    <script>
-                    function goBack() {
-                    window.history.back();
-                    }
-                    </script>
-                </div>
-                <div class="col-9 text-right m-3">
-                    <form action="" method="get" >
-                        <label>
-                            <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
-                            <input type="text" name="keyword3" placeholder="検索キーワード">
-                        </label>
-                        <input type="submit" class="btn btn-primary" value="検索">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+        <script>
+        function goBack() {
+        window.history.back();
+        }
+        </script>
+        <form action="" method="get" >
+            <label>
+                <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
+                <input type="text" name="keyword3" placeholder="検索キーワード">
+            </label>
+            <input type="submit" class="btn btn-primary" value="検索">
+        </form>
+
 
         @if(count($tracks) == 0)
             <p>検索結果は見つかりませんでした</p>
         @else
-        <table class="table table-striped">
+        <table class="table">
             <tr class="bg-dark text-white text-center align-middle">
                 <th>ジャケット写真</th>
                 <th>曲名</th>
