@@ -43,7 +43,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-2">
-                    <main class="m-2 text-left">
+                    <main class="m-3 text-left">
                         <button class="btn btn-info" style="margin-top: 10px" onclick="goBack()">
                             <b>戻る</b>
                         </button>
@@ -54,7 +54,7 @@
                         }
                         </script>
                     </div>
-                    <div class="col-9 text-right m-3">
+                    <div class="col-5 text-right m-3">
                         <form action="" method="get" >
                             <label>
                                 <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
