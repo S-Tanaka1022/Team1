@@ -46,7 +46,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                 </li>
                 <li class="nav-item">
                     <form action="everyone_playlist" method="get">
-                        <button class="btn btn-primary mr-3" type="submit">みんなのプレイリスト</button>
+                        <button class="btn btn-primary mr-3" type="submit">楽曲一覧</button>
                     </form>
                 </li>
                 <li class="nav-item">
@@ -65,12 +65,12 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
     </header>
 
     {{-- ここから本文 --}}
-    <div class="container m-10 p-10 rounded bg-dark text-white">
+    <br><br><div class="container m-10 p-10 rounded bg-dark text-white">
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-auto text-center">
                     <div class="text-center"><br>
-                        <img src={{$trackImage}} width=350><br>
+                        <br><img src={{$trackImage}} width=350><br>
                         <span style="font-size: 40px;" class="fw-bold">{{$trackName}}</span>　　{{$minutes}}:{{$secondsFormat}}<br>
                         <span style="font-size: 20px;" class="fw-bold">{{$albumName}}</span><br>
                         <div class="container-fluid">
@@ -94,7 +94,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                         @else
                             Preview not available.<br>
                         @endif
-                    </div><br>
+                    </div><br><br>
                 </div>
                 {{-- ここまでが左側の要素 --}}
                 <div class="col-md-auto">
@@ -107,6 +107,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                             @endif
 
 
+
     <section class="someTabs" data-tabs="">
         <nav class="tabs__nav">
           <a href="#" class="tabs__item active" data-tab="">新規プレイリスト</a>
@@ -117,7 +118,8 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
         <div class="tabs__body">
           <div class="tabs__content active" data-tab-content="">
 
-                            <span class="m-2">プレイリスト名 </span>
+                            <br><span class="m-2">プレイリスト名 </span>
+
                             <input type="text" name="playlist_name" id="playlist_name" placeholder="新規プレイリスト"><br><br>
           </div>
 
@@ -128,14 +130,15 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                                 @foreach ($playlists as $playlist)
                                     <option value="{{$playlist->id}}">{{$playlist->list_name}}</option>
                                 @endforeach
+
                             </select><br><br>
           </div>
         </div>
     </section>
-                            <span class="m-2">曲名 </span>
-                            <input type="text" name="title" value="{{$track->name}}" readonly><br><br>
-                            <span class="m-2">アーティスト </span>
-                            <input type="text" name="artist" value="{{$track->artists[0]->name}}" readonly><br><br>
+                            
+                           
+                            <input type="hidden" name="title" value="{{$track->name}}" readonly>
+                            <input type="hidden" name="artist" value="{{$track->artists[0]->name}}" readonly><br><br>
                             <input type="hidden" name="trackId" value="{{$trackId}}">
                             <input type="submit" value="追加" class="btn btn-success btn-block btn-lg" id="add_button" disabled><br>
                             @csrf
@@ -144,7 +147,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                     <div class="text-right">
                         <button class="btn btn-info btn-block btn-lg" onclick="goBack()">
                             <b>戻る</b>
-                        </button>
+                        </button><br><br>
 
                         <script>
                         function goBack() {
@@ -152,7 +155,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                         }
                         </script>
                     </div>
-                </div>
+                </div><br>
 
                 <script>
                     // 入力状態を監視し、どちらか一方が入力されている場合に追加ボタンを有効化する
@@ -180,5 +183,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
 
 
     <script src="{{ asset('/js/left-right.js') }}"></script>
+
+    </div><br><br>
 </body>
 </html>

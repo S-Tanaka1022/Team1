@@ -4,6 +4,18 @@
     box-sizing: border-box;
 }
 
+body h1{
+    padding: 10px 15px;
+    background-color: #343a40;
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 0;
+}
+
+body .Lobster{
+    font-family: 'Lobster Two', cursive;
+}
+
 .areas_name{
     display: flex;
     justify-content: center;
@@ -44,9 +56,6 @@
 .aid,
 .artist_name{
     height: 99.6px;
-    width:250px;
-    overflow: auto;
-
 }
 
 
