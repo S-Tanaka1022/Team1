@@ -79,16 +79,16 @@
                     <th>ジャケット写真</th>
                     <th>曲名</th>
                     <th>アーティスト名</th>
-                    <th class="text-right">マイプレイリストへ</th>
+                    <th class="text-center">マイプレイリストへ</th>
                     <th>詳細を表示</th>
                 </tr>
                 @foreach ($results->tracks->items as $song)
                 <tr>
                     <td class="text-center align-middle col-2"><img src="{{$song->album->images[0]->url}}" width=80></td>
-                    <td class="text-center align-middle"><b>{{$song->name}}</b></td>
+                    <td class="text-center align-middle col-3"><b>{{$song->name}}</b></td>
                     <td class="text-center align-middle"><b>{{$song->artists[0]->name}}</b></td>
                     <form action="add_myplaylist" method="get" enctype="multipart/form-data">
-                        <td class="text-right align-middle col-3"><button class="btn text-center align-middle btn-secondary" type="submit" name="add_mylist" value='{{$song->id}}'>追加する</button></td>
+                        <td class="text-center align-middle"><button class="btn text-center align-middle btn-secondary" type="submit" name="add_mylist" value='{{$song->id}}'>追加する</button></td>
                     </form>
                     <form action="information" method="get" enctype="multipart/form-data">
                         <td class="text-center align-middle col-2"><button class="btn text-center align-middle btn-info" type="submit" name="information" value='{{$song->id}}'>詳細情報</button></td>
