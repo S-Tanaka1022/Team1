@@ -80,6 +80,10 @@ use App\Models\Region_name;
                             $areas_data = $data[0]["timeSeries"][0]["areas"];
                             $area = $areas_data[$area_code]["area"]["name"];
                             $weathers = $areas_data[$area_code]["weathers"];
+                            $replace_area = array(
+                                        "地方" => "地域",
+                                        );
+                            $area = str_replace(array_keys($replace_area), array_values($replace_area), $area);
                             echo <<<_TABLE_
                                 <tr>
                                     <td>
