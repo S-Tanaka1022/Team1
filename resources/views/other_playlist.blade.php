@@ -43,10 +43,10 @@
             </ul>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
             <div class="row" >
                 <div class="col-2">
-                <main class="m-3 text-left">
+                    <main class="m-3 text-left">
                     <button class="btn btn-info btn" onclick="goBack()">
                         <b>戻る</b>
                     </button>
@@ -56,7 +56,7 @@
                         }
                     </script>
                 </div>
-                <div class="col-5 text-right m-3">
+                <div class="col-5  ofset-3 text-right m-3">
                     <form action="" method="get">
                       <label>
                         <input type="hidden" name="playlist_id" value="{{$playlistId}}">
@@ -67,8 +67,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
         @if(count($tracks) == 0)
             <p>検索結果は見つかりませんでした</p>
         @else

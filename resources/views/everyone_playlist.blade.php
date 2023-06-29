@@ -57,7 +57,7 @@
 
         <div class="tabs__body" style="text-align: center">
           <div class="tabs__content active" data-tab-content="">
-            <div class="container align-middle text-center">
+          <div class="container-fluid">
                 <div class="row align-items-center text-center">
                     <div class="col-2">
                         <button class="btn btn-primary btn-block" name="back" onclick="location.href=''">
