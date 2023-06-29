@@ -112,7 +112,7 @@ _TABLE_;
                 </table>
             </div>
             <div style="flex: 1; margin-left: 10px;">
-                <table class="table table-bordered">
+                <table class="table table-bordered col-12">
                     <tr class="bg-dark text-white">
                         <th><div class="column_headers">ジャケット</div></th>
                         <th><div class="column_headers">曲名</div></th>
@@ -167,12 +167,13 @@ _TABLE_;
                                             </a>
                                         </div>
                                     </td>
-                                    <td class="align-middle text-center aid">
+                                    <td class="align-middle text-center col-6 aid">
                                             <b><a href="/information?information={$songId}">
                                                 $trackName
                                             </a></b>
                                     </td>
-                                    <td class='align-middle text-center artist_name'><b>
+
+                                    <td class="align-middle text-center overflow-hidden artist_name"><b>
                                         $artistName
                                     </b></td>
                                 </tr>
