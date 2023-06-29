@@ -26,7 +26,7 @@
                 </li>
                 <li class="nav-item">
                     <form action="everyone_playlist" method="get">
-                        <button class="btn btn-primary mr-3" type="submit">みんなのプレイリスト</button>
+                        <button class="btn btn-primary mr-3" type="submit">楽曲一覧</button>
                     </form>
                 </li>
                 <li class="nav-item">
@@ -43,34 +43,41 @@
             </ul>
         </nav>
     </header>
-    <main class="m-3">
-        <button class="btn btn-info btn-block btn-lg" onclick="goBack()">
-            <b>戻る</b>
-        </button>
-
-        <script>
-        function goBack() {
-        window.history.back();
-        }
-        </script>
-        <form action="" method="get" >
-            <label>
-                <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
-                <input type="text" name="keyword3" placeholder="検索キーワード">
-            </label>
-            <input type="submit" class="btn btn-primary" value="検索">
-        </form>
+    <main class="m-1">
+        <div class="container m-2">
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-info btn" onclick="goBack()">
+                        <b>戻る</b>
+                    </button>
+                    <script>
+                        function goBack() {
+                            window.history.back();
+                        }
+                    </script>
+                </div>
+                <div class="col text-right">
+                    <form class="form-group text-right" action="" method="get">
+                      <label class="align-middle">
+                        <input type="hidden" name="playlist_id" value="{{$playlistId}}">
+                        <input class="form-control align-middle" type="text" name="keyword3" placeholder="検索キーワード">
+                      </label>
+                      <input type="submit" class="btn btn-primary align-top" value="検索">
+                    </form>
+                </div>
+            </div>
+        </div>
 
         @if(count($tracks) == 0)
         <p>検索結果は見つかりませんでした</p>
         @else
-        <table class="table text-center align-middle">
+        <table class="table table-striped text-center align-middle">
             <tbody class="m-3">
                 <tr class="bg-dark text-white m-3">
                     <th>ジャケット写真</th>
                     <th>曲名</th>
                     <th>アーティスト名</th>
-                    <th>プレリストに追加</th>
+                    <th>マイプレイリストへ</th>
                     <th>詳細情報</th>
 
                 </tr>
@@ -80,7 +87,7 @@
                     <td class="text-center align-middle"><b>{{$track->name}}</b></td>
                     <td class="text-center align-middle"><b>{{$track->artists[0]->name}}</b></td>
                     <form action="add_myplaylist" method="get" enctype="multipart/form-data">
-                        <td class="text-center align-middle col-2"><button class="btn text-center align-middle btn-secondary" type="submit" name="add_mylist" value='{{$track->id}}'>リストへ追加</button></td>
+                        <td class="text-center align-middle col-2"><button class="btn text-center align-middle btn-secondary" type="submit" name="add_mylist" value='{{$track->id}}'>追加する</button></td>
                     </form>
                     <form action="information" method="get" enctype="multipart/form-data">
                         <td class="text-center align-middle col-2"><button class="btn text-center align-middle btn-info" type="submit" name="information" value='{{$track->id}}'>詳細情報</button></td>

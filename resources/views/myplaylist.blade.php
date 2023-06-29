@@ -24,7 +24,7 @@
                 </li>
                 <li class="nav-item">
                     <form action="everyone_playlist" method="get">
-                        <button class="btn btn-primary mr-3" type="submit">みんなのプレイリスト</button>
+                        <button class="btn btn-primary mr-3" type="submit">楽曲一覧</button>
                     </form>
                 </li>
                 <li class="nav-item">
@@ -50,7 +50,7 @@
                 <input type="submit" value="検索" class="btn btn-primary">
             </form>
         </div>
-        <table class="table">
+        <table class="table table-striped">
             <tr class="bg-dark text-white text-center align-center">
                 <th>プレイリスト名</th>
                 <th>詳細を表示</th>
@@ -58,14 +58,26 @@
             </tr>
             @foreach ($playlists as $playlist)
             <tr class="text-center align-middle">
-                <td><b>{{$playlist->list_name}}</b></td>
+                    <td>
+                        <b>{{$playlist->list_name}}</b>
+                    </td>
                 <form action="detail_myplaylist" method="get" enctype="multipart/form-data">
-                    <td><button class="btn btn-info" type="submit" name="playlist_id" value='{{$playlist->id}}'>詳細</button></td>
+                    <td>
+                        <button class="btn btn-info" type="submit" name="playlist_id" value='{{$playlist->id}}'>詳細</button>
+                    </td>
                     @csrf
                 </form>
                 <form action="delete_myplaylist" method="get">
-                <td><button class="btn btn-danger" type="submit" name="playlist_id" value="{{$playlist->id}}">削除</button></td>
+                <td>
+                    <button class="btn btn-danger" type="submit" name="playlist_id" value="{{$playlist->id}}" onclick="return confirmDelete()">削除</button>
+                </td>
                 </form>
+
+                <script>
+                function confirmDelete() {
+                    return confirm("本当に削除してもよろしいですか？");
+                }
+                </script>
             </tr>
             @endforeach
         </table>

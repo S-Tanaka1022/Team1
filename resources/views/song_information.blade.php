@@ -42,7 +42,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
             </li>
             <li class="nav-item">
                 <form action="everyone_playlist" method="get">
-                    <button class="btn btn-primary mr-3" type="submit">みんなのプレイリスト</button>
+                    <button class="btn btn-primary mr-3" type="submit">楽曲一覧</button>
                 </form>
             </li>
             <li class="nav-item">
@@ -56,8 +56,8 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
 </header>
 
 <main>
-    <div class="container m-10 p-10 rounded bg-dark text-white">
-        <div class="text-center"><br>
+    <br><br><div class="container m-10 p-10 rounded bg-dark text-white">
+        <div class="text-center"><br><br>
             <img src={{$trackImage}} width=350><br>
             <span style="font-size: 40px;" class="fw-bold">{{$trackName}}</span>　　{{$minutes}}:{{$secondsFormat}}<br>
             <span style="font-size: 20px;" class="fw-bold">{{$albumName}}</span><br>
@@ -86,15 +86,6 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
         <div class="container m-10">
             <div class="row">
                 <div class="col">
-                    <form action="add_myplaylist" method="get" enctype="multipart/form-data">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn-success btn-block btn-lg" type="submit" name="add_mylist" value="{{$track->id}}">
-                                <b>リストへ追加</b>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div class="col">
                     <div class="d-flex justify-content-center align-items-center">
 
                         <button class="btn btn-info btn-block btn-lg" onclick="goBack()">
@@ -108,7 +99,16 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                         </script>
                     </div>
                 </div>
+                <div class="col">
+                    <form action="add_myplaylist" method="get" enctype="multipart/form-data">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <button class="btn btn-success btn-block btn-lg" type="submit" name="add_mylist" value="{{$track->id}}">
+                                <b>リストへ追加</b>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    </div>
+        </div><br>
+    </div><br><br>
 </main>
