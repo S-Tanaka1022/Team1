@@ -68,10 +68,16 @@
                     @csrf
                 </form>
                 <form action="delete_myplaylist" method="get">
-                    <td>
-                        <button class="btn btn-danger" type="submit" name="playlist_id" value="{{$playlist->id}}">削除</button>
-                    </td>
+                <td>
+                    <button class="btn btn-danger" type="submit" name="playlist_id" value="{{$playlist->id}}" onclick="return confirmDelete()">削除</button>
+                </td>
                 </form>
+
+                <script>
+                function confirmDelete() {
+                    return confirm("本当に削除してもよろしいですか？");
+                }
+                </script>
             </tr>
             @endforeach
         </table>
