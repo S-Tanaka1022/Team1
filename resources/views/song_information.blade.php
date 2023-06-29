@@ -42,7 +42,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
             </li>
             <li class="nav-item">
                 <form action="everyone_playlist" method="get">
-                    <button class="btn btn-primary mr-3" type="submit">みんなのプレイリスト</button>
+                    <button class="btn btn-primary mr-3" type="submit">楽曲一覧</button>
                 </form>
             </li>
             <li class="nav-item">

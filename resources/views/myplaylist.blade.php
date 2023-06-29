@@ -24,7 +24,7 @@
                 </li>
                 <li class="nav-item">
                     <form action="everyone_playlist" method="get">
-                        <button class="btn btn-primary mr-3" type="submit">みんなのプレイリスト</button>
+                        <button class="btn btn-primary mr-3" type="submit">楽曲一覧</button>
                     </form>
                 </li>
                 <li class="nav-item">
@@ -45,8 +45,7 @@
         <div>
             <form action="" method="GET">
                 <label>
-                    検索キーワード
-                    <input type="text" name="keyword2">
+                    <input type="text" name="keyword2" placeholder="検索キーワード">
                 </label>
                 <input type="submit" value="検索" class="btn btn-primary">
             </form>
@@ -69,10 +68,16 @@
                     @csrf
                 </form>
                 <form action="delete_myplaylist" method="get">
-                    <td>
-                        <button class="btn btn-danger" type="submit" name="playlist_id" value="{{$playlist->id}}">削除</button>
-                    </td>
+                <td>
+                    <button class="btn btn-danger" type="submit" name="playlist_id" value="{{$playlist->id}}" onclick="return confirmDelete()">削除</button>
+                </td>
                 </form>
+
+                <script>
+                function confirmDelete() {
+                    return confirm("本当に削除してもよろしいですか？");
+                }
+                </script>
             </tr>
             @endforeach
         </table>
