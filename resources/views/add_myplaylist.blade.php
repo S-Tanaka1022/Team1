@@ -118,7 +118,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
         <div class="tabs__body">
           <div class="tabs__content active" data-tab-content="">
 
-                            <br><span class="m-2">プレイリスト名 </span>
+                            <span class="m-2">プレイリスト名 </span>
 
                             <input type="text" name="playlist_name" id="playlist_name" placeholder="新規プレイリスト"><br><br>
           </div>
@@ -135,8 +135,8 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
           </div>
         </div>
     </section>
-                            
-                           
+
+
                             <input type="hidden" name="title" value="{{$track->name}}" readonly>
                             <input type="hidden" name="artist" value="{{$track->artists[0]->name}}" readonly><br><br>
                             <input type="hidden" name="trackId" value="{{$trackId}}">
