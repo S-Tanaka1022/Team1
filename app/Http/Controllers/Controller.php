@@ -54,6 +54,8 @@ class Controller extends BaseController
                 'prefecture' => $prefecture,
                 'area' => $area,
                 'weathers' => $weathers,
+                'region_code' => $region_code,
+                'area_code' => $area_code,
             ];
         }
         return $API_data;
