@@ -83,7 +83,7 @@ use App\Models\Region_name;
                             echo <<<_TABLE_
                                 <tr>
                                     <td>
-                                        <div class="areas_name">{$prefecture}<br>{$area}</div>
+                                        <div class="align-middle text-center areas_name">{$prefecture}<br>{$area}</div>
                                     </td>
 _TABLE_;
                             for ($i=0; $i < 3; $i++) {
