@@ -43,7 +43,7 @@
             </ul>
         </nav>
     </header>
-    <div class="container align-middle text-center">
+    <div class="container">
             <div class="row" >
                 <div class="col-2">
                 <main class="m-3 text-left">
