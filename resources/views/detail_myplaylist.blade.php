@@ -40,32 +40,32 @@
             </ul>
         </nav>
     </header>
-    <div class="container align-middle text-center">
-        <div class="row">
-            <div class="col-2">
-                <main class="m-3 text-left">
-                    <button class="btn btn-info" onclick="goBack()">
-                        <b>戻る</b>
-                    </button>
-                    <script>
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <main class="m-2 text-left">
+                        <button class="btn btn-info" style="margin-top: 10px" onclick="goBack()">
+                            <b>戻る</b>
+                        </button>
+
+                        <script>
                         function goBack() {
-                            window.history.back();
+                        window.history.back();
                         }
-                    </script>
-                </div>
-                <div class="col-5 text-right m-3">
-                    <form action="" method="get" >
-                        <label>
-                            <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
-                            <input type="text" name="keyword3" placeholder="検索キーワード">
-                        </label>
-                        <input type="submit" class="btn btn-primary" value="検索">
-                    </form>
+                        </script>
+                    </div>
+                    <div class="col-9 text-right m-3">
+                        <form action="" method="get" >
+                            <label>
+                                <input type="hidden" name = "playlist_id" value="{{$playlistId}}">
+                                <input type="text" name="keyword3" placeholder="検索キーワード">
+                            </label>
+                            <input type="submit" class="btn btn-primary" value="検索">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
         @if(count($tracks) == 0)
             <p>検索結果は見つかりませんでした</p>
         @else
