@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-2">
                     <main class="m-2 text-left">
-                        <button class="btn btn-info" onclick="goBack()">
+                        <button class="btn btn-info" style="margin-top: 10px" onclick="goBack()">
                             <b>戻る</b>
                         </button>
 
