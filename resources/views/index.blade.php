@@ -1,6 +1,32 @@
 @php
 use App\Models\Region_name;
+use Illuminate\Support\Str;
+
+$fir_region = $fav_regions[0];
+$fir_region_code = $fir_region["region_code"];
+$fir_area_code = $fir_region["area_code"];
+$id = $fir_region["id"];
+
+$fir_region = Region_name::where('region_code', "$fir_region_code")->get();
+$fir_region_data = json_decode($fir_region, true);
+$fir_prefecture = $fir_region_data[0]["region_name"];
+
+$fir_url = "https://www.jma.go.jp/bosai/forecast/data/forecast/{$fir_region_code}.json";
+$fir_response = file_get_contents($fir_url);
+$fir_data = json_decode($fir_response, true);
+$fir_areas_data = $fir_data[0]["timeSeries"][0]["areas"];
+$fir_area = $fir_areas_data[$fir_area_code]["area"]["name"];
+$fir_weathers = $fir_areas_data[$fir_area_code]["weathers"];
+if (Str::contains($fir_weathers[0], '雨')) {
+    $message = "傘は持ちましたか？";
+} elseif(Str::contains($fir_weathers[0], '晴')){
+    $message = "お出かけ日和ですね！";
+} else {
+    $message = "お疲れ様です！今日もかっこよく働きましょう！";
+}
+
 @endphp
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -19,7 +45,7 @@ use App\Models\Region_name;
         <nav class="navbar navbar-light bg-light">
             <h1>Temporature</h1>
                 <p class="navbar-text mt-3">
-                    {{ Auth::user() -> name }} さん ログイン中
+                    {{ Auth::user() -> name }} さん {{$message}}
                 </p>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
