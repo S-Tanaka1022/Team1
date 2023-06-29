@@ -27,6 +27,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+    @vite(['resources/css/addplaylist_css.css'])
     <title>プレイリストへ追加</title>
 </head>
 
@@ -104,15 +105,38 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                                     {{ session('error') }}
                                 </div>
                             @endif
+
+
+
+    <section class="someTabs" data-tabs="">
+        <nav class="tabs__nav">
+          <a href="#" class="tabs__item active" data-tab="">新規プレイリスト</a>
+          <a href="#" class="tabs__item" data-tab="">既存プレイリスト</a>
+          <a class="Tabs__presentation-slider" role="presentation"></a>
+        </nav>
+
+        <div class="tabs__body">
+          <div class="tabs__content active" data-tab-content="">
+
                             <br><span class="m-2">プレイリスト名 </span>
+
                             <input type="text" name="playlist_name" id="playlist_name" placeholder="新規プレイリスト"><br><br>
+          </div>
+
+          <div class="tabs__content" data-tab-content="">
                             <span class="m-2">既存プレイリスト </span>
                             <select name="list_id" id="list_id" class="form-select form-select-lg">
                                 <option value="">-</option>
                                 @foreach ($playlists as $playlist)
                                     <option value="{{$playlist->id}}">{{$playlist->list_name}}</option>
                                 @endforeach
-                            </select>
+
+                            </select><br><br>
+          </div>
+        </div>
+    </section>
+                            
+                           
                             <input type="hidden" name="title" value="{{$track->name}}" readonly>
                             <input type="hidden" name="artist" value="{{$track->artists[0]->name}}" readonly><br><br>
                             <input type="hidden" name="trackId" value="{{$trackId}}">
@@ -153,10 +177,13 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                         }
                     }
                 </script>
-
-
+                </div>
             </div>
         </div>
+
+
+    <script src="{{ asset('/js/left-right.js') }}"></script>
+
     </div><br><br>
 </body>
 </html>
