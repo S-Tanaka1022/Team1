@@ -6,9 +6,10 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use SpotifyWebAPI\Session;
+use Illuminate\Support\Str;
 use SpotifyWebAPI\SpotifyWebAPI;
 use App\Models\Region_name;
-use App\Http\Controllers\RegionNameController;
+use Illuminate\Support\Facades\Auth;
 
 class Controller extends BaseController
 {
@@ -27,6 +28,33 @@ class Controller extends BaseController
         $api->setAccessToken($accessToken);
 
         return $api;
+    }
+
+    public static function getMessage($data)
+    {
+        $fir_weathers = $data[0]["weathers"];
+        if (Str::contains($fir_weathers[0], '雨')) {
+            $message = "傘は持ちましたか？";
+        } elseif (Str::contains($fir_weathers[0], '晴')) {
+            $message = "お出かけ日和ですね！";
+        } else {
+            $message = "お疲れ様です！今日もかっこよく働きましょう！";
+        }
+        return $message;
+    }
+
+    public static function get_weather_forecast($data)
+    {
+        $fir_weathers = $data[0]["weathers"];
+        $fir_area = $data[0]["area"];
+        if (Str::contains($fir_weathers[0], '雨')) {
+            $message = $fir_area . "は雨の予報が出ています";
+        } elseif (Str::contains($fir_weathers[0], '晴')) {
+            $message = $fir_area . "は晴れの予報が出ています";
+        } else {
+            $message = Auth::user()->name . "さん！お疲れ様です！";
+        }
+        return $message;
     }
 
     public static function get_weatherAPI($fav_regions)
@@ -60,6 +88,15 @@ class Controller extends BaseController
         }
         return $API_data;
     }
+
+    public static function areaReplace($table_data)
+    {
+        $area = $table_data["area"];
+        $replace_area = array("地方" => "地域",);
+        $area = str_replace(array_keys($replace_area), array_values($replace_area), $area);
+        return $area;
+    }
+
     public static function weatherToIcon($weathers)
     {
         if (isset($weathers)) {

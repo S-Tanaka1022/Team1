@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Playlist;
 use App\Models\Song;
+use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use SpotifyWebAPI\SpotifyWebAPI;
@@ -41,8 +42,11 @@ class SongController extends Controller
             //$playlists = Playlist::getUserPlaylists($auth_info); //ログイン中のユーザー以外のプレイリストを表示
             $playlists = Playlist::where('user_id', '!=', $auth_info)->get(); //ログイン中のユーザー以外のプレイリストを表示
         }
+        $user_id = auth()->user()->id;
+        $fav_regions = Region::where('user_id', "$user_id")->get();
+        $data = $this->get_weatherAPI($fav_regions);
 
-        return view('everyone_playlist', compact('results', 'playlists'));
+        return view('everyone_playlist', compact('results', 'playlists', 'data'));
     }
 
     public function information(Request $request)
@@ -52,21 +56,24 @@ class SongController extends Controller
         $track = $api->getTrack($trackId);
         $artistId = $track->artists[0]->id;
         $artist = $api->getArtist($artistId);
+        $user_id = auth()->user()->id;
+        $fav_regions = Region::where('user_id', "$user_id")->get();
+        $data = $this->get_weatherAPI($fav_regions);
 
-        return view('/song_information', compact('track', 'artist'));
+        return view('/song_information', compact('track', 'artist', 'data'));
     }
 
     public function detail(Request $request)
     {
         $api = Controller::getAPI();
         $auth_info = Auth::user()->id;
-        $keyword3 = $request->keyword3;//キーワード
-        if (Str::length($keyword3) > 0){//検索している場合
+        $keyword3 = $request->keyword3; //キーワード
+        if (Str::length($keyword3) > 0) { //検索している場合
             $song_id = Song::where('title', 'LIKE', "%$keyword3%") // プレイリスト名にkeyword2 を含むものを絞り込み
-            ->orwhere('artist', 'LIKE', "%$keyword3%")
-            ->get();
-            $select_id = [];//検索結果を配列に入れる
-            for($i=0;$i<count($song_id);$i++){
+                ->orwhere('artist', 'LIKE', "%$keyword3%")
+                ->get();
+            $select_id = []; //検索結果を配列に入れる
+            for ($i = 0; $i < count($song_id); $i++) {
                 $select_id[] = $song_id[$i]->id;
             }
             $playlistId = $request->playlist_id;
@@ -74,14 +81,14 @@ class SongController extends Controller
             $songs = $playlist->songs;
             $tracks = [];
             foreach ($songs as $song) {
-                for($i=0;$i<count($select_id);$i++){
-                    if($select_id[$i] == $song->id){//検索と一致
+                for ($i = 0; $i < count($select_id); $i++) {
+                    if ($select_id[$i] == $song->id) { //検索と一致
                         $trackId = $song->song_detail_id;
                         $tracks[] = $api->getTrack($trackId);
                     }
                 }
             }
-        }else{//検索していない
+        } else { //検索していない
             $playlistId = $request->playlist_id;
 
             $playlist = Playlist::findOrFail($playlistId);
@@ -93,6 +100,9 @@ class SongController extends Controller
                 $tracks[] = $api->getTrack($trackId);
             }
         }
-        return view('other_playlist',compact('playlist','tracks','playlistId'));
+        $user_id = auth()->user()->id;
+        $fav_regions = Region::where('user_id', "$user_id")->get();
+        $data = $this->get_weatherAPI($fav_regions);
+        return view('other_playlist', compact('playlist', 'tracks', 'playlistId', 'data'));
     }
 }

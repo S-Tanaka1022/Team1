@@ -2,21 +2,24 @@
 {{-- 追加ボタン、楽曲へ戻るボタンが押されたら「みんなのプレイリスト画面」に遷移 --}}
 
 @php //前準備で変数を用意
-$trackImage = $track->album->images[0]->url; //アルバム画像
-$releaseDate = $track->album->release_date; //リリース日
-    $dateFormat = date("Y年m月d日", strtotime($releaseDate));
-$trackName = $track->name; //曲名
-$artistName = $track->artists[0]->name; //アーティスト名
-$trackTime = $track->duration_ms; //曲の再生時間
-    $seconds = floor($trackTime/1000);
-    $minutes = floor($seconds/60);
-    $seconds = $seconds%60;
-    $secondsFormat = sprintf('%02d', $seconds);
-$albumName = $track->album->name; //アルバム名
-$trackPreview = $track->preview_url; //プレビューのURL(日本の曲は対応してないことが多い)
+    $trackImage = $track->album->images[0]->url; //アルバム画像
+    $releaseDate = $track->album->release_date; //リリース日
+        $dateFormat = date("Y年m月d日", strtotime($releaseDate));
+    $trackName = $track->name; //曲名
+    $artistName = $track->artists[0]->name; //アーティスト名
+    $trackTime = $track->duration_ms; //曲の再生時間
+        $seconds = floor($trackTime/1000);
+        $minutes = floor($seconds/60);
+        $seconds = $seconds%60;
+        $secondsFormat = sprintf('%02d', $seconds);
+    $albumName = $track->album->name; //アルバム名
+    $trackPreview = $track->preview_url; //プレビューのURL(日本の曲は対応してないことが多い)
 
-//アーティスト情報
-$artistImage = $artist->images[0]->url; //アーティストの宣材写真
+    //アーティスト情報
+    $artistImage = $artist->images[0]->url; //アーティストの宣材写真
+
+    use App\Http\Controllers\Controller;
+    $message=Controller::get_weather_forecast($data);
 @endphp
 
 <!DOCTYPE html>
@@ -36,7 +39,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
         <nav class="navbar navbar-light bg-light">
             <h1>プレイリストに追加</h1>
                 <p class="navbar-text mt-3">
-                    {{ Auth::user() -> name }} さん ログイン中
+                    {{$message}}
                 </p>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
@@ -116,14 +119,14 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
         </nav>
 
         <div class="tabs__body">
-          <div class="tabs__content active" data-tab-content="">
+          <div class="tabs__content active" style="height: 54px;" data-tab-content="">
 
                             <span class="m-2">プレイリスト名 </span>
 
                             <input type="text" name="playlist_name" id="playlist_name" placeholder="新規プレイリスト"><br><br>
           </div>
 
-          <div class="tabs__content" data-tab-content="">
+          <div class="tabs__content" style="height: 54px;" data-tab-content="">
                             <span class="m-2">既存プレイリスト </span>
                             <select name="list_id" id="list_id" class="form-select form-select-lg">
                                 <option value="">-</option>
