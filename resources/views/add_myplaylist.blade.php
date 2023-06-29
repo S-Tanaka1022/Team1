@@ -64,12 +64,12 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
     </header>
 
     {{-- ここから本文 --}}
-    <div class="container m-10 p-10 rounded bg-dark text-white">
+    <br><br><div class="container m-10 p-10 rounded bg-dark text-white">
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-auto text-center">
                     <div class="text-center"><br>
-                        <img src={{$trackImage}} width=350><br>
+                        <br><img src={{$trackImage}} width=350><br>
                         <span style="font-size: 40px;" class="fw-bold">{{$trackName}}</span>　　{{$minutes}}:{{$secondsFormat}}<br>
                         <span style="font-size: 20px;" class="fw-bold">{{$albumName}}</span><br>
                         <div class="container-fluid">
@@ -93,7 +93,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                         @else
                             Preview not available.<br>
                         @endif
-                    </div><br>
+                    </div><br><br>
                 </div>
                 {{-- ここまでが左側の要素 --}}
                 <div class="col-md-auto">
@@ -104,7 +104,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                                     {{ session('error') }}
                                 </div>
                             @endif
-                            <span class="m-2">プレイリスト名 </span>
+                            <br><span class="m-2">プレイリスト名 </span>
                             <input type="text" name="playlist_name" id="playlist_name" placeholder="新規プレイリスト"><br><br>
                             <span class="m-2">既存プレイリスト </span>
                             <select name="list_id" id="list_id" class="form-select form-select-lg">
@@ -125,7 +125,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                     <div class="text-right">
                         <button class="btn btn-info btn-block btn-lg" onclick="goBack()">
                             <b>戻る</b>
-                        </button>
+                        </button><br><br>
 
                         <script>
                         function goBack() {
@@ -133,7 +133,7 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                         }
                         </script>
                     </div>
-                </div>
+                </div><br>
 
                 <script>
                     // 入力状態を監視し、どちらか一方が入力されている場合に追加ボタンを有効化する
@@ -159,6 +159,6 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
 
             </div>
         </div>
-    </div>
+    </div><br><br>
 </body>
 </html>
