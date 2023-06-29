@@ -2,8 +2,12 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Response;
-
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\RegionController;
+use App\Http\Controllers\RegionNameController;
+use App\Http\Controllers\SongController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -31,53 +35,57 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/{id}', function ($id) {
-    $url = "https://www.jma.go.jp/bosai/forecast/data/forecast/$id.json";
 
-    $json = file_get_contents($url);
-    $weatherdata = json_decode($json, true);
+#ホーム画面
+Route::get('/index', [UserController::class, 'index'])->middleware('auth');
 
-    $areasdata = ($weatherdata[0]["timeSeries"][0]["areas"]);
+#最初の現在地登録画面
+Route::get('/new_region', [RegionController::class, 'new']);
+Route::post('/new_area', [RegionController::class, 'new_area']);
+Route::post('/code_save', [RegionController::class, 'update']);
 
-    foreach ($areasdata as $key => $data) {
-        $area = $data["area"];
-        $weatherCodes = $data["weatherCodes"];
-        $weathers = $data["weathers"];
-        $winds = $data["winds"];
-        $waves = $data["waves"];
+#現在地追加画面
+Route::get('/add_region', [RegionController::class, 'add']);
+Route::post('/add_area', [RegionController::class, 'add_area']);
 
-        echo $area["name"] . "の天気<hr>";
+#削除機能
+Route::get('/delete/{id}', [RegionController::class, 'delete']);
 
-        foreach ($weatherCodes as $key => $weatherCode) {
-            echo $key + 1 . "番目の天気コード：" . $weatherCode . "<br>";
-        }
-        echo "<hr>";
+#自分のプレイリスト一覧画面
+Route::get('/myplaylist', [PlaylistController::class, 'myplaylist']);
+/*Route::get('/myplaylist', function () {
+    return view('myplaylist');
+});
+*/
 
-        foreach ($weathers as $key => $weather) {
-            echo $key + 1 . "番目の天気：" . $weather . "<br>";
-        }
-        echo "<hr>";
+#プレイリスト確認画面
+// Route::get('/myplaylist', [PlaylistController::class, 'detail']);
 
-        foreach ($winds as $key => $wind) {
-            echo $key + 1 . "番目の風向き：" . $wind . "<br>";
-        }
-        echo "<hr>";
+#プレイリスト追加画面
+//Route::get('/add_myplaylist', [PlaylistController::class, 'add']);
+Route::get('/add_myplaylist', [PlaylistController::class, 'index'])->middleware('auth');
 
-        foreach ($waves as $key => $wave) {
-            echo $key + 1 . "番目の風速：" . $wave . "<br>";
-        }
-        echo "<hr>";
-    }
+Route::post('/add_myplaylist', [PlaylistController::class, 'add'])->middleware('auth');
+
+#全員のプレイリスト一覧画面と楽曲一覧画面
+Route::get('/everyone_playlist', [SongController::class, 'index'])->middleware('auth');
+Route::get('/information', [SongController::class, 'information']);
+
+#それぞれのプレイリスト確認画面
+Route::get('/other_playlist', [SongController::class, 'detail'])->middleware('auth');
+
+#マイプレイリストの詳細画面
+Route::get('/detail_myplaylist', [PlaylistController::class, 'detail']);
+//->name('back_detail_myplaylist');
+
+#マイプレイリストの削除
+Route::get('/delete_myplaylist', [PlaylistController::class, 'delete_myplaylist']);
+
+#マイプレイリスト内の曲の削除
+Route::get('/delete_myplaylist_song', [PlaylistController::class, 'delete_myplaylist_song']);
+
+Route::get('/testcss', function () {
+    return view('testcss');
 });
 
-
-// Route::get('/130000', function () {
-//     $url = "https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json";
-
-//     $json = file_get_contents($url);
-//     $weather = json_decode($json);
-
-//     echo "<pre>";
-//     var_dump($weather);
-//     echo "</pre>";
-// });
+require __DIR__ . '/auth.php';
