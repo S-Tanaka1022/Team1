@@ -8,8 +8,18 @@ use App\Models\Region_name;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    {{-- BootStrap Link --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- 自作CSSファイル -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    {{-- フォント Link --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+
+
+    {{-- 自作CSSファイル --}}
     @vite(['resources/css/index_css.css'])
     <title>index</title>
 </head>
@@ -17,7 +27,8 @@ use App\Models\Region_name;
 <body>
     <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
-            <h1>Temporature</h1>
+            {{-- <img src="\images\kawaii\sunny.png" alt="ロゴ" width="60px"> --}}
+            <h1 class="Lobster">Temporature</h1>
                 <p class="navbar-text mt-3">
                     {{ Auth::user() -> name }} さん ログイン中
                 </p>
@@ -80,6 +91,10 @@ use App\Models\Region_name;
                             $areas_data = $data[0]["timeSeries"][0]["areas"];
                             $area = $areas_data[$area_code]["area"]["name"];
                             $weathers = $areas_data[$area_code]["weathers"];
+                            $replace_area = array(
+                                        "地方" => "地域",
+                                        );
+                            $area = str_replace(array_keys($replace_area), array_values($replace_area), $area);
                             echo <<<_TABLE_
                                 <tr>
                                     <td>
