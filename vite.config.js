@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/css/index_css.css',
                 'resources/css/stylesheet.css',
                 'resources/css/testcss.css',
+                'resources/css/addplaylist_css.css',
             ],
             refresh: true,
         }),

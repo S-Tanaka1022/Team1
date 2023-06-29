@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     @vite(['resources/css/testcss.css'])
+    {{-- @vite(['resources/css/addplaylist_css.css']) --}}
     <title>みんなのプレイリスト</title>
 </head>
 
