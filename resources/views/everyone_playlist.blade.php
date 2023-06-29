@@ -55,7 +55,7 @@
           <a class="Tabs__presentation-slider" role="presentation"></a>
         </nav>
 
-        <div class="tabs__body">
+        <div class="tabs__body" style="text-align: center">
           <div class="tabs__content active" data-tab-content="">
             <div class="container align-middle text-center">
                 <div class="row align-items-center text-center">

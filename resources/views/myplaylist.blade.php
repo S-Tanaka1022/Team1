@@ -42,7 +42,7 @@
         </nav>
     </header>
     <main class="m-3">
-        <div>
+        <div style="text-align: center">
             <form action="" method="GET">
                 <label>
                     <input type="text" name="keyword2" placeholder="検索キーワード">
