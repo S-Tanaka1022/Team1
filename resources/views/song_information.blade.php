@@ -56,8 +56,8 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
 </header>
 
 <main>
-    <div class="container m-10 p-10 rounded bg-dark text-white">
-        <div class="text-center"><br>
+    <br><br><div class="container m-10 p-10 rounded bg-dark text-white">
+        <div class="text-center"><br><br>
             <img src={{$trackImage}} width=350><br>
             <span style="font-size: 40px;" class="fw-bold">{{$trackName}}</span>　　{{$minutes}}:{{$secondsFormat}}<br>
             <span style="font-size: 20px;" class="fw-bold">{{$albumName}}</span><br>
@@ -109,6 +109,6 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
+        </div><br>
+    </div><br><br>
 </main>
