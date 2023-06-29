@@ -14,6 +14,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
+
     public static function getAPI()
     {
         $session = new Session(
@@ -28,29 +29,60 @@ class Controller extends BaseController
         return $api;
     }
 
+    public static function get_weatherAPI($fav_regions)
+    {
+        $API_data = []; // Initialize as an empty array
+
+        foreach ($fav_regions as $fav_region) {
+            $region_code = $fav_region["region_code"];
+            $area_code = $fav_region["area_code"];
+            $id = $fav_region["id"];
+
+            $region = Region_name::where('region_code', "$region_code")->get();
+            $region_data = json_decode($region, true);
+            $prefecture = $region_data[0]["region_name"];
+
+            $url = "https://www.jma.go.jp/bosai/forecast/data/forecast/{$region_code}.json";
+            $response = file_get_contents($url);
+            $data = json_decode($response, true);
+            $areas_data = $data[0]["timeSeries"][0]["areas"];
+            $area = $areas_data[$area_code]["area"]["name"];
+            $weathers = $areas_data[$area_code]["weathers"];
+
+            $API_data[] = [ // Append a new array to $API_data
+                'id' => $id,
+                'prefecture' => $prefecture,
+                'area' => $area,
+                'weathers' => $weathers,
+                'region_code' => $region_code,
+                'area_code' => $area_code,
+            ];
+        }
+        return $API_data;
+    }
     public static function weatherToIcon($weathers)
     {
         if (isset($weathers)) {
             $weather = $weathers;
             $replacements = array(
-                "雨" => "<br><img src = '".asset('images/normal/rainny.png')."' alt = '雨のイラスト' width = '50px'><br>",
-                "晴れ" => "<br><img src = '".asset('images/normal/sunny.png')."' alt = '晴れのイラスト' width = '50px'><br>",
-                "雷" => "<br><img src = '".asset('images/normal/thunder.png')."' alt = '雷のイラスト' width = '50px'>",
-                "雪" => "<br><img src = '".asset('images/normal/snow.png')."' alt = '雪のイラスト' width = '50px'><br>",
-                "くもり" => "<br><img src = '".asset('images/normal/cloudy.png')."' alt = 'くもりのイラスト' width = '50px'><br>",
+                "雨" => "<br><img src = '" . asset('images/normal/rainny.png') . "' alt = '雨のイラスト' width = '50px'><br>",
+                "晴れ" => "<br><img src = '" . asset('images/normal/sunny.png') . "' alt = '晴れのイラスト' width = '50px'><br>",
+                "雷" => "<br><img src = '" . asset('images/normal/thunder.png') . "' alt = '雷のイラスト' width = '50px'>",
+                "雪" => "<br><img src = '" . asset('images/normal/snow.png') . "' alt = '雪のイラスト' width = '50px'><br>",
+                "くもり" => "<br><img src = '" . asset('images/normal/cloudy.png') . "' alt = 'くもりのイラスト' width = '50px'><br>",
                 "　" => "",
                 "所により" => "",
                 "<br><br>" => "<br>",
                 "<br>で<br>" => "",
-                );
+            );
             $result = str_replace(array_keys($replacements), array_values($replacements), $weather);
             return $result;
-        }else{
+        } else {
             return "情報取得中";
         }
     }
 
-    public static function weatherTracks($fav_region,$api)
+    public static function weatherTracks($fav_region, $api)
     {
         $region_code = $fav_region["region_code"];
         $area_code = $fav_region["area_code"];
@@ -59,15 +91,14 @@ class Controller extends BaseController
         $data = json_decode($response, true);
         $areas_data = $data[0]["timeSeries"][0]["areas"];
         $weathers = $areas_data[$area_code]["weathers"];
-        $search_word= preg_split('/\p{Zs}/u', $weathers[0], 2)[0];
-        if($search_word=="くもり")
-        {
-            $search_word="曇";
+        $search_word = preg_split('/\p{Zs}/u', $weathers[0], 2)[0];
+        if ($search_word == "くもり") {
+            $search_word = "曇";
         }
         $limit = 3;
         $options = [
             'limit' => $limit,
-            'offset' => random_int(0,100),
+            'offset' => random_int(0, 100),
         ];
         $results = $api->search($search_word, 'track', $options);
         return $results;

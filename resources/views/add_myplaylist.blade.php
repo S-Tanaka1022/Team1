@@ -116,14 +116,14 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
         </nav>
 
         <div class="tabs__body">
-          <div class="tabs__content active" data-tab-content="">
+          <div class="tabs__content active" style="height: 54px;" data-tab-content="">
 
-                            <br><span class="m-2">プレイリスト名 </span>
+                            <span class="m-2">プレイリスト名 </span>
 
                             <input type="text" name="playlist_name" id="playlist_name" placeholder="新規プレイリスト"><br><br>
           </div>
 
-          <div class="tabs__content" data-tab-content="">
+          <div class="tabs__content" style="height: 54px;" data-tab-content="">
                             <span class="m-2">既存プレイリスト </span>
                             <select name="list_id" id="list_id" class="form-select form-select-lg">
                                 <option value="">-</option>
@@ -135,8 +135,8 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
           </div>
         </div>
     </section>
-                            
-                           
+
+
                             <input type="hidden" name="title" value="{{$track->name}}" readonly>
                             <input type="hidden" name="artist" value="{{$track->artists[0]->name}}" readonly><br><br>
                             <input type="hidden" name="trackId" value="{{$trackId}}">

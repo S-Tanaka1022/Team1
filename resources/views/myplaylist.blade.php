@@ -42,7 +42,7 @@
         </nav>
     </header>
     <main class="m-3">
-        <div>
+        <div style="text-align: center">
             <form action="" method="GET">
                 <label>
                     <input type="text" name="keyword2" placeholder="検索キーワード">
@@ -50,7 +50,7 @@
                 <input type="submit" value="検索" class="btn btn-primary">
             </form>
         </div>
-        <table class="table table-striped">
+        <table class="table table-striped mt-3">
             <tr class="bg-dark text-white text-center align-center">
                 <th>プレイリスト名</th>
                 <th>詳細を表示</th>

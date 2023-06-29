@@ -43,10 +43,10 @@
             </ul>
         </nav>
     </header>
-    <main class="m-1">
-        <div class="container m-2">
-            <div class="row">
-                <div class="col">
+    <div class="container">
+            <div class="row" >
+                <div class="col-2">
+                <main class="m-3 text-left">
                     <button class="btn btn-info btn" onclick="goBack()">
                         <b>戻る</b>
                     </button>
@@ -56,20 +56,21 @@
                         }
                     </script>
                 </div>
-                <div class="col text-right">
-                    <form class="form-group text-right" action="" method="get">
-                      <label class="align-middle">
+                <div class="col-5 text-right m-3">
+                    <form action="" method="get">
+                      <label>
                         <input type="hidden" name="playlist_id" value="{{$playlistId}}">
-                        <input class="form-control align-middle" type="text" name="keyword3" placeholder="検索キーワード">
+                        <input type="text" name="keyword3" placeholder="検索キーワード">
                       </label>
-                      <input type="submit" class="btn btn-primary align-top" value="検索">
+                      <input type="submit" class="btn btn-primary" value="検索">
                     </form>
                 </div>
             </div>
         </div>
+    </div>
 
         @if(count($tracks) == 0)
-        <p>検索結果は見つかりませんでした</p>
+            <p>検索結果は見つかりませんでした</p>
         @else
         <table class="table table-striped text-center align-middle">
             <tbody class="m-3">
@@ -98,7 +99,6 @@
             </tr>
         </table>
         @endif
-    </main>
 </body>
 </html>
 

@@ -3,21 +3,8 @@ use App\Models\Region_name;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 
-$fir_region = $fav_regions[0];
-$fir_region_code = $fir_region["region_code"];
-$fir_area_code = $fir_region["area_code"];
-$id = $fir_region["id"];
+$fir_weathers = $data[0]["weathers"];
 
-$fir_region = Region_name::where('region_code', "$fir_region_code")->get();
-$fir_region_data = json_decode($fir_region, true);
-$fir_prefecture = $fir_region_data[0]["region_name"];
-
-$fir_url = "https://www.jma.go.jp/bosai/forecast/data/forecast/{$fir_region_code}.json";
-$fir_response = file_get_contents($fir_url);
-$fir_data = json_decode($fir_response, true);
-$fir_areas_data = $fir_data[0]["timeSeries"][0]["areas"];
-$fir_area = $fir_areas_data[$fir_area_code]["area"]["name"];
-$fir_weathers = $fir_areas_data[$fir_area_code]["weathers"];
 if (Str::contains($fir_weathers[0], '雨')) {
     $message = "傘は持ちましたか？";
 } elseif(Str::contains($fir_weathers[0], '晴')){
@@ -103,22 +90,13 @@ if (Str::contains($fir_weathers[0], '雨')) {
                     <tbody>
                     @php
                         #表示するのは、都道府県名（DB）・地域名(API)・気象情報(API)
-                        foreach ($fav_regions as $fav_region){
-                            $region_code = $fav_region["region_code"];
-                            $area_code = $fav_region["area_code"];
-                            $id = $fav_region["id"];
+                        foreach ($data as $table_data){
+                        $area = $table_data["area"];
+                        $prefecture = $table_data["prefecture"];
+                        $id = $table_data["id"];
+                        $weathers = $table_data["weathers"];
 
-                            $region = Region_name::where('region_code', "$region_code")->get();
-                            $region_data = json_decode($region, true);
-                            $prefecture = $region_data[0]["region_name"];
-
-                            $url = "https://www.jma.go.jp/bosai/forecast/data/forecast/{$region_code}.json";
-                            $response = file_get_contents($url);
-                            $data = json_decode($response, true);
-                            $areas_data = $data[0]["timeSeries"][0]["areas"];
-                            $area = $areas_data[$area_code]["area"]["name"];
-                            $weathers = $areas_data[$area_code]["weathers"];
-                            $replace_area = array(
+                        $replace_area = array(
                                         "地方" => "地域",
                                         );
                             $area = str_replace(array_keys($replace_area), array_values($replace_area), $area);
@@ -144,7 +122,7 @@ _TABLE_;
                         <th><div class="column_headers">曲名</div></th>
                         <th><div class="column_headers">アーティスト</div></th>
                     </tr>
-                    @foreach ($fav_regions as $fav_region)
+                    @foreach ($data as $fav_region)
                         <?php $results = Controller::weatherTracks($fav_region, $api); ?>
                         @foreach ($results->tracks->items as $counter => $song)
                             @if ($counter > 2)
