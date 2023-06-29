@@ -112,11 +112,9 @@ $artistImage = $artist->images[0]->url; //アーティストの宣材写真
                                 @foreach ($playlists as $playlist)
                                     <option value="{{$playlist->id}}">{{$playlist->list_name}}</option>
                                 @endforeach
-                            </select><br><br>
-                            <span class="m-2">曲名 </span>
-                            <input type="text" name="title" value="{{$track->name}}" readonly><br><br>
-                            <span class="m-2">アーティスト </span>
-                            <input type="text" name="artist" value="{{$track->artists[0]->name}}" readonly><br><br>
+                            </select>
+                            <input type="hidden" name="title" value="{{$track->name}}" readonly>
+                            <input type="hidden" name="artist" value="{{$track->artists[0]->name}}" readonly><br><br>
                             <input type="hidden" name="trackId" value="{{$trackId}}">
                             <input type="submit" value="追加" class="btn btn-success btn-block btn-lg" id="add_button" disabled><br>
                             @csrf
