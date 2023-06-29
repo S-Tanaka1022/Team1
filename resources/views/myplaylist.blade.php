@@ -58,13 +58,19 @@
             </tr>
             @foreach ($playlists as $playlist)
             <tr class="text-center align-middle">
-                <td><b>{{$playlist->list_name}}</b></td>
+                    <td>
+                        <b>{{$playlist->list_name}}</b>
+                    </td>
                 <form action="detail_myplaylist" method="get" enctype="multipart/form-data">
-                    <td><button class="btn btn-info" type="submit" name="playlist_id" value='{{$playlist->id}}'>詳細</button></td>
+                    <td>
+                        <button class="btn btn-info" type="submit" name="playlist_id" value='{{$playlist->id}}'>詳細</button>
+                    </td>
                     @csrf
                 </form>
                 <form action="delete_myplaylist" method="get">
-                <td><button class="btn btn-danger" type="submit" name="playlist_id" value="{{$playlist->id}}">削除</button></td>
+                    <td>
+                        <button class="btn btn-danger" type="submit" name="playlist_id" value="{{$playlist->id}}">削除</button>
+                    </td>
                 </form>
             </tr>
             @endforeach
