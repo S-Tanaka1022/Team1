@@ -60,7 +60,7 @@
                     <form class="form-group text-right" action="" method="get">
                       <label class="align-middle">
                         <input type="hidden" name="playlist_id" value="{{$playlistId}}">
-                        <input class="form-control align-middle" type="text" name="keyword3" placeholder="検索">
+                        <input class="form-control align-middle" type="text" name="keyword3" placeholder="検索キーワード">
                       </label>
                       <input type="submit" class="btn btn-primary align-top" value="検索">
                     </form>
