@@ -47,7 +47,11 @@ class RegionController extends Controller
         $user_id = auth()->user()->id;
         $regions = Region_name::all();
         $fav_regions = Region::where('user_id', "$user_id")->get();
-        return view("add_region", compact('regions', 'fav_regions'));
+
+        $user_id = auth()->user()->id;
+        $fav_regions = Region::where('user_id', "$user_id")->get();
+        $data = $this->get_weatherAPI($fav_regions);
+        return view("add_region", compact('regions', 'fav_regions', 'data'));
     }
 
     public function add_area(Request $request)
@@ -62,7 +66,10 @@ class RegionController extends Controller
         $regions = Region_name::all();
         $fav_regions = Region::where('user_id', "$user_id")->get();
 
-        return view("add_area", compact('areas_data', 'region_code', 'fav_regions'));
+        $user_id = auth()->user()->id;
+        $fav_regions = Region::where('user_id', "$user_id")->get();
+        $data = $this->get_weatherAPI($fav_regions);
+        return view("add_area", compact('areas_data', 'region_code', 'fav_regions', 'data'));
     }
 
     public function delete($id)

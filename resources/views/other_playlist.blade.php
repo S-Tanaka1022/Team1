@@ -1,5 +1,9 @@
 {{-- みんなのプレイリスト一覧画面から「詳細」ボタンを押したときに来る画面 --}}
 {{-- 楽曲一覧と構成は一緒でリストへ追加と楽曲詳細に遷移できる --}}
+<?php
+    use App\Http\Controllers\Controller;
+    $message=Controller::get_weather_forecast($data);
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -16,7 +20,7 @@
         <nav class="navbar navbar-light bg-light">
             <h1>{{$playlist->user->name}}さんのプレイリスト</h1>
                 <p class="navbar-text mt-3">
-                    {{ Auth::user() -> name }} さん ログイン中
+                    {{$message}}
                 </p>
             <ul class="nav justify-content-end">
                 <li class="nav-item">

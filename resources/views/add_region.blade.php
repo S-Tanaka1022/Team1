@@ -1,3 +1,8 @@
+@php
+    use App\Http\Controllers\Controller;
+    $message=Controller::get_weather_forecast($data);
+@endphp
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -13,7 +18,7 @@
         <nav class="navbar navbar-light bg-light">
             <h1>登録地追加</h1>
                 <p class="navbar-text mt-3">
-                    {{ Auth::user() -> name }} さん ログイン中
+                    {{$message}}
                 </p>
             <ul class="nav justify-content-end">
                 <li class="nav-item">

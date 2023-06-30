@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Playlist;
 use App\Models\Song;
+use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use SpotifyWebAPI\SpotifyWebAPI;
 use SpotifyWebAPI\Session;
 use Illuminate\Support\Str;
@@ -23,7 +23,11 @@ class PlaylistController extends Controller
         $artistId = $track->artists[0]->id;
         $artist = $api->getArtist($artistId);
 
-        return view('add_myplaylist', compact('playlists','track','trackId','artist'));
+        $user_id = auth()->user()->id;
+        $fav_regions = Region::where('user_id', "$user_id")->get();
+        $data = $this->get_weatherAPI($fav_regions);
+
+        return view('add_myplaylist', compact('playlists', 'track', 'trackId', 'artist', 'data'));
     }
 
     public function add(Request $request)
@@ -36,7 +40,7 @@ class PlaylistController extends Controller
             $add_playlist->user_id = $auth_info;
             $add_playlist->list_name = $playlist_name;
             $add_playlist->save(); /* データベースにレコードを追加する */
-        }else{//プレイリストを選択した場合
+        } else { //プレイリストを選択した場合
             $add_playlist = Playlist::find($request->list_id);
         }
         /* Song オブジェクトを生成 */
@@ -45,7 +49,7 @@ class PlaylistController extends Controller
         $add_song->title = $request->title;
         $add_song->artist = $request->artist;
         $add_song->save();
-        $add_playlist->songs()->attach($add_song->id);//中間テーブルにレコード追加
+        $add_playlist->songs()->attach($add_song->id); //中間テーブルにレコード追加
 
         return redirect("everyone_playlist");
     }
@@ -77,20 +81,24 @@ class PlaylistController extends Controller
             $playlists = Playlist::where('user_id', $auth_info)->get(); //ログイン中のユーザー以外のプレイリストを表示
         }
 
-        return view('myplaylist', compact('playlists'));
+        $user_id = auth()->user()->id;
+        $fav_regions = Region::where('user_id', "$user_id")->get();
+        $data = $this->get_weatherAPI($fav_regions);
+
+        return view('myplaylist', compact('playlists', 'data'));
     }
 
     public function detail(Request $request)
     {
         $api = Controller::getAPI();
         $auth_info = Auth::user()->id;
-        $keyword3 = $request->keyword3;//キーワード
-        if (Str::length($keyword3) > 0){//検索している場合
+        $keyword3 = $request->keyword3; //キーワード
+        if (Str::length($keyword3) > 0) { //検索している場合
             $song_id = Song::where('title', 'LIKE', "%$keyword3%") // プレイリスト名にkeyword2 を含むものを絞り込み
-            ->orwhere('artist', 'LIKE', "%$keyword3%")
-            ->get();
-            $select_id = [];//検索結果を配列に入れる
-            for($i=0;$i<count($song_id);$i++){
+                ->orwhere('artist', 'LIKE', "%$keyword3%")
+                ->get();
+            $select_id = []; //検索結果を配列に入れる
+            for ($i = 0; $i < count($song_id); $i++) {
                 $select_id[] = $song_id[$i]->id;
             }
             $playlistId = $request->playlist_id;
@@ -98,8 +106,8 @@ class PlaylistController extends Controller
             $songs = $playlist->songs;
             $tracks = [];
             foreach ($songs as $song) {
-                for($i=0;$i<count($select_id);$i++){
-                    if($select_id[$i] == $song->id){//検索と一致
+                for ($i = 0; $i < count($select_id); $i++) {
+                    if ($select_id[$i] == $song->id) { //検索と一致
                         $trackId = $song->song_detail_id;
                         //$tracks[] = $api->getTrack($trackId);
                         $tracks[] = ["detail" => $api->getTrack($trackId), "song_primary_key" => $song->id];
@@ -107,7 +115,7 @@ class PlaylistController extends Controller
                 }
                 $song_primary_key = $song->id;
             }
-        }else{//検索していない
+        } else { //検索していない
             $playlistId = $request->playlist_id;
 
             $playlist = Playlist::findOrFail($playlistId);
@@ -120,7 +128,11 @@ class PlaylistController extends Controller
             }
         }
 
-        return view('detail_myplaylist', compact('playlist', 'tracks','playlistId'));
+        $user_id = auth()->user()->id;
+        $fav_regions = Region::where('user_id', "$user_id")->get();
+        $data = $this->get_weatherAPI($fav_regions);
+
+        return view('detail_myplaylist', compact('playlist', 'tracks', 'playlistId', 'data'));
     }
 
     public function delete_myplaylist(Request $request)
