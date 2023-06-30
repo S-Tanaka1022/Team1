@@ -70,7 +70,11 @@ $message=Controller::getMessage($data);
                             <tr>
                                 <td><div class="align-middle text-center areas_name">{{$table_data["prefecture"]}}<br>{{$area}}</div></td>
                                 @for ($i=0; $i < 3; $i++)
-                                    <?php $result = Controller::weatherToIcon($table_data["weathers"][$i]); ?>
+                                    @if(isset($table_data["weathers"][$i]))
+                                        <?php $result = Controller::weatherToIcon($table_data["weathers"][$i]); ?>
+                                    @else
+                                        <?php $result = "情報取得中"; ?>
+                                    @endif
                                     <td class='align-middle text-center weather_forecasts'>{!! $result !!}<br>　</td>
                                 @endfor
                                 <td class='align-middle text-center delete'><form action='/delete/{{$table_data["id"]}}'><button type='submit' class='btn btn-danger'>削除</botton></form></td>

@@ -18,12 +18,16 @@
         <nav class="navbar navbar-light bg-light">
             <h1>エリア選択画面</h1>
                 <p class="navbar-text mt-3">
-                    {{ Auth::user() -> name }} さん ログイン中
+                    {{ Auth::user() -> name }} さん ようこそ！
                 </p>
         </nav>
     </header>
 
     <main>
+        <div class="explaination ml-3 mt-3" style="font-size: 22px;">
+            ご利用いただきありがとうございます！<br>
+            天気予報を取得するため、観測地を登録してください！
+        </div>
         <div class="select_new mt-3 mb-0 mx-3" style="font-size: 22px;">
         エリア選択
             <form action="code_save" method="POST">

@@ -2,6 +2,11 @@
 {{-- 楽曲を一覧として表示する画面がページ1（詳細画面、追加画面に遷移できる） --}}
 {{-- みんなのプレイリストの一覧を表示する画面がページ2 (詳細画面に遷移できる） --}}
 
+<?php
+    use App\Http\Controllers\Controller;
+    $message=Controller::get_weather_forecast($data);
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -20,7 +25,7 @@
         <nav class="navbar navbar-light bg-light">
             <h1>楽曲一覧&みんなのプレイリスト</h1>
                 <p class="navbar-text mt-3">
-                    {{ Auth::user() -> name }} さん ログイン中
+                    {{$message}}
                 </p>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
@@ -57,7 +62,7 @@
 
         <div class="tabs__body" style="text-align: center">
           <div class="tabs__content active" data-tab-content="">
-            <div class="container align-middle text-center">
+          <div class="container-fluid">
                 <div class="row align-items-center text-center">
                     <div class="col-2">
                         <button class="btn btn-primary btn-block" name="back" onclick="location.href=''">

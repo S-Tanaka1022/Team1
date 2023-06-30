@@ -1,5 +1,9 @@
 {{-- みんなのプレイリスト一覧画面から「詳細」ボタンを押したときに来る画面 --}}
 {{-- 楽曲一覧と構成は一緒でリストへ追加と楽曲詳細に遷移できる --}}
+<?php
+    use App\Http\Controllers\Controller;
+    $message=Controller::get_weather_forecast($data);
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -16,7 +20,7 @@
         <nav class="navbar navbar-light bg-light">
             <h1>{{$playlist->user->name}}さんのプレイリスト</h1>
                 <p class="navbar-text mt-3">
-                    {{ Auth::user() -> name }} さん ログイン中
+                    {{$message}}
                 </p>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
@@ -43,10 +47,10 @@
             </ul>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
             <div class="row" >
                 <div class="col-2">
-                <main class="m-3 text-left">
+                    <main class="m-3 text-left">
                     <button class="btn btn-info btn" onclick="goBack()">
                         <b>戻る</b>
                     </button>
@@ -56,7 +60,7 @@
                         }
                     </script>
                 </div>
-                <div class="col-5 text-right m-3">
+                <div class="col-5  ofset-3 text-right m-3">
                     <form action="" method="get">
                       <label>
                         <input type="hidden" name="playlist_id" value="{{$playlistId}}">
@@ -67,8 +71,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
         @if(count($tracks) == 0)
             <p>検索結果は見つかりませんでした</p>
         @else
