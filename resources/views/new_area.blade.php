@@ -1,5 +1,6 @@
 @php
     $i=0;
+    use App\Http\Controllers\Controller;
 @endphp
 
 <!DOCTYPE html>
@@ -18,27 +19,24 @@
         <nav class="navbar navbar-light bg-light">
             <h1>エリア選択画面</h1>
                 <p class="navbar-text mt-3">
-                    {{ Auth::user() -> name }} さん ログイン中
+                    {{ Auth::user() -> name }} さん ようこそ！
                 </p>
         </nav>
     </header>
 
     <main>
+        <div class="explaination ml-3 mt-3" style="font-size: 22px;">
+            ご利用いただきありがとうございます！<br>
+            天気予報を取得するため、観測地を登録してください！
+        </div>
         <div class="select_new mt-3 mb-0 mx-3" style="font-size: 22px;">
         エリア選択
             <form action="code_save" method="POST">
                 <input type="hidden" name="region_code" value="{{$region_code}}">
                 <select name="sel_area_code" class="form-select form-select-lg text-center w-25">
                     @foreach($areas_data as $areas)
-                    @php
-                        $area = $areas['area']['name'];
-                        $replace_area = array(
-                            "地方" => "地域",
-                            );
-                        $area = str_replace(array_keys($replace_area), array_values($replace_area), $area);
-                    @endphp
+                        <?php $area = Controller::replaceWord($areas); ?>
                         <option value="{{$i}}">{{$area}}</option>
-                        {{-- エリアコードをエリアごとに変化させ、送信 --}}
                         {{$i+=1}}
                     @endforeach
                 </select>

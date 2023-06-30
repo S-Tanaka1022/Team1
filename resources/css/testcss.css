@@ -101,8 +101,6 @@
 }
 
 .material-symbols-outlined::after {
-    margin: 100px;
-
     font-variation-settings:
     'FILL' 0,
     'wght' 400,
