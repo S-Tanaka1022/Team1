@@ -115,12 +115,6 @@
                 </table>
             </div>
             <div class="tabs__content" data-tab-content="">
-                    <form action="" method="GET">
-                        <label>
-                            <input class="col-12" type="text" name="keyword2" placeholder="検索キーワード"  onclick="showTab('tabpage2'); return false;">
-                        </label>
-                        <input type="submit" value="検索" class="btn btn-primary">
-                    </form>
                 <table class="table table-striped text-center align-middle mt-4">
                     <tr class="bg-dark text-white">
                         <th>ユーザ名</th>
