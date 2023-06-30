@@ -64,3 +64,23 @@
   .tabs__content.active {
       animation: fadeIn 0.7s ease 0s 1 normal;
   }
+
+/* 更新ボタン */
+.material-symbols-outlined {
+    padding: 0.5em;
+    /* margin: 10px 0; */
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+    font-size:16px;
+    border-radius: 3px;
+    text-align:center;
+    text-decoration:none;
+}
+.material-symbols-outlined::after {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48;
+}
