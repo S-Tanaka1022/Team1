@@ -11,12 +11,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {{-- フォント Link --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+    {{-- 自作CSSファイル --}}
+    @vite(['resources/css/index_css.css'])
     <title>エリア追加画面</title>
 </head>
 <body>
     <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
-            <h1>エリア選択画面</h1>
+            <h2 class="Lobster">Temporature</h2>
+            <h4>エリア選択画面</h4>
                 <p class="navbar-text mt-3">
                     {{$message}}
                 </p>
@@ -65,7 +72,7 @@
         </div>
 
         <div class="now_areas mt-3 mb-0 mx-3 pl-6" style="font-size: 22px; padding-left: 382px;">
-            <h2 class="pl-3" style="border-left: 8px solid black;">現在の登録地</h2>
+            <h4 class="pl-3" style="border-left: 8px solid black;">現在の登録地</h4>
             @foreach ($fav_regions as $fav_region)
                 <?php [$areas_data, $region_data, $area_code]=Controller::getAreaData($fav_region); ?>
                 @foreach ($region_data as $data )

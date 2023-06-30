@@ -12,13 +12,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    {{-- フォント Link --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+    {{-- 自作CSSファイル --}}
+    @vite(['resources/css/index_css.css'])
     <title>{{$playlist->user->name}}さんのプレイリスト</title>
 </head>
 <body>
     <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
-            <h1>{{$playlist->user->name}}さんのプレイリスト</h1>
+            <h2 class="Lobster">Temporature</h2>
+            <h4>{{$playlist->user->name}}さんのプレイリスト</h4>
                 <p class="navbar-text mt-3">
                     {{$message}}
                 </p>
@@ -51,22 +57,19 @@
             <div class="row" >
                 <div class="col-2">
                     <main class="m-3 text-left">
-                    <button class="btn btn-info btn" onclick="goBack()">
-                        <b>戻る</b>
-                    </button>
-                    <script>
-                        function goBack() {
-                            window.history.back();
-                        }
-                    </script>
+                        <form action="everyone_playlist">
+                            <button class="btn btn-info btn" onclick="goBack()">
+                                <b>戻る</b>
+                            </button>
+                        </form>
                 </div>
                 <div class="col-5  ofset-3 text-right m-3">
                     <form action="" method="get">
-                      <label>
+                    <label>
                         <input type="hidden" name="playlist_id" value="{{$playlistId}}">
                         <input type="text" name="keyword3" placeholder="検索キーワード">
-                      </label>
-                      <input type="submit" class="btn btn-primary" value="検索">
+                    </label>
+                    <input type="submit" class="btn btn-primary" value="検索">
                     </form>
                 </div>
             </div>
