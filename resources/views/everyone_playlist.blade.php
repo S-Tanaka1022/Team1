@@ -62,24 +62,22 @@
           <a class="Tabs__presentation-slider" role="presentation"></a>
         </nav>
 
-        <div class="tabs__body" style="text-align: center">
-          <div class="tabs__content active" data-tab-content="">
-          <div class="container-fluid">
-                <div class="row align-items-center text-center">
-                    <div class="col-2">
-                        <button class="btn btn-primary btn-block" name="back" onclick="location.href=''">
-                            楽曲更新
-                        </button>
-                    </div>
-                    <div class="col-8">
-                        <form action="" method="GET">
-                            <label>
-                                <input type="text" name="keyword" placeholder="検索キーワード">
-                            </label>
-                            <input type="submit" class="btn btn-primary" value="検索">
-                        </form>
-                    </div>
-                </div>
+        <div class="container align-middle text-center">
+            <div class="row">
+              <button class="btn btn-primary d-flex justify-content-center align-items-center material-symbols-outlined" name="back" onclick="location.href=''">
+                楽曲更新
+                <span class="material-symbols-outlined2 align-middle test">
+                  refresh
+                </span>
+              </button>
+              <div class="col-8">
+                <form action="" method="GET">
+                  <label>
+                    <input type="text" name="keyword" placeholder="検索キーワード">
+                  </label>
+                  <input type="submit" class="btn btn-primary" value="検索">
+                </form>
+              </div>
             </div>
           </div>
 
