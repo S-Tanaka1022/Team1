@@ -62,9 +62,9 @@
             <div class="container align-middle text-center">
                 <div class="row align-items-center text-center">
 
-                        <button class="btn btn-primary material-symbols-outlined" name="back" onclick="location.href=''">
+                        <button class="btn btn-primary d-flex align-items-center material-symbols-outlined" name="back" onclick="location.href=''">
                             楽曲更新
-                            <span>
+                            <span class="material-symbols-outlined2">
                                 refresh
                             </span>
                             </button>
