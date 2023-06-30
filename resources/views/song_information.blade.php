@@ -2,32 +2,42 @@
 {{-- リストへ追加ボタンと楽曲一覧に戻るボタンが設置されてる --}}
 
 <?php
-//曲の詳細情報
-$trackImage = $track->album->images[0]->url; //アルバム画像
-$releaseDate = $track->album->release_date; //リリース日
-    $dateFormat = date("Y年m月d日", strtotime($releaseDate));
-$trackName = $track->name; //曲名
-$artistName = $track->artists[0]->name; //アーティスト名
-$trackTime = $track->duration_ms; //曲の再生時間
-    $seconds = floor($trackTime/1000);
-    $minutes = floor($seconds/60);
-    $seconds = $seconds%60;
-    $secondsFormat = sprintf('%02d', $seconds);
-$albumName = $track->album->name; //アルバム名
-$trackPreview = $track->preview_url; //プレビューのURL(日本の曲は対応してないことが多い)
+    //曲の詳細情報
+    $trackImage = $track->album->images[0]->url; //アルバム画像
+    $releaseDate = $track->album->release_date; //リリース日
+        $dateFormat = date("Y年m月d日", strtotime($releaseDate));
+    $trackName = $track->name; //曲名
+    $artistName = $track->artists[0]->name; //アーティスト名
+    $trackTime = $track->duration_ms; //曲の再生時間
+        $seconds = floor($trackTime/1000);
+        $minutes = floor($seconds/60);
+        $seconds = $seconds%60;
+        $secondsFormat = sprintf('%02d', $seconds);
+    $albumName = $track->album->name; //アルバム名
+    $trackPreview = $track->preview_url; //プレビューのURL(日本の曲は対応してないことが多い)
 
-//アーティスト情報
-$artistImage = $artist->images[0]->url; //アーティストの宣材写真
+    //アーティスト情報
+    $artistImage = $artist->images[0]->url; //アーティストの宣材写真
+
+    use App\Http\Controllers\Controller;
+    $message=Controller::get_weather_forecast($data);
 ?>
 
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{{-- フォント Link --}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+{{-- 自作CSSファイル --}}
+@vite(['resources/css/index_css.css'])
 
 <header class="border-bottom border-1 border-secondary">
     <nav class="navbar navbar-light bg-light">
-        <h1>楽曲詳細</h1>
+        <h2 class="Lobster">Temporature</h2>
+        <h4>楽曲詳細</h4>
             <p class="navbar-text mt-3">
-                {{ Auth::user() -> name }} さん ログイン中
+                    {{$message}}
             </p>
         <ul class="nav justify-content-end">
             <li class="nav-item">

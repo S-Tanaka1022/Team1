@@ -1,5 +1,9 @@
 {{-- みんなのプレイリスト一覧画面から「詳細」ボタンを押したときに来る画面 --}}
 {{-- 楽曲一覧と構成は一緒でリストへ追加と楽曲詳細に遷移できる --}}
+<?php
+    use App\Http\Controllers\Controller;
+    $message=Controller::get_weather_forecast($data);
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -8,15 +12,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    {{-- フォント Link --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+    {{-- 自作CSSファイル --}}
+    @vite(['resources/css/index_css.css'])
     <title>{{$playlist->user->name}}さんのプレイリスト</title>
 </head>
 <body>
     <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
-            <h1>{{$playlist->user->name}}さんのプレイリスト</h1>
+            <h2 class="Lobster">Temporature</h2>
+            <h4>{{$playlist->user->name}}さんのプレイリスト</h4>
                 <p class="navbar-text mt-3">
-                    {{ Auth::user() -> name }} さん ログイン中
+                    {{$message}}
                 </p>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
@@ -43,33 +53,29 @@
             </ul>
         </nav>
     </header>
-    <main class="m-1">
-        <div class="container m-2">
-            <div class="row">
-                <div class="col">
-                    <button class="btn btn-info btn" onclick="goBack()">
-                        <b>戻る</b>
-                    </button>
-                    <script>
-                        function goBack() {
-                            window.history.back();
-                        }
-                    </script>
+    <div class="container-fluid">
+            <div class="row" >
+                <div class="col-2">
+                    <main class="m-3 text-left">
+                        <form action="everyone_playlist">
+                            <button class="btn btn-info btn" onclick="goBack()">
+                                <b>戻る</b>
+                            </button>
+                        </form>
                 </div>
-                <div class="col text-right">
-                    <form class="form-group text-right" action="" method="get">
-                      <label class="align-middle">
+                <div class="col-5  ofset-3 text-right m-3">
+                    <form action="" method="get">
+                    <label>
                         <input type="hidden" name="playlist_id" value="{{$playlistId}}">
-                        <input class="form-control align-middle" type="text" name="keyword3" placeholder="検索キーワード">
-                      </label>
-                      <input type="submit" class="btn btn-primary align-top" value="検索">
+                        <input type="text" name="keyword3" placeholder="検索キーワード">
+                    </label>
+                    <input type="submit" class="btn btn-primary" value="検索">
                     </form>
                 </div>
             </div>
         </div>
-
         @if(count($tracks) == 0)
-        <p>検索結果は見つかりませんでした</p>
+            <p>検索結果は見つかりませんでした</p>
         @else
         <table class="table table-striped text-center align-middle">
             <tbody class="m-3">
@@ -98,7 +104,6 @@
             </tr>
         </table>
         @endif
-    </main>
 </body>
 </html>
 

@@ -1,3 +1,8 @@
+<?php
+    use App\Http\Controllers\Controller;
+    $message=Controller::get_weather_forecast($data);
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -5,16 +10,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    {{-- フォント Link --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+    {{-- 自作CSSファイル --}}
+    @vite(['resources/css/index_css.css'])
     <title>マイプレイリスト</title>
 </head>
 
 <body>
     <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
-            <h1>マイプレイリスト</h1>
+            <h2 class="Lobster">Temporature</h2>
+            <h4>マイプレイリスト</h4>
                 <p class="navbar-text mt-3">
-                    {{ Auth::user() -> name }} さん ログイン中
+                    {{$message}}
                 </p>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
@@ -42,7 +53,7 @@
         </nav>
     </header>
     <main class="m-3">
-        <div>
+        <div style="text-align: center">
             <form action="" method="GET">
                 <label>
                     <input type="text" name="keyword2" placeholder="検索キーワード">
@@ -50,7 +61,7 @@
                 <input type="submit" value="検索" class="btn btn-primary">
             </form>
         </div>
-        <table class="table table-striped">
+        <table class="table table-striped mt-3">
             <tr class="bg-dark text-white text-center align-center">
                 <th>プレイリスト名</th>
                 <th>詳細を表示</th>

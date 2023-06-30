@@ -1,3 +1,8 @@
+@php
+    use App\Http\Controllers\Controller;
+    $message=Controller::get_weather_forecast($data);
+@endphp
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -5,15 +10,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {{-- フォント Link --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+    {{-- 自作CSSファイル --}}
+    @vite(['resources/css/index_css.css'])
     <title>登録地追加（ログイン後）</title>
 </head>
 
 <body>
     <header class="border-bottom border-secondary">
         <nav class="navbar navbar-light bg-light">
-            <h1>登録地追加</h1>
+            <h2 class="Lobster">Temporature</h2>
+            <h4>登録地追加</h4>
                 <p class="navbar-text mt-3">
-                    {{ Auth::user() -> name }} さん ログイン中
+                    {{$message}}
                 </p>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
@@ -57,19 +69,13 @@
         </div>
 
         <div class="now_regions  mt-3 mb-0 mx-3" style="font-size: 22px; padding-left: 382px;">
-            <h2 class="pl-3" style="border-left: 8px solid black;">現在の登録地</h2>
-            @php
-            use App\Models\Region_name;
-            foreach ($fav_regions as $fav_region){
-                $region_code = $fav_region["region_code"];
-                $region = Region_name::where('region_code', "$region_code")->get();
-                $region_data = json_decode($region, true);
-
-                foreach ($region_data as $data ){
-                    echo "<div class='regions d-inline-block mr-3 mt-2 p-3 border border-secondary rounded-pill'>".$data["region_name"]. "</div>";
-                }
-            }
-            @endphp
+            <h4 class="pl-3" style="border-left: 8px solid black;">現在の登録地</h4>
+            @foreach ($fav_regions as $fav_region)
+                <?php [$areas,$region_data,$area_code] = Controller::getAreaData($fav_region); ?>
+                @foreach ($region_data as $data )
+                    <div class='regions d-inline-block mr-3 mt-2 p-3 border border-secondary rounded-pill'>{{$data["region_name"]}}</div>
+                @endforeach
+            @endforeach
         </div>
     </main>
 </body>
