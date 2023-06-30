@@ -92,17 +92,15 @@
     font-size:16px;
 }
 
-.material-symbols-outlined2 {
-    /* padding: 0.5em auto; */
-    padding-bottom:5px;
+.test {
+    padding-top: 5px;
+    padding-left: 5px;
     text-decoration: none;
     font-weight: bold;
     font-size:16px;
 }
 
 .material-symbols-outlined::after {
-    margin: 100px;
-
     font-variation-settings:
     'FILL' 0,
     'wght' 400,
