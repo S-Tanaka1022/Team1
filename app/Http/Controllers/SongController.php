@@ -22,7 +22,7 @@ class SongController extends Controller
             $offset = 10;
         } else { /* 検索キーワードが入力されていない場合は、全件取得する */
             $query = 'genre:"japanese"';
-            $offset = 1000;
+            $offset = 500;
         }
         $options = [
             'limit' => 30,
