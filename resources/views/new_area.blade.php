@@ -1,5 +1,6 @@
 @php
     $i=0;
+    use App\Http\Controllers\Controller;
 @endphp
 
 <!DOCTYPE html>
@@ -34,15 +35,8 @@
                 <input type="hidden" name="region_code" value="{{$region_code}}">
                 <select name="sel_area_code" class="form-select form-select-lg text-center w-25">
                     @foreach($areas_data as $areas)
-                    @php
-                        $area = $areas['area']['name'];
-                        $replace_area = array(
-                            "地方" => "地域",
-                            );
-                        $area = str_replace(array_keys($replace_area), array_values($replace_area), $area);
-                    @endphp
+                        <?php $area = Controller::replaceWord($areas); ?>
                         <option value="{{$i}}">{{$area}}</option>
-                        {{-- エリアコードをエリアごとに変化させ、送信 --}}
                         {{$i+=1}}
                     @endforeach
                 </select>
