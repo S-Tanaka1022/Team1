@@ -48,14 +48,11 @@
             <div class="row">
                 <div class="col-2">
                     <main class="m-3 text-left">
-                    <button class="btn btn-info" onclick="goBack()">
-                        <b>戻る</b>
+                        <form action="myplaylist">
+                            <button class="btn btn-info" onclick="">
+                                <b>戻る</b>
+                        </form>
                     </button>
-                    <script>
-                        function goBack() {
-                        window.history.back();
-                        }
-                    </script>
                 </div>
                 <div class="col-5  ofset-3 text-right m-3">
                     <form action="" method="get" >
