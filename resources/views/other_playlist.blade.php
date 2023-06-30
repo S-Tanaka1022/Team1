@@ -51,22 +51,19 @@
             <div class="row" >
                 <div class="col-2">
                     <main class="m-3 text-left">
-                    <button class="btn btn-info btn" onclick="goBack()">
-                        <b>戻る</b>
-                    </button>
-                    <script>
-                        function goBack() {
-                            window.history.back();
-                        }
-                    </script>
+                        <form action="everyone_playlist">
+                            <button class="btn btn-info btn" onclick="goBack()">
+                                <b>戻る</b>
+                            </button>
+                        </form>
                 </div>
                 <div class="col-5  ofset-3 text-right m-3">
                     <form action="" method="get">
-                      <label>
+                    <label>
                         <input type="hidden" name="playlist_id" value="{{$playlistId}}">
                         <input type="text" name="keyword3" placeholder="検索キーワード">
-                      </label>
-                      <input type="submit" class="btn btn-primary" value="検索">
+                    </label>
+                    <input type="submit" class="btn btn-primary" value="検索">
                     </form>
                 </div>
             </div>
