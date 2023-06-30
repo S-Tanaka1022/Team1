@@ -15,9 +15,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     @vite(['resources/css/testcss.css'])
     {{-- @vite(['resources/css/addplaylist_css.css']) --}}
     <title>みんなのプレイリスト</title>
+
 </head>
 
 <body>
@@ -79,6 +81,8 @@
                     </div>
                 </div>
             </div>
+          </div>
+
 
             <table class="table table-striped text-center align-middle mt-4">
                 <tr class="bg-dark text-white">
