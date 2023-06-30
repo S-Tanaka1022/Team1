@@ -84,8 +84,6 @@
                     </div>
                 </div>
             </div>
-          </div>
-
 
             <table class="table table-striped text-center align-middle mt-4">
                 <tr class="bg-dark text-white">
