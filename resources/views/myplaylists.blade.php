@@ -2,9 +2,17 @@
 {{-- 詳細ボタンからそれぞれのプレイリストに入った曲を閲覧できる --}}
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{{-- フォント Link --}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+{{-- 自作CSSファイル --}}
+@vite(['resources/css/index_css.css'])
+
 <header class="border-bottom border-1 border-secondary">
     <nav class="navbar navbar-light bg-light">
-        <h1>マイプレイリスト</h1>
+        <h2 class="Lobster">Temporature</h2>
+        <h4>マイプレイリスト</h4>
             <p class="navbar-text mt-3">
                 {{ Auth::user() -> name }} さん ログイン中
             </p>

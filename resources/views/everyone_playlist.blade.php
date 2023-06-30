@@ -14,8 +14,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    {{-- フォント Link --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+    {{-- 自作CSSファイル --}}
+    @vite(['resources/css/index_css.css'])
     @vite(['resources/css/testcss.css'])
     {{-- @vite(['resources/css/addplaylist_css.css']) --}}
     <title>みんなのプレイリスト</title>
@@ -25,7 +29,8 @@
 <body>
     <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
-            <h1>楽曲一覧&みんなのプレイリスト</h1>
+            <h2 class="Lobster">Temporature</h2>
+            <h4>楽曲一覧&みんなのプレイリスト</h4>
                 <p class="navbar-text mt-3">
                     {{$message}}
                 </p>
@@ -57,22 +62,22 @@
 
     <section class="someTabs" data-tabs="">
         <nav class="tabs__nav">
-          <a href="#" class="tabs__item active" data-tab="">楽曲一覧</a>
-          <a href="#" class="tabs__item" data-tab="">プレイリスト一覧</a>
-          <a class="Tabs__presentation-slider" role="presentation"></a>
+            <a href="#" class="tabs__item active" data-tab="">楽曲一覧</a>
+            <a href="#" class="tabs__item" data-tab="">プレイリスト一覧</a>
+            <a class="Tabs__presentation-slider" role="presentation"></a>
         </nav>
 
         <div class="tabs__body">
-          <div class="tabs__content active" data-tab-content="">
+        <div class="tabs__content active" data-tab-content="">
             <div class="container align-middle text-center">
                 <div class="row align-items-center text-center">
 
                     <button class="btn btn-primary d-flex justify-content-center align-items-center material-symbols-outlined" name="back" onclick="location.href=''">
                         楽曲更新
                         <span class="material-symbols-outlined2 align-middle test">
-                          refresh
+                            refresh
                         </span>
-                      </button>
+                    </button>
 
                     <div class="col-8">
                         <form action="" method="GET">
@@ -134,7 +139,7 @@
                 @endforeach
             </table>
         </div>
-     </div>
+    </div>
     </section>
     <script src="{{ asset('/js/testcss.js') }}"></script>
 </body>

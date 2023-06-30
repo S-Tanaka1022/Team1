@@ -6,13 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {{-- フォント Link --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+    {{-- 自作CSSファイル --}}
+    @vite(['resources/css/index_css.css'])
     <title>初回現在地登録</title>
 </head>
 
 <body>
     <header class="border-bottom border-1 border-secondary">
         <nav class="navbar navbar-light bg-light">
-            <h1>初回現在地登録</h1>
+            <h2 class="Lobster">Temporature</h2>
+            <h4>初回現在地登録</h4>
                 <p class="navbar-text mt-3">
                     {{ Auth::user() -> name }} さん ようこそ！
                 </p>
