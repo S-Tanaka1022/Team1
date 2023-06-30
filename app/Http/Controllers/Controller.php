@@ -140,4 +140,28 @@ class Controller extends BaseController
         $results = $api->search($search_word, 'track', $options);
         return $results;
     }
+
+    public static function getAreaData($fav_region)
+    {
+        $region_code = $fav_region["region_code"];
+        $area_code = $fav_region["area_code"];
+        $region = Region_name::where('region_code', "$region_code")->get();
+        $region_data = json_decode($region, true);
+
+        $url = "https://www.jma.go.jp/bosai/forecast/data/forecast/{$region_code}.json";
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
+        $areas_data = ($data[0]["timeSeries"][0]["areas"]);
+        return[$areas_data,$region_data,$area_code];
+    }
+
+    public static function replaceWord($areas)
+    {
+        $area = $areas['area']['name'];
+        $replace_area = array(
+            "地方" => "地域",
+            );
+        $area = str_replace(array_keys($replace_area), array_values($replace_area), $area);
+        return $area;
+    }
 }
