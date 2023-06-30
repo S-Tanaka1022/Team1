@@ -15,11 +15,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     @vite(['resources/css/testcss.css'])
     {{-- @vite(['resources/css/addplaylist_css.css']) --}}
     <title>みんなのプレイリスト</title>
-
 </head>
 
 <body>
@@ -62,18 +60,18 @@
           <a class="Tabs__presentation-slider" role="presentation"></a>
         </nav>
 
-        <div class="tabs__body">
+        <div class="tabs__body" style="text-align: center">
           <div class="tabs__content active" data-tab-content="">
-            <div class="container align-middle text-center">
+          <div class="container-fluid">
                 <div class="row align-items-center text-center">
-
-                    <button class="btn btn-primary d-flex justify-content-center align-items-center material-symbols-outlined" name="back" onclick="location.href=''">
-                        楽曲更新
-                        <span class="material-symbols-outlined2 align-middle test">
-                          refresh
-                        </span>
-                      </button>
-
+                    <div class="col-2">
+                        <button class="btn btn-primary btn-block" name="back" onclick="location.href=''">
+                            楽曲更新
+                            <span class="material-symbols-outlined2 align-middle test">
+                            refresh
+                            </span>
+                        </button>
+                    </div>
                     <div class="col-8">
                         <form action="" method="GET">
                             <label>
