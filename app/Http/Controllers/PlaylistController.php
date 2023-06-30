@@ -51,11 +51,7 @@ class PlaylistController extends Controller
         $add_song->save();
         $add_playlist->songs()->attach($add_song->id); //中間テーブルにレコード追加
 
-        $user_id = auth()->user()->id;
-        $fav_regions = Region::where('user_id', "$user_id")->get();
-        $data = $this->get_weatherAPI($fav_regions);
-
-        return redirect("everyone_playlist", "data");
+        return redirect("everyone_playlist");
     }
 
     public function myplaylist(Request $request)
