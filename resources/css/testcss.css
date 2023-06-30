@@ -64,3 +64,47 @@
   .tabs__content.active {
       animation: fadeIn 0.7s ease 0s 1 normal;
   }
+
+/* 更新ボタン */
+
+/*
+.material-symbols-outlined {
+    padding: 0.5em;
+    margin: 10px 10px;
+    display: block;
+    text-decoration: none;
+    text-decoration: white;
+    font-weight: bold;
+    font-size:16px;
+    border: 0;
+    border-radius: 3px;
+    border-color: #007bff;
+    text-align:center;
+    text-decoration:none;
+    background-color: #007bff;
+}
+*/
+.material-symbols-outlined {
+    /* padding: 0.5em auto; */
+    padding-bottom:10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size:16px;
+}
+
+.test {
+    padding-top: 5px;
+    padding-left: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size:16px;
+}
+
+.material-symbols-outlined::after {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48;
+
+}

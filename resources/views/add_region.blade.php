@@ -63,18 +63,12 @@
 
         <div class="now_regions  mt-3 mb-0 mx-3" style="font-size: 22px; padding-left: 382px;">
             <h2 class="pl-3" style="border-left: 8px solid black;">現在の登録地</h2>
-            @php
-            use App\Models\Region_name;
-            foreach ($fav_regions as $fav_region){
-                $region_code = $fav_region["region_code"];
-                $region = Region_name::where('region_code', "$region_code")->get();
-                $region_data = json_decode($region, true);
-
-                foreach ($region_data as $data ){
-                    echo "<div class='regions d-inline-block mr-3 mt-2 p-3 border border-secondary rounded-pill'>".$data["region_name"]. "</div>";
-                }
-            }
-            @endphp
+            @foreach ($fav_regions as $fav_region)
+                <?php [$areas,$region_data,$area_code] = Controller::getAreaData($fav_region); ?>
+                @foreach ($region_data as $data )
+                    <div class='regions d-inline-block mr-3 mt-2 p-3 border border-secondary rounded-pill'>{{$data["region_name"]}}</div>
+                @endforeach
+            @endforeach
         </div>
     </main>
 </body>
